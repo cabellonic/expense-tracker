@@ -1,7 +1,7 @@
 import { Link } from "@reach/router";
 // Util
 import { formatAmount } from "util/currency";
-import { formatDaysAgo } from "util/date";
+import { formatTimeAgo } from "util/date";
 // Components
 import CategoryIcon from "components/ui/CategoryIcon";
 // Styles
@@ -10,7 +10,7 @@ import styles from "./TransactionCard.module.css";
 const TransactionCard = ({ item }) => {
 	const { id, type, title, amount, category, date } = item;
 	const formattedAmount = formatAmount(amount);
-	const formattedDate = formatDaysAgo(date);
+	const formattedDate = formatTimeAgo(date);
 
 	return (
 		<Link to={`/transactions/${id}`} className={styles.transaction_card}>
