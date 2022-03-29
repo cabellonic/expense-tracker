@@ -15,7 +15,7 @@ const Menu = () => {
 			<Link className={styles.navlink} data-icon="filter" to="/">
 				<FontAwesomeIcon icon={["fas", "filter-circle-dollar"]} />
 			</Link>
-			<Link className={styles.navlink} data-icon="config" to="/">
+			<Link className={styles.navlink} data-icon="config" to="/config">
 				<FontAwesomeIcon icon={["fas", "gear"]} />
 			</Link>
 		</nav>

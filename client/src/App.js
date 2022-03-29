@@ -1,6 +1,7 @@
 import { Router } from "@reach/router";
 // Components
 import Home from "pages/home/home";
+import ConfigPage from "pages/config/config";
 import Transaction from "pages/transactions/id";
 import AllTransactions from "pages/transactions/all";
 import Incomes from "pages/transactions/incomes";
@@ -16,6 +17,7 @@ const App = () => {
 	return (
 		<Router>
 			<Home path="/" />
+			<ConfigPage path="/config" />
 			<Transaction path="/transactions/:id" />
 			<AllTransactions path="/transactions" />
 			<Incomes path="/transactions/incomes" />

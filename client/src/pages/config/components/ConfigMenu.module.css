@@ -1,0 +1,25 @@
+.config_menu {
+	display: flex;
+	flex-flow: column;
+}
+
+.link {
+	display: flex;
+	align-items: center;
+	gap: var(--sp-4);
+	font-size: var(--fs-lg);
+	text-decoration: none;
+	color: inherit;
+	padding: var(--sp-4);
+	border-bottom: 1px solid var(--bg-secondary-dk);
+	transition: background-color 0.2s ease-in-out;
+}
+
+.link:hover {
+	background-color: var(--bg-secondary-dk);
+}
+
+.link.danger {
+	background-color: var(--bg-danger);
+	color: white;
+}
