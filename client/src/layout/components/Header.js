@@ -8,7 +8,7 @@ const Header = ({ pageTitle }) => {
 		return (
 			<header className={styles.header_wrapper}>
 				<div className={styles.header}>
-					<Link to="/" alt="Go home" className={styles.item}>
+					<Link to="/" alt="Go home" className={styles.icon}>
 						<FontAwesomeIcon icon={["fas", "arrow-left"]} />
 					</Link>
 					<span className={styles.nav}>{pageTitle}</span>
