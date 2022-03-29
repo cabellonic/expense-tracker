@@ -11,7 +11,7 @@ const Tabs = () => {
 				getProps={({ isCurrent }) =>
 					isCurrent
 						? { className: `${styles.tab} ${styles.active}` }
-						: styles.tab
+						: { className: styles.tab }
 				}
 			>
 				All
@@ -22,7 +22,7 @@ const Tabs = () => {
 				getProps={({ isCurrent }) =>
 					isCurrent
 						? { className: `${styles.tab} ${styles.active}` }
-						: styles.tab
+						: { className: styles.tab }
 				}
 			>
 				Incomes
@@ -33,7 +33,7 @@ const Tabs = () => {
 				getProps={({ isCurrent }) =>
 					isCurrent
 						? { className: `${styles.tab} ${styles.active}` }
-						: styles.tab
+						: { className: styles.tab }
 				}
 			>
 				Expenses
