@@ -1,4 +1,4 @@
-export const getCurrency = (amount) => {
+export const formatAmount = (amount) => {
 	const config = {
 		style: "currency",
 		currency: "USD",

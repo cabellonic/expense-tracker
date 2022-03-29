@@ -7,6 +7,13 @@
 	border-radius: var(--br-base);
 	gap: var(--sp-3);
 	align-items: center;
+	color: inherit;
+	text-decoration: none;
+	transition: box-shadow 0.2s ease-in-out;
+}
+
+.transaction_card:hover {
+	box-shadow: var(--bs-base-dk);
 }
 
 .icon {

@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 // Component
 import TransactionCard from "./TransactionCard";
 // Util
-import { getCurrency } from "util/currency";
+import { formatAmount } from "util/currency";
 import { registerIcons } from "util/fontAwesome";
 registerIcons();
 
@@ -19,7 +19,7 @@ test("renders content", () => {
 		type: "expense",
 	};
 	const component = render(<TransactionCard item={item} />);
-	const formattedAmount = getCurrency(item.amount);
+	const formattedAmount = formatAmount(item.amount);
 
 	expect(component.container).toHaveTextContent(item.title);
 	expect(component.container).toHaveTextContent(formattedAmount);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Util
-import { getCurrency } from "../../util/currency";
+import { formatAmount } from "util/currency";
 // Styles
 import styles from "./Balance.module.css";
 
@@ -17,7 +17,7 @@ const Balance = ({ amount = -93154 }) => {
 			<div className={styles.balance}>
 				<span className={styles.title}>Total balance</span>
 				<span className={styles.amount}>
-					{showBalance ? getCurrency(amount) : "$＊＊＊＊"}
+					{showBalance ? formatAmount(amount) : "$＊＊＊＊"}
 
 					{showBalance ? (
 						<FontAwesomeIcon
@@ -39,7 +39,7 @@ const Balance = ({ amount = -93154 }) => {
 					</span>
 					<div className={styles.balance_incomes}>
 						<span>Incomes</span>
-						<span>{showBalance ? getCurrency(5701) : "$＊＊＊"}</span>
+						<span>{showBalance ? formatAmount(5701) : "$＊＊＊"}</span>
 					</div>
 				</div>
 				<div className={styles.balance_info}>
@@ -48,7 +48,7 @@ const Balance = ({ amount = -93154 }) => {
 					</span>
 					<div className={styles.balance_expenses}>
 						<span>Expenses</span>
-						<span>{showBalance ? getCurrency(-1504) : "$＊＊＊"}</span>
+						<span>{showBalance ? formatAmount(-1504) : "$＊＊＊"}</span>
 					</div>
 				</div>
 			</div>

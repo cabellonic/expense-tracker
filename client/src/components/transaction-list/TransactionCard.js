@@ -1,14 +1,19 @@
+import { Link } from "@reach/router";
 // Util
-import { getCurrency } from "util/currency";
+import { formatAmount } from "util/currency";
+import { formatDaysAgo } from "util/date";
 // Components
 import CategoryIcon from "components/ui/CategoryIcon";
 // Styles
 import styles from "./TransactionCard.module.css";
 
 const TransactionCard = ({ item }) => {
-	const { type, title, amount, category } = item;
+	const { id, type, title, amount, category, date } = item;
+	const formattedAmount = formatAmount(amount);
+	const formattedDate = formatDaysAgo(date);
+
 	return (
-		<div className={styles.transaction_card}>
+		<Link to={`/transactions/${id}`} className={styles.transaction_card}>
 			<div className={styles.icon}>
 				<CategoryIcon category={category} />
 			</div>
@@ -19,11 +24,11 @@ const TransactionCard = ({ item }) => {
 						type === "expense" ? styles.expense : styles.income
 					}`}
 				>
-					{getCurrency(amount)}
+					{formattedAmount}
 				</span>
-				<span className={styles.time_ago}>Yesterday</span>
+				<span className={styles.time_ago}>{formattedDate}</span>
 			</div>
-		</div>
+		</Link>
 	);
 };
 
