@@ -7,10 +7,10 @@ import Footer from "./components/Footer";
 // Styles
 import styles from "./Layout.module.css";
 
-const Layout = ({ balance, menu, item, pageTitle, children }) => {
+const Layout = ({ balance, menu, pageTitle, to, children }) => {
 	return (
 		<main className={styles.layout}>
-			<Header item={item} pageTitle={pageTitle} />
+			<Header pageTitle={pageTitle} href={to} />
 			{balance && <Balance />}
 			{menu && <Menu />}
 			<Content>{children}</Content>
