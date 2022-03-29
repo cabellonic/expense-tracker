@@ -28,9 +28,11 @@ const CategorySelector = ({ register, setValue, category }) => {
 				<div className={styles.category}>
 					{selectedCategory ? (
 						<>
-							<CategoryIcon category={selectedCategory.name} />
+							<span className={styles.icon}>
+								<CategoryIcon category={selectedCategory.name} />
+							</span>
 							<input
-								className={styles.category_name}
+								className={styles.name}
 								type="text"
 								placeholder="Category"
 								{...register}
@@ -38,7 +40,7 @@ const CategorySelector = ({ register, setValue, category }) => {
 							/>
 						</>
 					) : (
-						<span className={styles.category_name}>Select category</span>
+						<span className={styles.name}>Select category</span>
 					)}
 				</div>
 			</div>
@@ -52,8 +54,10 @@ const CategorySelector = ({ register, setValue, category }) => {
 								className={styles.category}
 								onClick={() => handleCategory(category)}
 							>
-								<CategoryIcon category={category.name} />
-								<span className={styles.category_name}>{category.name}</span>
+								<span className={styles.icon}>
+									<CategoryIcon category={category.name} />
+								</span>
+								<span className={styles.name}>{category.name}</span>
 							</div>
 						))}
 					</div>

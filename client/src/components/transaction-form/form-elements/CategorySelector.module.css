@@ -22,7 +22,11 @@
 	box-shadow: var(--bs-base-dk);
 }
 
-.category_name {
+.icon {
+	font-size: var(--fs-2xl);
+}
+
+.name {
 	border: 0;
 	outline: 0;
 	font-size: var(--fs-lg);
