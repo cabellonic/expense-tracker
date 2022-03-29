@@ -6,7 +6,7 @@ const transactions = [
 		date: "2022-03-26",
 		category: "Food",
 		title: "McDonalds",
-		description: "Lunch",
+		note: "Lunch",
 	},
 	{
 		id: "2",
@@ -23,7 +23,7 @@ const transactions = [
 		date: "2022-03-26",
 		category: "Sport",
 		title: "Argentina vs Venezuela",
-		description: "Match ticket",
+		note: "Match ticket",
 	},
 	{
 		id: "4",
@@ -32,7 +32,7 @@ const transactions = [
 		date: "2022-03-26",
 		category: "Shopping",
 		title: "Toys for my nephew",
-		description: "Lunch",
+		note: "Lunch",
 	},
 	{
 		id: "5",
@@ -81,7 +81,7 @@ const transactions = [
 		date: "2022-03-26",
 		category: "Clothes",
 		title: "Shoes",
-		description: "Clothes for the winter",
+		note: "Clothes for the winter",
 	},
 	{
 		id: "12",
@@ -90,7 +90,7 @@ const transactions = [
 		date: "2022-03-26",
 		category: "Education",
 		title: "Academind",
-		description: "React Native course",
+		note: "React Native course",
 	},
 	{
 		id: "13",
@@ -107,7 +107,7 @@ const transactions = [
 		date: "2022-03-26",
 		category: "Decor",
 		title: "Plants",
-		description: "A lime tree",
+		note: "A lime tree",
 	},
 	{
 		id: "15",
@@ -116,7 +116,7 @@ const transactions = [
 		date: "2022-03-26",
 		category: "Gaming",
 		title: "Elden Ring",
-		description: "Steam",
+		note: "Steam",
 	},
 	{
 		id: "16",
@@ -125,7 +125,7 @@ const transactions = [
 		date: "2022-03-26",
 		category: "Custom tag",
 		title: "Some custom thing",
-		description: "Nothing to say",
+		note: "Nothing to say",
 	},
 	{
 		id: "17",
