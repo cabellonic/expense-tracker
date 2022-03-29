@@ -8,7 +8,7 @@ const Header = ({ pageTitle, href = "/" }) => {
 		return (
 			<header className={styles.header_wrapper}>
 				<div className={styles.header}>
-					<Link to={href} alt="Go home" className={styles.icon}>
+					<Link to={href} aria-label="Go home" className={styles.icon}>
 						<FontAwesomeIcon icon={["fas", "arrow-left"]} />
 					</Link>
 					<span className={styles.page_title}>{pageTitle}</span>

@@ -10,7 +10,7 @@ const EditTransaction = () => {
 	const transaction = transactions.find((item) => item.id === id);
 
 	return (
-		<Layout pageTitle={"Edit transaction"} to={`/transactions/${id}`}>
+		<Layout pageTitle={"Edit transaction"} from={`/transactions/${id}`}>
 			<EditTransactionForm transaction={transaction} />
 		</Layout>
 	);
