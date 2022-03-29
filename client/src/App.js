@@ -2,6 +2,7 @@ import { Router } from "@reach/router";
 // Components
 import Home from "pages/home/home";
 import ConfigPage from "pages/config/config";
+import CategoriesPage from "pages/categories/categories";
 import Transaction from "pages/transactions/id";
 import AllTransactions from "pages/transactions/all";
 import Incomes from "pages/transactions/incomes";
@@ -18,6 +19,7 @@ const App = () => {
 		<Router>
 			<Home path="/" />
 			<ConfigPage path="/config" />
+			<CategoriesPage path="/categories" />
 			<Transaction path="/transactions/:id" />
 			<AllTransactions path="/transactions" />
 			<Incomes path="/transactions/incomes" />

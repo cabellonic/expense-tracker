@@ -12,7 +12,7 @@ const Menu = () => {
 			<Link className={styles.navlink} data-icon="expense" to="/add/expense">
 				<FontAwesomeIcon icon={["fas", "circle-minus"]} />
 			</Link>
-			<Link className={styles.navlink} data-icon="filter" to="/">
+			<Link className={styles.navlink} data-icon="filter" to="/categories">
 				<FontAwesomeIcon icon={["fas", "filter-circle-dollar"]} />
 			</Link>
 			<Link className={styles.navlink} data-icon="config" to="/config">
