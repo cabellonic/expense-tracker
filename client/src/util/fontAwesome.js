@@ -12,6 +12,7 @@ import {
 	faMinusCircle,
 	faGear,
 	faXmark,
+	faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Expense Tracker Categories
@@ -64,6 +65,7 @@ export const registerIcons = () => {
 		faCouch,
 		faGamepad,
 		faTags,
-		faXmark
+		faXmark,
+		faPenToSquare
 	);
 };
