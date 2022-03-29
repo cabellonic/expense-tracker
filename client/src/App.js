@@ -12,7 +12,7 @@ import EditTransaction from "pages/edit/edit";
 import { registerIcons } from "./util/fontAwesome";
 registerIcons();
 
-function App() {
+const App = () => {
 	return (
 		<Router>
 			<Home path="/" />
@@ -25,6 +25,6 @@ function App() {
 			<EditTransaction path="/edit/:id" />
 		</Router>
 	);
-}
+};
 
 export default App;
