@@ -1,0 +1,20 @@
+.input {
+	padding: var(--sp-2) 0;
+	border: 0;
+	border-bottom: 2px solid gainsboro;
+	background-color: transparent;
+	outline: 0;
+	font-size: var(--fs-lg);
+	transition: border-bottom 0.2s ease-in-out;
+}
+
+.input:focus,
+.input:active,
+.input:hover {
+	outline: 0;
+	border-bottom: 2px solid var(--bg-primary);
+}
+
+.error {
+	border-bottom: 2px solid crimson;
+}

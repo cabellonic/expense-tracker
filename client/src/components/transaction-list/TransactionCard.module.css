@@ -1,0 +1,46 @@
+.transaction_card {
+	margin: var(--sp-4) 0;
+	display: flex;
+	background-color: var(--bg-secondary-lt);
+	padding: var(--sp-3);
+	box-shadow: var(--bs-base);
+	border-radius: var(--br-base);
+	gap: var(--sp-3);
+	align-items: center;
+}
+
+.icon {
+	font-size: var(--fs-2xl);
+}
+
+.title {
+	font-size: var(--fs-base);
+	font-weight: 600;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.info {
+	margin-left: auto;
+	font-size: var(--fs-sm);
+	display: flex;
+	flex-flow: column;
+	text-align: right;
+}
+
+.amount {
+	color: var(--text);
+}
+
+.amount.income {
+	color: var(--clr-income-dk);
+}
+
+.amount.expense {
+	color: var(--clr-expense-dk);
+}
+
+.time_ago {
+	opacity: 0.65;
+}

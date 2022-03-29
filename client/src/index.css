@@ -1,0 +1,172 @@
+/* Font size */
+:root {
+	--fs-xs: 0.75rem;
+	--fs-sm: 0.875rem;
+	--fs-base: 1rem;
+	--fs-lg: 1.125rem;
+	--fs-xl: 1.25rem;
+	--fs-2xl: 1.5rem;
+	--fs-3xl: 1.875rem;
+	--fs-4xl: 2.25rem;
+	--fs-5xl: 3rem;
+	--fs-6xl: 3.75rem;
+	--fs-7xl: 4.5rem;
+	--fs-8xl: 6rem;
+	--fs-9xl: 8rem;
+}
+
+/* Spacing */
+:root {
+	--sp-1: 0.25rem;
+	--sp-2: 0.5rem;
+	--sp-3: 0.75rem;
+	--sp-4: 1rem;
+	--sp-5: 1.25rem;
+	--sp-6: 1.5rem;
+	--sp-8: 2rem;
+	--sp-10: 2.5rem;
+	--sp-12: 3rem;
+	--sp-16: 4rem;
+	--sp-20: 5rem;
+	--sp-24: 6rem;
+	--sp-32: 8rem;
+	--sp-40: 10rem;
+	--sp-48: 12rem;
+	--sp-56: 14rem;
+	--sp-64: 16rem;
+}
+
+/* Border radius */
+:root {
+	--br-sm: 0.25rem;
+	--br-base: 0.5rem;
+	--br-lg: 0.75rem;
+	--br-xl: 1rem;
+	--br-2xl: 1.25rem;
+	--br-max: 9999px;
+	--br-circle: 50%;
+}
+
+/* Box shadow */
+:root {
+	--bs-sm: 0 0.15rem 0.25rem 0 rgba(40, 40, 110, 0.2);
+	--bs-sm-dk: 0 0.15rem 0.25rem 0 rgba(40, 40, 110, 0.4);
+	--bs-base: 0 0.25rem 0.5rem 0 rgba(40, 40, 110, 0.2);
+	--bs-base-dk: 0 0.25rem 0.5rem 0 rgba(40, 40, 110, 0.4);
+	--bs-lg: 0 0.3rem 0.75rem 0 rgba(40, 40, 110, 0.3);
+	--bs-lg-dk: 0 0.3rem 0.75rem 0 rgba(40, 40, 110, 0.5);
+	--bs-xl: 0 0.5rem 1rem 0 rgba(40, 40, 110, 0.3);
+	--bs-xl-dk: 0 0.5rem 1rem 0 rgba(40, 40, 110, 0.5);
+}
+
+/* Main backgrounds */
+:root {
+	--bg-primary-lt: rgb(199, 215, 243);
+	--bg-primary: rgb(86, 86, 175);
+	--bg-primary-dk: rgb(40, 40, 110);
+
+	--bg-secondary-lt: rgb(255, 255, 255);
+	--bg-secondary: rgb(240, 240, 240);
+	--bg-secondary-dk: rgb(220, 220, 220);
+
+	--bg-backdrop: rgba(0, 0, 0, 0.5);
+
+	--bg-danger-lt: rgb(243, 201, 201);
+	--bg-danger: rgb(223, 83, 83);
+	--bg-danger-dk: rgb(173, 12, 12);
+
+	--bg-success: rgb(112, 209, 66);
+	--bg-success-dk: rgb(52, 128, 17);
+}
+
+/* Main text colors */
+:root {
+	--text: black;
+	--text-accent: white;
+}
+
+/* Menu colors */
+:root {
+	--clr-income: rgb(113, 207, 113);
+	--clr-income-dk: rgb(18, 156, 18);
+
+	--clr-expense: rgb(238, 106, 132);
+	--clr-expense-dk: rgb(235, 22, 64);
+
+	--clr-filter: rgb(141, 173, 235);
+	--clr-filter-dk: rgb(85, 136, 231);
+
+	--clr-config: rgb(241, 182, 109);
+	--clr-config-dk: rgb(252, 145, 15);
+}
+
+/* Categories colors */
+
+:root {
+	--clr-cat-default: rgb(133, 164, 211);
+	--clr-cat-default-dk: rgb(39, 98, 187);
+
+	--clr-cat-food: rgb(236, 148, 60);
+	--clr-cat-food-dk: rgb(223, 94, 34);
+
+	--clr-cat-salary: rgb(72, 228, 124);
+	--clr-cat-salary-dk: rgb(29, 167, 103);
+
+	--clr-cat-sport: rgb(53, 114, 226);
+	--clr-cat-sport-dk: rgb(29, 54, 167);
+
+	--clr-cat-shopping: rgb(238, 191, 105);
+	--clr-cat-shopping-dk: rgb(230, 150, 4);
+
+	--clr-cat-travel: rgb(216, 213, 60);
+	--clr-cat-travel-dk: rgb(202, 159, 16);
+
+	--clr-cat-streaming: rgb(211, 82, 228);
+	--clr-cat-streaming-dk: rgb(128, 29, 167);
+
+	--clr-cat-education: rgb(151, 91, 41);
+	--clr-cat-education-dk: rgb(88, 43, 7);
+
+	--clr-cat-gaming: rgb(64, 116, 214);
+	--clr-cat-gaming-dk: rgb(35, 50, 114);
+
+	--clr-cat-healthcare: rgb(58, 214, 214);
+	--clr-cat-healthcare-dk: rgb(29, 167, 160);
+
+	--clr-cat-gym: rgb(107, 107, 107);
+	--clr-cat-gym-dk: rgb(37, 37, 37);
+
+	--clr-cat-clothes: rgb(228, 82, 196);
+	--clr-cat-clothes-dk: rgb(167, 29, 156);
+
+	--clr-cat-gift: rgb(228, 82, 82);
+	--clr-cat-gift-dk: rgb(224, 19, 19);
+
+	--clr-cat-bills: rgb(216, 116, 116);
+	--clr-cat-bills-dk: rgb(168, 45, 45);
+
+	--clr-cat-decor: rgb(95, 228, 183);
+	--clr-cat-decor-dk: rgb(47, 190, 119);
+}
+
+/* Normalizer */
+
+html {
+	scroll-behavior: smooth;
+	-webkit-tap-highlight-color: transparent;
+}
+
+body {
+	margin: 0;
+	background-color: var(--bg-secondary);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
+}

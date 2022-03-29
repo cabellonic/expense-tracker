@@ -1,0 +1,34 @@
+.backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--bg-backdrop);
+	z-index: 10;
+	cursor: pointer;
+}
+
+.modal_wrapper {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: var(--sp-4);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	z-index: 20;
+}
+
+.modal {
+	min-width: 280px;
+	width: 80%;
+	max-width: 900px;
+	max-height: 75vh;
+	overflow: auto;
+	background-color: var(--bg-secondary);
+	padding: var(--sp-4);
+	border-radius: var(--br-base);
+}

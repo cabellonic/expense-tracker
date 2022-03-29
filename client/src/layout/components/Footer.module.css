@@ -1,0 +1,20 @@
+.main_footer {
+	border-top: 1px solid var(--bg-secondary-dk);
+	margin-top: auto;
+	padding: var(--sp-4);
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: column;
+	gap: var(--sp-2);
+}
+
+.link {
+	font-size: var(--fs-lg);
+	transition: color 0.2s ease-in-out;
+}
+
+.link:hover {
+	text-decoration: none;
+}

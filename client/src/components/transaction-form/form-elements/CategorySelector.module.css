@@ -1,0 +1,30 @@
+.select_category,
+.category_list {
+	display: flex;
+	flex-flow: wrap;
+	gap: var(--sp-3);
+}
+
+.category {
+	display: flex;
+	align-items: center;
+	gap: var(--sp-2);
+	width: 100%;
+	padding: var(--sp-3);
+	background-color: var(--bg-secondary-lt);
+	box-shadow: var(--bs-base);
+	border-radius: var(--br-base);
+	transition: box-shadow 0.1s ease-in-out;
+	cursor: pointer;
+}
+
+.category:hover {
+	box-shadow: var(--bs-base-dk);
+}
+
+.category_name {
+	border: 0;
+	outline: 0;
+	font-size: var(--fs-lg);
+	cursor: inherit;
+}

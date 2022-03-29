@@ -1,0 +1,9 @@
+.main_content_wrapper {
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.main_content {
+	padding: var(--sp-4);
+}

@@ -1,0 +1,5 @@
+.transaction_form {
+	display: flex;
+	flex-flow: column;
+	gap: var(--sp-4);
+}

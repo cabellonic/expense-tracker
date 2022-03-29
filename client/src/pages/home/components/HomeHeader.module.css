@@ -1,0 +1,15 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.title {
+	font-size: var(--fs-xl);
+	font-weight: 600;
+}
+
+.view_all {
+	text-decoration: none;
+	color: darkblue;
+}

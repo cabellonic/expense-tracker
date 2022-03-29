@@ -1,0 +1,45 @@
+.fieldset {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.currency_symbol {
+	font-size: var(--fs-2xl);
+	font-family: monospace;
+}
+
+.amount {
+	max-width: 300px;
+	background-color: transparent;
+	font-size: var(--fs-5xl);
+	text-align: center;
+	border: 0;
+	border-bottom: 2px solid transparent;
+	transition: border-bottom 0.2s ease-in-out;
+}
+
+.amount:hover,
+.amount:active,
+.amount:focus {
+	border: 0;
+	outline: 0;
+	border-bottom: 2px solid transparent;
+}
+
+/* Removing arrow for input type number */
+.amount::-webkit-outer-spin-button,
+.amount::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+.amount[type="number"] {
+	-moz-appearance: textfield;
+}
+
+.error {
+	border-bottom: 2px solid crimson;
+}
