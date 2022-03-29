@@ -30,8 +30,11 @@
 	background-color: var(--bg-secondary-dk);
 }
 
-.nav {
+.page_title {
 	font-size: var(--fs-2xl);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .avatar {

@@ -11,7 +11,7 @@ const Header = ({ pageTitle }) => {
 					<Link to="/" alt="Go home" className={styles.icon}>
 						<FontAwesomeIcon icon={["fas", "arrow-left"]} />
 					</Link>
-					<span className={styles.nav}>{pageTitle}</span>
+					<span className={styles.page_title}>{pageTitle}</span>
 				</div>
 			</header>
 		);
