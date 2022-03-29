@@ -23,6 +23,7 @@
 	height: var(--fs-2xl);
 	width: var(--fs-2xl);
 	border-radius: var(--br-circle);
+	transition: background-color 0.2s ease-in-out;
 }
 
 .icon:hover {
