@@ -1,7 +1,7 @@
 import Layout from "layout/Layout";
 import ConfigMenu from "./components/ConfigMenu";
 
-const ConfigPage = ({}) => {
+const ConfigPage = () => {
 	return (
 		<Layout pageTitle={"Configuration"}>
 			<ConfigMenu />
