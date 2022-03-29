@@ -1,0 +1,11 @@
+.transaction {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	gap: var(--sp-4);
+}
+
+.edit {
+	margin-top: var(--sp-4);
+	text-decoration: none;
+}

@@ -1,0 +1,27 @@
+.amount {
+	padding: var(--sp-4);
+	color: var(--text-accent);
+	border-radius: var(--br-base);
+	font-size: var(--fs-xl);
+	width: fit-content;
+	min-width: 100px;
+	text-align: center;
+}
+
+.expense {
+	background: var(--clr-expense-dk);
+	background: linear-gradient(
+		-25deg,
+		var(--clr-expense-dk) 0%,
+		var(--clr-expense) 100%
+	);
+}
+
+.income {
+	background: var(--clr-income-dk);
+	background: linear-gradient(
+		-25deg,
+		var(--clr-income-dk) 0%,
+		var(--clr-income) 100%
+	);
+}

@@ -8,8 +8,8 @@ import styles from "./CategorySelector.module.css";
 // Dummy Data
 import categories from "data/categories";
 
-const CategorySelector = ({ register, setValue }) => {
-	const [selectedCategory, setSelectedCategory] = useState();
+const CategorySelector = ({ register, setValue, category }) => {
+	const [selectedCategory, setSelectedCategory] = useState(category);
 	const [showModal, setShowModal] = useState(false);
 
 	const handleModal = () => {

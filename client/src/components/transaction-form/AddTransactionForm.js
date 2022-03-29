@@ -17,7 +17,6 @@ const AddTransactionForm = ({ type = "expense" }) => {
 	} = useForm({ mode: "onChange" });
 
 	const onSubmit = (data) => console.log(data);
-	console.log(errors);
 
 	const amountRegister = register("amount", { required: true });
 	// const typeRegister = register("type", {

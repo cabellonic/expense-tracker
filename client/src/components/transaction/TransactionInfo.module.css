@@ -1,0 +1,17 @@
+.transaction_info {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	text-align: center;
+	gap: var(--sp-2);
+	margin-bottom: var(--sp-2);
+}
+
+.title {
+	font-size: var(--fs-2xl);
+	font-weight: 600;
+}
+
+.date {
+	opacity: 0.75;
+}

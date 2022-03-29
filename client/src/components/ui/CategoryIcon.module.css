@@ -2,6 +2,8 @@
 	font-size: inherit;
 	min-width: var(--fs-4xl);
 	min-height: var(--fs-4xl);
+	width: auto;
+	height: inherit;
 	padding: var(--sp-1);
 	display: flex;
 	align-items: center;

@@ -11,6 +11,7 @@ const TypeSelector = ({ setValue, type, disabled }) => {
 	const [selectedType, setSelectedType] = useState(type);
 
 	const handleType = (type) => {
+		if (disabled) return;
 		if (type === selectedType) return;
 		if (type === TYPE.expense) {
 			setValue("type", TYPE.expense);

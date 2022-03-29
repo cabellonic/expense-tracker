@@ -8,7 +8,7 @@ import CategorySelector from "./form-elements/CategorySelector";
 import Fieldset from "./form-elements/Fieldset";
 import Button from "./form-elements/Button";
 
-const EditTransactionForm = () => {
+const EditTransactionForm = ({ transaction }) => {
 	const {
 		register,
 		handleSubmit,
@@ -16,35 +16,46 @@ const EditTransactionForm = () => {
 		formState: { errors },
 	} = useForm({ mode: "onChange" });
 
+	const { amount, type, title, note, category } = transaction;
+
 	const onSubmit = (data) => console.log(data);
 
-	const amountRegister = register("amount", { required: true });
+	const amountRegister = register("amount", {
+		required: true,
+		value: Math.abs(amount),
+	});
 	// const typeRegister = register("type", {
 	register("type", {
 		required: true,
-		value: "income",
+		value: type,
 	});
 	const titleRegister = register("title", {
 		required: true,
 		minLength: 3,
 		maxLength: 100,
+		value: title,
 	});
-	const noteRegister = register("note");
+	const noteRegister = register("note", { value: note });
 	const categoryRegister = register("category", {
 		required: true,
+		value: category,
 	});
 
 	return (
 		<Form onSubmit={handleSubmit(onSubmit)}>
 			<AmountInput register={amountRegister} error={errors.amount} />
-			<TypeSelector setValue={setValue} type={"income"} disabled />
+			<TypeSelector setValue={setValue} type={type} disabled />
 			<Input
 				register={titleRegister}
 				placeholder="Title"
 				error={errors.title}
 			/>
 			<Input register={noteRegister} placeholder="Note" error={errors.note} />
-			<CategorySelector register={categoryRegister} setValue={setValue} />
+			<CategorySelector
+				register={categoryRegister}
+				setValue={setValue}
+				category={category}
+			/>
 
 			<Fieldset>
 				<Button type="submit" red>
