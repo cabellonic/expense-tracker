@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Styles
 import styles from "./Header.module.css";
 
-const Header = ({ pageTitle }) => {
+const Header = ({ pageTitle, href = "/" }) => {
 	if (pageTitle)
 		return (
 			<header className={styles.header_wrapper}>
 				<div className={styles.header}>
-					<Link to="/" alt="Go home" className={styles.icon}>
+					<Link to={href} alt="Go home" className={styles.icon}>
 						<FontAwesomeIcon icon={["fas", "arrow-left"]} />
 					</Link>
 					<span className={styles.page_title}>{pageTitle}</span>
