@@ -7,7 +7,7 @@ export const formatDate = (value, locale = "en-US") => {
 	return formatter.format(date);
 };
 
-export const formatDaysAgo = (value, locale = "en-US") => {
+export const formatTimeAgo = (value, locale = "en-US") => {
 	const dayInMilliseconds = 1000 * 60 * 60 * 24;
 	const date = new Date(value.split("-"));
 	const deltaDays = (date.getTime() - Date.now()) / dayInMilliseconds;
