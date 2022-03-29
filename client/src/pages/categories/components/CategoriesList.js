@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Link } from "@reach/router";
 // Components
 import CategoryIcon from "components/ui/CategoryIcon";
@@ -10,7 +11,7 @@ const CategoriesList = () => {
 	return (
 		<div className={styles.category_list}>
 			{categories.map((category) => {
-				if (!category.count) return <></>;
+				if (!category.count) return <Fragment key={category.id}></Fragment>;
 				return (
 					<Link
 						to={`/categories/${category.id}`}
