@@ -1,7 +1,12 @@
 import { Router } from "@reach/router";
 // Components
 import Home from "pages/home/home";
+// GuestHomePage will be the default page for not logged in users
+// But for now I will render it in the /guest route
+import GuestHomePage from "pages/home/guest";
 import ConfigPage from "pages/config/config";
+import SingUpPage from "pages/auth/singup";
+import LogInPage from "pages/auth/login";
 import CategoriesPage from "pages/categories/categories";
 import Transaction from "pages/transactions/id";
 import AllTransactions from "pages/transactions/all";
@@ -18,6 +23,9 @@ const App = () => {
 	return (
 		<Router>
 			<Home path="/" />
+			<GuestHomePage path="/guest" />
+			<LogInPage path="/login" />
+			<SingUpPage path="/singup" />
 			<ConfigPage path="/config" />
 			<CategoriesPage path="/categories" />
 			<Transaction path="/transactions/:id" />
