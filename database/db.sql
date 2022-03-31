@@ -22,7 +22,7 @@ CREATE TABLE category (
     user_id BIGINT REFERENCES app_user (id) ON DELETE CASCADE
 );
 
-INSERT INTO category (name, slug, created_at, updated_at, user_id) VALUES ('Food', 'food', '2020-01-01 00:00:00', '2020-01-01 00:00:00');
+INSERT INTO category (name, slug, created_at, updated_at, user_id) VALUES ('Food', 'food', '2020-01-01 00:00:00', '2020-01-01 00:00:00', null);
 
 CREATE TABLE transaction (
     id BIGSERIAL NOT NULL PRIMARY KEY,
