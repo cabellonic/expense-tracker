@@ -2,7 +2,7 @@ CREATE DATABASE expensetracker;
 
 CREATE TABLE IF NOT EXISTS app_user (
     id SERIAL NOT NULL PRIMARY KEY,
-    name VARCHAR(20) NOT NULL,
+    first_name VARCHAR(20) NOT NULL,
     lastname VARCHAR(20) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
     passhash VARCHAR(255) NOT NULL,
