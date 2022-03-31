@@ -9,7 +9,7 @@ const {
 	createTransaction,
 	updateTransaction,
 	deleteTransaction,
-} = require("../controllers/transactions.controllers");
+} = require("../controllers/transactions.controller");
 
 router.get("/transactions", getAllTransactions);
 router.post("/transactions", createTransaction);

@@ -4,8 +4,12 @@ import Button from "components/ui/Button";
 import Fieldset from "components/ui/form/Fieldset";
 import Form from "components/ui/form/Form";
 import Input from "components/ui/form/Input";
+import { useContext } from "react";
+import { AuthContext } from "context/AuthContext";
 
 const LoginForm = ({}) => {
+	const { isLoggedIn, userToken, login, singout } = useContext(AuthContext);
+
 	const {
 		register,
 		handleSubmit,
@@ -24,7 +28,7 @@ const LoginForm = ({}) => {
 			});
 
 			const resData = await response.json();
-			console.log(resData);
+			login(resData.token);
 		} catch (err) {
 			// HANDLE ERROR LATER
 			console.log(err);
@@ -58,12 +62,6 @@ const LoginForm = ({}) => {
 
 				<Fieldset>
 					<Button type="submit">Log in</Button>
-				</Fieldset>
-
-				<Fieldset>
-					<Button href={"/singup"} green>
-						I'm new here
-					</Button>
 				</Fieldset>
 			</Form>
 		</>

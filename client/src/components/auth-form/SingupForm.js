@@ -80,10 +80,6 @@ const SingupForm = () => {
 					Sing up
 				</Button>
 			</Fieldset>
-
-			<Fieldset>
-				<Button href={"/login"}>I have an account</Button>
-			</Fieldset>
 		</Form>
 	);
 };
