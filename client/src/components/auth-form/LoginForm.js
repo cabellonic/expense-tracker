@@ -14,31 +14,32 @@ const LoginForm = ({}) => {
 
 	const onSubmit = async (data) => {
 		const { email, password } = data;
-		const result = await fetch("http://localhost:5000/login", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ email, password }),
-		});
-		result
-			.then((res) => {
-				console.log(res);
-			})
-			.catch((err) => {
-				console.log(err);
+		try {
+			const response = await fetch("http://localhost:5000/login", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ email, password }),
 			});
+
+			const resData = await response.json();
+			console.log(resData);
+		} catch (err) {
+			// HANDLE ERROR LATER
+			console.log(err);
+		}
 	};
 
 	const emailRegister = register("email", {
 		required: true,
 		pattern: /^\S+@\S+$/i,
-		value: "mail@mail.com",
+		value: "cabellonic@gmail.com",
 	});
 	const passwordRegister = register("password", {
 		required: true,
 		min: 5,
-		value: "testtest",
+		value: "somepassword",
 	});
 	return (
 		<>

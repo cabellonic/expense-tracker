@@ -34,15 +34,22 @@ const SingupForm = () => {
 	const firstNameRegister = register("firstName", {
 		required: true,
 		maxLength: 25,
+		value: "Nicolás",
 	});
 	const lastNameRegister = register("lastName", {
 		maxLength: 25,
+		value: "Cabello",
 	});
 	const emailRegister = register("email", {
 		required: true,
 		pattern: /^\S+@\S+$/i,
+		value: "cabellonic@gmail.com",
 	});
-	const passwordRegister = register("password", { required: true, min: 5 });
+	const passwordRegister = register("password", {
+		required: true,
+		min: 5,
+		value: "somepassword",
+	});
 
 	return (
 		<Form onSubmit={handleSubmit(onSubmit)}>
