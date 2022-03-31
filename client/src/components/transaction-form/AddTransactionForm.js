@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 // Components
-import Form from "./form-elements/Form";
+import Form from "components/ui/form/Form";
 import AmountInput from "./form-elements/AmountInput";
 import TypeSelector from "./form-elements/TypeSelector";
-import Input from "./form-elements/Input";
+import Input from "components/ui/form/Input";
 import CategorySelector from "./form-elements/CategorySelector";
-import Fieldset from "./form-elements/Fieldset";
-import Button from "./form-elements/Button";
+import Fieldset from "components/ui/form/Fieldset";
+import Button from "components/ui/Button";
 
 const AddTransactionForm = ({ type = "expense" }) => {
 	const {

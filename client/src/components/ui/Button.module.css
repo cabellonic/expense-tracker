@@ -1,4 +1,7 @@
 .button {
+	display: block;
+	text-align: center;
+	text-decoration: none;
 	font-size: var(--fs-lg);
 	width: fit-content;
 	min-width: 120px;
