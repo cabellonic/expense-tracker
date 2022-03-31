@@ -3,15 +3,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Styles
 import styles from "./Header.module.css";
 
-const Header = ({ pageTitle, href = "/" }) => {
+const Header = ({ pageTitle, center, href = "/" }) => {
 	if (pageTitle)
 		return (
 			<header className={styles.header_wrapper}>
 				<div className={styles.header}>
-					<Link to={href} aria-label="Go home" className={styles.icon}>
-						<FontAwesomeIcon icon={["fas", "arrow-left"]} />
-					</Link>
-					<span className={styles.page_title}>{pageTitle}</span>
+					{!center && (
+						<Link to={href} aria-label="Go home" className={styles.icon}>
+							<FontAwesomeIcon icon={["fas", "arrow-left"]} />
+						</Link>
+					)}
+					<span
+						className={`${styles.page_title} ${center ? styles.center : ""}`}
+					>
+						{pageTitle}
+					</span>
 				</div>
 			</header>
 		);

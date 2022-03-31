@@ -11,10 +11,10 @@ import styles from "./Layout.module.css";
 // I can use navigate(-1), but it will go back no matter if the previous page is part of my web app or not
 // So I decided to get the previous path from a param (from) until I came with a better approach.
 
-const Layout = ({ balance, menu, pageTitle, from, children }) => {
+const Layout = ({ balance, menu, pageTitle, center, from, children }) => {
 	return (
 		<main className={styles.layout}>
-			<Header pageTitle={pageTitle} href={from} />
+			<Header pageTitle={pageTitle} center={center} href={from} />
 			{balance && <Balance />}
 			{menu && <Menu />}
 			<Content>{children}</Content>

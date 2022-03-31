@@ -37,6 +37,12 @@
 	text-overflow: ellipsis;
 }
 
+.page_title.center {
+	display: block;
+	width: 100%;
+	text-align: center;
+}
+
 .avatar {
 	width: 35px;
 	height: 35px;
