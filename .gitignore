@@ -1,4 +1,9 @@
-node_modules
-coverage
+node_modules/
+coverage/
+
+# ENVIROMENT
 .env
+.env.development
+.env.test
+.env.production
 .env.*
