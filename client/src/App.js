@@ -5,8 +5,8 @@ import Home from "pages/home/home";
 // But for now I will render it in the /guest route
 import GuestHomePage from "pages/home/guest";
 import ConfigPage from "pages/config/config";
-import SingUpPage from "pages/auth/singup";
-import LogInPage from "pages/auth/login";
+import SingupPage from "pages/auth/singup";
+import LoginPage from "pages/auth/login";
 import CategoriesPage from "pages/categories/categories";
 import Transaction from "pages/transactions/id";
 import AllTransactions from "pages/transactions/all";
@@ -24,8 +24,8 @@ const App = () => {
 		<Router>
 			<Home path="/" />
 			<GuestHomePage path="/guest" />
-			<LogInPage path="/login" />
-			<SingUpPage path="/singup" />
+			<LoginPage path="/login" />
+			<SingupPage path="/singup" />
 			<ConfigPage path="/config" />
 			<CategoriesPage path="/categories" />
 			<Transaction path="/transactions/:id" />
