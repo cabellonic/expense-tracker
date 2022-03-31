@@ -1,9 +1,9 @@
 CREATE DATABASE expensetracker;
 
 CREATE TABLE IF NOT EXISTS app_user (
-    id SERIAL NOT NULL PRIMARY KEY,
+    id BIGSERIAL NOT NULL PRIMARY KEY,
     first_name VARCHAR(20) NOT NULL,
-    lastname VARCHAR(20) NOT NULL,
+    last_name VARCHAR(20),
     email VARCHAR(50) UNIQUE NOT NULL,
     passhash VARCHAR(255) NOT NULL,
     income NUMERIC(10,2) DEFAULT 0,
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS app_user (
     balance NUMERIC(10,2) DEFAULT 0
 );
 
-INSERT INTO app_user (first_name, lastname, email, passhash) VALUES ('John', 'Doe', 'johndoe@mail.com', 'passhash')
+INSERT INTO app_user (first_name, last_name, email, passhash) VALUES ('John', 'Doe', 'johndoe@mail.com', 'passhash')
 
 CREATE TABLE category (
     id BIGSERIAL NOT NULL PRIMARY KEY,
