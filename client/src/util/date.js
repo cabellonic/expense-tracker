@@ -1,5 +1,5 @@
 export const formatDate = (value, locale = "en-US") => {
-	const date = new Date(value.split("-"));
+	const date = new Date(value);
 	const config = {
 		dateStyle: "full",
 	};
@@ -9,7 +9,7 @@ export const formatDate = (value, locale = "en-US") => {
 
 export const formatTimeAgo = (value, locale = "en-US") => {
 	const dayInMilliseconds = 1000 * 60 * 60 * 24;
-	const date = new Date(value.split("-"));
+	const date = new Date(value);
 	const deltaDays = (date.getTime() - Date.now()) / dayInMilliseconds;
 	const formatter = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
 	const daysNumber = Math.round(deltaDays);
