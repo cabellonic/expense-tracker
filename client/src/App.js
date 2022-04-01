@@ -21,6 +21,7 @@ import { useAuth } from "hook/use-auth";
 import { AuthContext } from "context/AuthContext";
 // Util
 import { registerIcons } from "util/fontAwesome";
+import Category from "pages/categories/id";
 registerIcons();
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
 							<HomePage path="/home" />
 							<ConfigPage path="/config" />
 							<CategoriesPage path="/categories" />
+							<Category path="/categories/:category_id" />
 							<Transaction path="/transactions/:id" />
 							<AllTransactions path="/transactions" />
 							<Incomes path="/transactions/incomes" />

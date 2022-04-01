@@ -1,8 +1,6 @@
 import TransactionCard from "./TransactionCard";
-// Dummy data
-import transactions from "data/transactions";
 
-const TransactionList = () => {
+const TransactionList = ({ transactions }) => {
 	return (
 		<section>
 			<main>

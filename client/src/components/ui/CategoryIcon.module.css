@@ -18,7 +18,7 @@
 	);
 }
 
-.category[data-category="Food"] {
+.category[data-category="food"] {
 	background: var(--clr-cat-food-dk);
 	background: linear-gradient(
 		-25deg,
@@ -27,7 +27,7 @@
 	);
 }
 
-.category[data-category="Salary"] {
+.category[data-category="salary"] {
 	background: var(--clr-cat-salary-dk);
 	background: linear-gradient(
 		-25deg,
@@ -36,7 +36,7 @@
 	);
 }
 
-.category[data-category="Sport"] {
+.category[data-category="sport"] {
 	background: var(--clr-cat-sport-dk);
 	background: linear-gradient(
 		-25deg,
@@ -45,7 +45,7 @@
 	);
 }
 
-.category[data-category="Shopping"] {
+.category[data-category="shopping"] {
 	background: var(--clr-cat-shopping-dk);
 	background: linear-gradient(
 		-25deg,
@@ -54,7 +54,7 @@
 	);
 }
 
-.category[data-category="Travel"] {
+.category[data-category="travel"] {
 	background: var(--clr-cat-travel-dk);
 	background: linear-gradient(
 		-25deg,
@@ -63,7 +63,7 @@
 	);
 }
 
-.category[data-category="Streaming"] {
+.category[data-category="streaming"] {
 	background: var(--clr-cat-streaming-dk);
 	background: linear-gradient(
 		-25deg,
@@ -72,7 +72,7 @@
 	);
 }
 
-.category[data-category="Education"] {
+.category[data-category="education"] {
 	background: var(--clr-cat-education-dk);
 	background: linear-gradient(
 		-25deg,
@@ -81,7 +81,7 @@
 	);
 }
 
-.category[data-category="Gaming"] {
+.category[data-category="gaming"] {
 	background: var(--clr-cat-gaming-dk);
 	background: linear-gradient(
 		-25deg,
@@ -90,7 +90,7 @@
 	);
 }
 
-.category[data-category="Healthcare"] {
+.category[data-category="healthcare"] {
 	background: var(--clr-cat-healthcare-dk);
 	background: linear-gradient(
 		-25deg,
@@ -99,7 +99,7 @@
 	);
 }
 
-.category[data-category="GYM"] {
+.category[data-category="gym"] {
 	background: var(--clr-cat-gym-dk);
 	background: linear-gradient(
 		-25deg,
@@ -108,7 +108,7 @@
 	);
 }
 
-.category[data-category="Clothes"] {
+.category[data-category="clothes"] {
 	background: var(--clr-cat-clothes-dk);
 	background: linear-gradient(
 		-25deg,
@@ -117,7 +117,7 @@
 	);
 }
 
-.category[data-category="Gift"] {
+.category[data-category="gift"] {
 	background: var(--clr-cat-gift-dk);
 	background: linear-gradient(
 		-25deg,
@@ -126,7 +126,7 @@
 	);
 }
 
-.category[data-category="Bills"] {
+.category[data-category="bills"] {
 	background: var(--clr-cat-bills-dk);
 	background: linear-gradient(
 		-25deg,
@@ -135,7 +135,7 @@
 	);
 }
 
-.category[data-category="Decor"] {
+.category[data-category="decoration"] {
 	background: var(--clr-cat-decor-dk);
 	background: linear-gradient(
 		-25deg,

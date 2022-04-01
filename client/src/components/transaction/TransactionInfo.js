@@ -4,8 +4,8 @@ import { formatDate } from "util/date";
 import styles from "./TransactionInfo.module.css";
 
 const TransactionInfo = ({ transaction }) => {
-	const { title, note, date } = transaction;
-	const formattedDate = formatDate(date);
+	const { title, note, created_at } = transaction;
+	const formattedDate = formatDate(created_at);
 
 	return (
 		<div className={styles.transaction_info}>

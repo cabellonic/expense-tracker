@@ -4,11 +4,11 @@ import CategoryIcon from "components/ui/CategoryIcon";
 import styles from "./TransactionIcon.module.css";
 
 const TransactionIcon = ({ transaction }) => {
-	const { category } = transaction;
+	const { category_slug } = transaction;
 
 	return (
 		<figure className={styles.transaction_icon}>
-			<CategoryIcon category={category} />
+			<CategoryIcon category={category_slug} />
 		</figure>
 	);
 };

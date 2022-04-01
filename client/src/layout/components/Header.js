@@ -1,9 +1,14 @@
+import { useContext } from "react";
 import { Link } from "@reach/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Styles
 import styles from "./Header.module.css";
+// Context
+import { AuthContext } from "context/AuthContext";
 
 const Header = ({ pageTitle, center, href = "/home" }) => {
+	const { userToken } = useContext(AuthContext);
+
 	if (pageTitle)
 		return (
 			<header className={styles.header_wrapper}>

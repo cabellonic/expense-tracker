@@ -4,20 +4,8 @@ import { Link } from "@reach/router";
 import CategoryIcon from "components/ui/CategoryIcon";
 // Styles
 import styles from "./CategoriesList.module.css";
-// Dummy Data
-// import categories from "data/categories";
 
-const CategoriesList = () => {
-	const [categories, setCategories] = useState([]);
-	useEffect(() => {
-		const fetchData = async () => {
-			const response = await fetch("http://localhost:5000/categories");
-			const resData = await response.json();
-			setCategories(resData);
-		};
-		fetchData();
-	}, []);
-
+const CategoriesList = ({ categories }) => {
 	return (
 		<div className={styles.category_list}>
 			{categories.map((category) => {
@@ -29,7 +17,7 @@ const CategoriesList = () => {
 						className={styles.category}
 					>
 						<span className={styles.icon}>
-							<CategoryIcon category={category.name} />
+							<CategoryIcon category={category.slug} />
 						</span>
 						<span className={styles.name}>{category.name}</span>
 						{/* <span className={styles.count}>{category.count}</span> */}

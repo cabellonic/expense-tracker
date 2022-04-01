@@ -8,14 +8,14 @@ import CategoryIcon from "components/ui/CategoryIcon";
 import styles from "./TransactionCard.module.css";
 
 const TransactionCard = ({ item }) => {
-	const { id, type, title, amount, category, date } = item;
+	const { id, type, title, amount, category_slug, created_at } = item;
 	const formattedAmount = formatAmount(amount);
-	const formattedDate = formatTimeAgo(date);
+	const formattedDate = formatTimeAgo(created_at);
 
 	return (
 		<Link to={`/transactions/${id}`} className={styles.transaction_card}>
 			<div className={styles.icon}>
-				<CategoryIcon category={category} />
+				<CategoryIcon category={category_slug} />
 			</div>
 			<div className={styles.title}>{title}</div>
 			<div className={styles.info}>
