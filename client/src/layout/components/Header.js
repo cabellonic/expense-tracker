@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Styles
 import styles from "./Header.module.css";
 
-const Header = ({ pageTitle, center, href = "/" }) => {
+const Header = ({ pageTitle, center, href = "/home" }) => {
 	if (pageTitle)
 		return (
 			<header className={styles.header_wrapper}>

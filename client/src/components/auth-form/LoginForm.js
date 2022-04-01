@@ -1,14 +1,17 @@
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 // Components
-import Button from "components/ui/Button";
-import Fieldset from "components/ui/form/Fieldset";
 import Form from "components/ui/form/Form";
 import Input from "components/ui/form/Input";
-import { useContext } from "react";
+import Fieldset from "components/ui/form/Fieldset";
+import Button from "components/ui/Button";
+import ErrorMessage from "components/ui/form/ErrorMessage";
+// Context
 import { AuthContext } from "context/AuthContext";
 
 const LoginForm = ({}) => {
-	const { isLoggedIn, userToken, login, singout } = useContext(AuthContext);
+	const [errorMessage, setErrorMessage] = useState();
+	const { login } = useContext(AuthContext);
 
 	const {
 		register,
@@ -28,6 +31,9 @@ const LoginForm = ({}) => {
 			});
 
 			const resData = await response.json();
+			// If credentials are invalid
+			if (!resData.isLoggedIn) return setErrorMessage(resData.message);
+
 			login(resData.token);
 		} catch (err) {
 			// HANDLE ERROR LATER
@@ -60,6 +66,7 @@ const LoginForm = ({}) => {
 					type="password"
 				/>
 
+				{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 				<Fieldset>
 					<Button type="submit">Log in</Button>
 				</Fieldset>

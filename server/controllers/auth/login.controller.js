@@ -14,8 +14,14 @@ exports.handleLogin = async (req, res) => {
 				message: "Invalid token",
 			});
 		}
+
 		// We got a valid token so we keep the user's session
-		return res.json({ isLoggedIn: true, token, email: decoded.email });
+		return res.json({
+			isLoggedIn: true,
+			token,
+			email: decoded.email,
+			expirationDate: decoded.exp,
+		});
 	});
 };
 
@@ -53,7 +59,7 @@ exports.login = async (req, res) => {
 			id: potentialLogin.rows[0].id,
 		},
 		process.env.JWT_SECRET,
-		{ expiresIn: "1m" },
+		{ expiresIn: "1h" },
 		(err, token) => {
 			if (err) {
 				return res.status(500).json({

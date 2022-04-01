@@ -1,8 +1,7 @@
 import { Router } from "@reach/router";
 // Components
-import Home from "pages/home/home";
-// GuestHomePage will be the default page for not logged in users
-// But for now I will render it in the /guest route
+import Loading from "layout/Loading";
+import HomePage from "pages/home/home";
 import GuestHomePage from "pages/home/guest";
 import ConfigPage from "pages/config/config";
 import SingupPage from "pages/auth/singup";
@@ -15,6 +14,7 @@ import Expenses from "pages/transactions/expenses";
 import AddIncome from "pages/add/income";
 import AddExpense from "pages/add/expense";
 import EditTransaction from "pages/edit/edit";
+import NotFoundPage from "pages/not-found/not-found";
 // Hookes
 import { useAuth } from "hook/use-auth";
 // Context
@@ -25,22 +25,36 @@ registerIcons();
 
 const App = () => {
 	const { isLoggedIn, userToken, login, singout } = useAuth();
+	console.log("IS THE USER LOGGED IN???", isLoggedIn);
+
+	if (isLoggedIn === null) {
+		return <Loading />;
+	}
+
 	return (
 		<AuthContext.Provider value={{ isLoggedIn, userToken, login, singout }}>
 			<Router>
-				<Home path="/" />
-				<GuestHomePage path="/guest" />
-				<LoginPage path="/login" />
-				<SingupPage path="/singup" />
-				<ConfigPage path="/config" />
-				<CategoriesPage path="/categories" />
-				<Transaction path="/transactions/:id" />
-				<AllTransactions path="/transactions" />
-				<Incomes path="/transactions/incomes" />
-				<Expenses path="/transactions/expenses" />
-				<AddIncome path="/add/income" />
-				<AddExpense path="/add/expense" />
-				<EditTransaction path="/edit/:id" />
+				{isLoggedIn ? (
+					<>
+						<HomePage path="/home" />
+						<ConfigPage path="/config" />
+						<CategoriesPage path="/categories" />
+						<Transaction path="/transactions/:id" />
+						<AllTransactions path="/transactions" />
+						<Incomes path="/transactions/incomes" />
+						<Expenses path="/transactions/expenses" />
+						<AddIncome path="/add/income" />
+						<AddExpense path="/add/expense" />
+						<EditTransaction path="/edit/:id" />
+					</>
+				) : (
+					<>
+						<GuestHomePage path="/" />
+						<LoginPage path="/login" />
+						<SingupPage path="/singup" />
+					</>
+				)}
+				<NotFoundPage default />
 			</Router>
 		</AuthContext.Provider>
 	);

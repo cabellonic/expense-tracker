@@ -1,0 +1,7 @@
+.error {
+	width: 100%;
+	text-align: center;
+	color: var(--bg-danger-dk);
+	font-weight: 600;
+	margin: 0;
+}

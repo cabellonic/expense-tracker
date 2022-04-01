@@ -4,7 +4,7 @@ import SingupForm from "components/auth-form/SingupForm";
 
 const SingupPage = () => {
 	return (
-		<Layout pageTitle={"Sing up"}>
+		<Layout pageTitle={"Sing up"} to="/">
 			<SingupForm />
 		</Layout>
 	);

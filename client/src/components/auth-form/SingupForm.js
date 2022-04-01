@@ -1,11 +1,18 @@
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 // Components
 import Form from "components/ui/form/Form";
 import Input from "components/ui/form/Input";
 import Fieldset from "components/ui/form/Fieldset";
 import Button from "components/ui/Button";
+import ErrorMessage from "components/ui/form/ErrorMessage";
+// Context
+import { AuthContext } from "context/AuthContext";
 
 const SingupForm = () => {
+	const [errorMessage, setErrorMessage] = useState();
+	const { login } = useContext(AuthContext);
+
 	const {
 		register,
 		handleSubmit,
@@ -23,8 +30,11 @@ const SingupForm = () => {
 				body: JSON.stringify({ firstName, lastName, email, password }),
 			});
 
-			const responseData = await response.json();
-			console.log(responseData);
+			const resData = await response.json();
+			// If credentials are invalid
+			if (!resData.isLoggedIn) return setErrorMessage(resData.message);
+
+			login(resData.token);
 		} catch (err) {
 			// HANDLE ERROR LATER
 			console.log(err);
@@ -75,6 +85,7 @@ const SingupForm = () => {
 				type="password"
 			/>
 
+			{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 			<Fieldset>
 				<Button type="submit" green>
 					Sing up
