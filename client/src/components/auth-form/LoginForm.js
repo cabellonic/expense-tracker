@@ -34,7 +34,7 @@ const LoginForm = ({}) => {
 			// If credentials are invalid
 			if (!resData.isLoggedIn) return setErrorMessage(resData.message);
 
-			login(resData.token);
+			login(resData.token, resData.userId);
 		} catch (err) {
 			// HANDLE ERROR LATER
 			console.log(err);

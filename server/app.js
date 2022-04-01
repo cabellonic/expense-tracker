@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 // Routes
-const transactionsRoutes = require("./routes/transactions.routes");
 const authRoutes = require("./routes/auth.routes");
+const transactionsRoutes = require("./routes/transactions.routes");
+const categoriesRoutes = require("./routes/categories.routes");
 
 // Middlewares
 app.use(express.json());
@@ -15,7 +16,8 @@ app.use(
 	})
 );
 
-app.use(transactionsRoutes);
 app.use(authRoutes);
+app.use(transactionsRoutes);
+app.use(categoriesRoutes);
 
 app.listen(5000);

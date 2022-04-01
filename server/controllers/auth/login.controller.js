@@ -16,10 +16,12 @@ exports.handleLogin = async (req, res) => {
 		}
 
 		// We got a valid token so we keep the user's session
+		console.log(decoded);
 		return res.json({
 			isLoggedIn: true,
 			token,
 			email: decoded.email,
+			userId: decoded.id,
 			expirationDate: decoded.exp,
 		});
 	});
@@ -30,7 +32,7 @@ exports.login = async (req, res) => {
 
 	// We try to get the user from the database
 	const potentialLogin = await pool.query(
-		"SELECT email, passhash FROM app_user WHERE email = $1",
+		"SELECT email, passhash, id FROM app_user WHERE email = $1",
 		[email]
 	);
 
@@ -72,6 +74,7 @@ exports.login = async (req, res) => {
 				isLoggedIn: true,
 				token,
 				email: potentialLogin.rows[0].email,
+				userId: potentialLogin.rows[0].id,
 			});
 		}
 	);

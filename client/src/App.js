@@ -25,37 +25,36 @@ registerIcons();
 
 const App = () => {
 	const { isLoggedIn, userToken, login, singout } = useAuth();
-	console.log("IS THE USER LOGGED IN???", isLoggedIn);
-
-	if (isLoggedIn === null) {
-		return <Loading />;
-	}
 
 	return (
 		<AuthContext.Provider value={{ isLoggedIn, userToken, login, singout }}>
-			<Router>
-				{isLoggedIn ? (
-					<>
-						<HomePage path="/home" />
-						<ConfigPage path="/config" />
-						<CategoriesPage path="/categories" />
-						<Transaction path="/transactions/:id" />
-						<AllTransactions path="/transactions" />
-						<Incomes path="/transactions/incomes" />
-						<Expenses path="/transactions/expenses" />
-						<AddIncome path="/add/income" />
-						<AddExpense path="/add/expense" />
-						<EditTransaction path="/edit/:id" />
-					</>
-				) : (
-					<>
-						<GuestHomePage path="/" />
-						<LoginPage path="/login" />
-						<SingupPage path="/singup" />
-					</>
-				)}
-				<NotFoundPage default />
-			</Router>
+			{isLoggedIn === null ? (
+				<Loading />
+			) : (
+				<Router>
+					{isLoggedIn ? (
+						<>
+							<HomePage path="/home" />
+							<ConfigPage path="/config" />
+							<CategoriesPage path="/categories" />
+							<Transaction path="/transactions/:id" />
+							<AllTransactions path="/transactions" />
+							<Incomes path="/transactions/incomes" />
+							<Expenses path="/transactions/expenses" />
+							<AddIncome path="/add/income" />
+							<AddExpense path="/add/expense" />
+							<EditTransaction path="/edit/:id" />
+						</>
+					) : (
+						<>
+							<GuestHomePage path="/" />
+							<LoginPage path="/login" />
+							<SingupPage path="/singup" />
+						</>
+					)}
+					<NotFoundPage default />
+				</Router>
+			)}
 		</AuthContext.Provider>
 	);
 };

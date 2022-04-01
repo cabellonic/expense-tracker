@@ -44,6 +44,7 @@ exports.singup = async (req, res) => {
 				isLoggedIn: true,
 				token,
 				email: newUserQuery.rows[0].email,
+				id: potentialLogin.rows[0].id,
 			});
 		}
 	);

@@ -3,13 +3,14 @@ import { useState, useCallback, useEffect } from "react";
 let logoutTimer;
 
 export const useAuth = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(null);
+	const [userId, setUserId] = useState(null);
 	const [token, setToken] = useState(false);
 	const [tokenExpirationDate, setTokenExpirationDate] = useState();
 
-	const login = useCallback((token, expirationDate) => {
-		console.log("HERE!");
+	const login = useCallback((token, userId, expirationDate) => {
 		setToken(token);
+		setUserId(userId);
 		setIsLoggedIn(true);
 		const tokenExpirationDate =
 			expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
@@ -18,6 +19,7 @@ export const useAuth = () => {
 			"userData",
 			JSON.stringify({
 				token: token,
+				userId: userId,
 				expiration: tokenExpirationDate.toISOString(),
 			})
 		);
@@ -26,6 +28,7 @@ export const useAuth = () => {
 	const logout = useCallback(() => {
 		setIsLoggedIn(false);
 		setToken(null);
+		setUserId(null);
 		setTokenExpirationDate(null);
 		localStorage.removeItem("userData");
 	}, []);
@@ -38,18 +41,26 @@ export const useAuth = () => {
 		} else {
 			clearTimeout(logoutTimer);
 		}
+		return clearTimeout(logoutTimer);
 	}, [token, logout, tokenExpirationDate]);
 
 	useEffect(() => {
 		const storedData = JSON.parse(localStorage.getItem("userData"));
 		if (
 			storedData &&
+			storedData.userId &&
 			storedData.token &&
 			new Date(storedData.expiration) > new Date()
 		) {
-			login(storedData.token, new Date(storedData.expiration));
+			login(
+				storedData.token,
+				storedData.userId,
+				new Date(storedData.expiration)
+			);
+		} else {
+			logout();
 		}
 	}, [login]);
 
-	return { token, isLoggedIn, login, logout };
+	return { token, userId, isLoggedIn, login, logout };
 };
