@@ -22,8 +22,8 @@ CREATE TABLE category (
 
 INSERT INTO category (name, slug, user_id) VALUES ('Food', 'food', null);
 INSERT INTO category (name, slug, user_id) VALUES ('Salary', 'salary', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Sport', 'food', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Shopping', 'sport', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Sport', 'sport', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Shopping', 'shopping', null);
 INSERT INTO category (name, slug, user_id) VALUES ('Travel', 'travel', null);
 INSERT INTO category (name, slug, user_id) VALUES ('Streaming', 'streaming', null);
 INSERT INTO category (name, slug, user_id) VALUES ('Insurance', 'insurance', null);
