@@ -38,12 +38,10 @@ INSERT INTO category (name, slug, user_id) VALUES ('Gaming', 'gaming', null);
 
 CREATE TABLE transaction (
     id BIGSERIAL NOT NULL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    slug VARCHAR(255) UNIQUE,
-    note TEXT,
     amount NUMERIC(10,2) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    note TEXT,
     type VARCHAR(255) NOT NULL,
-    date DATE NOT NULL,
     created_at TIMESTAMP,
     updated_at TIMESTAMP,
     category_id INTEGER REFERENCES category (id) ON DELETE CASCADE,
