@@ -16,7 +16,6 @@ exports.handleLogin = async (req, res) => {
 		}
 
 		// We got a valid token so we keep the user's session
-		console.log(decoded);
 		return res.json({
 			isLoggedIn: true,
 			token,
