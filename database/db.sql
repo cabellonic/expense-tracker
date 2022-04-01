@@ -17,12 +17,24 @@ CREATE TABLE category (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     slug VARCHAR(255) UNIQUE,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
     user_id BIGINT REFERENCES app_user (id) ON DELETE CASCADE
 );
 
-INSERT INTO category (name, slug, created_at, updated_at, user_id) VALUES ('Food', 'food', '2020-01-01 00:00:00', '2020-01-01 00:00:00', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Food', 'food', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Salary', 'salary', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Sport', 'food', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Shopping', 'sport', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Travel', 'travel', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Streaming', 'streaming', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Insurance', 'insurance', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Healthcare', 'healthcare', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Bills', 'bills', null);
+INSERT INTO category (name, slug, user_id) VALUES ('GYM', 'gym', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Clothes', 'clothes', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Education', 'education', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Gift', 'gift', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Decoration', 'decoration', null);
+INSERT INTO category (name, slug, user_id) VALUES ('Gaming', 'gaming', null);
 
 CREATE TABLE transaction (
     id BIGSERIAL NOT NULL PRIMARY KEY,
