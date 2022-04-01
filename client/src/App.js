@@ -24,10 +24,12 @@ import { registerIcons } from "util/fontAwesome";
 registerIcons();
 
 const App = () => {
-	const { isLoggedIn, userToken, login, singout } = useAuth();
+	const { isLoggedIn, token, userId, login, logout } = useAuth();
 
 	return (
-		<AuthContext.Provider value={{ isLoggedIn, userToken, login, singout }}>
+		<AuthContext.Provider
+			value={{ isLoggedIn, userToken: token, userId: userId, login, logout }}
+		>
 			{isLoggedIn === null ? (
 				<Loading />
 			) : (

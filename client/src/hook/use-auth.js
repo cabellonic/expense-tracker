@@ -8,8 +8,8 @@ export const useAuth = () => {
 	const [token, setToken] = useState(false);
 	const [tokenExpirationDate, setTokenExpirationDate] = useState();
 
-	const login = useCallback((token, userId, expirationDate) => {
-		setToken(token);
+	const login = useCallback((userToken, userId, expirationDate) => {
+		setToken(userToken);
 		setUserId(userId);
 		setIsLoggedIn(true);
 		const tokenExpirationDate =
@@ -18,7 +18,7 @@ export const useAuth = () => {
 		localStorage.setItem(
 			"userData",
 			JSON.stringify({
-				token: token,
+				token: userToken,
 				userId: userId,
 				expiration: tokenExpirationDate.toISOString(),
 			})
@@ -41,14 +41,12 @@ export const useAuth = () => {
 		} else {
 			clearTimeout(logoutTimer);
 		}
-		return clearTimeout(logoutTimer);
 	}, [token, logout, tokenExpirationDate]);
 
 	useEffect(() => {
 		const storedData = JSON.parse(localStorage.getItem("userData"));
 		if (
 			storedData &&
-			storedData.userId &&
 			storedData.token &&
 			new Date(storedData.expiration) > new Date()
 		) {
