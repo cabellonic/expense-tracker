@@ -7,7 +7,7 @@ const AmountInput = ({ register, error }) => {
 			<span className={styles.currency_symbol}>$</span>
 			<input
 				className={`${styles.amount} ${error ? styles.error : ""}`}
-				step="0.1"
+				step="0.01"
 				type="number"
 				min={0}
 				placeholder={0}

@@ -3,9 +3,12 @@ const express = require("express");
 const router = express.Router();
 
 // Controlers
-const { getAllCategories } = require("../controllers/categories.controller");
+const {
+	getAllCategories,
+	getTransactionsByCategory,
+} = require("../controllers/categories.controller");
 
 router.get("/categories", getAllCategories);
-// router.get("/categories/:id", getTransactionsByCategory);
+router.get("/categories/:category", getTransactionsByCategory);
 
 module.exports = router;

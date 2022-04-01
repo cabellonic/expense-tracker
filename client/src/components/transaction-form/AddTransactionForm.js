@@ -1,17 +1,20 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import { navigate } from "@reach/router";
 // Components
 import Form from "components/ui/form/Form";
 import AmountInput from "./form-elements/AmountInput";
 import TypeSelector from "./form-elements/TypeSelector";
 import Input from "components/ui/form/Input";
 import CategorySelector from "./form-elements/CategorySelector";
+import ErrorMessage from "components/ui/form/ErrorMessage";
 import Fieldset from "components/ui/form/Fieldset";
 import Button from "components/ui/Button";
 // Context
 import { AuthContext } from "context/AuthContext";
 
 const AddTransactionForm = ({ type = "expense" }) => {
+	const [errorMessage, setErrorMessage] = useState();
 	const { userToken } = useContext(AuthContext);
 	const {
 		register,
@@ -40,9 +43,8 @@ const AddTransactionForm = ({ type = "expense" }) => {
 
 			const resData = await response.json();
 			// If credentials are invalid
-			// if (!resData.isLoggedIn) return setErrorMessage(resData.message);
-			console.log("RES DATA ADD TRANSACTION:", resData);
-			// login(resData.token);
+			if (!resData.ok) return setErrorMessage(resData.message);
+			navigate(`/transactions/${resData.transaction.id}`);
 		} catch (err) {
 			// HANDLE ERROR LATER
 			console.log(err);
@@ -76,6 +78,8 @@ const AddTransactionForm = ({ type = "expense" }) => {
 			/>
 			<Input register={noteRegister} placeholder="Note" error={errors.note} />
 			<CategorySelector register={categoryRegister} setValue={setValue} />
+
+			{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
 			<Fieldset>
 				<Button type="submit">Add</Button>

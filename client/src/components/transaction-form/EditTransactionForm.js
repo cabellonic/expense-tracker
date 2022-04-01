@@ -1,3 +1,5 @@
+import { useContext, useState } from "react";
+import { navigate, useParams } from "@reach/router";
 import { useForm } from "react-hook-form";
 // Components
 import Form from "components/ui/form/Form";
@@ -5,10 +7,16 @@ import AmountInput from "./form-elements/AmountInput";
 import TypeSelector from "./form-elements/TypeSelector";
 import Input from "components/ui/form/Input";
 import CategorySelector from "./form-elements/CategorySelector";
+import ErrorMessage from "components/ui/form/ErrorMessage";
 import Fieldset from "components/ui/form/Fieldset";
 import Button from "components/ui/Button";
+// Context
+import { AuthContext } from "context/AuthContext";
 
 const EditTransactionForm = ({ transaction }) => {
+	const [errorMessage, setErrorMessage] = useState();
+	const { userToken } = useContext(AuthContext);
+	const { id } = useParams();
 	const {
 		register,
 		handleSubmit,
@@ -16,9 +24,36 @@ const EditTransactionForm = ({ transaction }) => {
 		formState: { errors },
 	} = useForm({ mode: "onChange" });
 
-	const { amount, type, title, note, category } = transaction;
+	const { amount, type, title, note, category_slug, category_name } =
+		transaction;
 
-	const onSubmit = (data) => console.log(data);
+	const onSubmit = async (data) => {
+		const { amount, title, note, category } = data;
+
+		try {
+			const response = await fetch(`http://localhost:5000/transactions/${id}`, {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					amount,
+					title,
+					note,
+					category,
+					token: userToken,
+				}),
+			});
+
+			const resData = await response.json();
+			// If credentials are invalid
+			if (!resData.ok) return setErrorMessage(resData.message);
+			navigate(`/transactions/${resData.transaction_id}`);
+		} catch (err) {
+			// HANDLE ERROR LATER
+			console.log(err);
+		}
+	};
 
 	const amountRegister = register("amount", {
 		required: true,
@@ -38,7 +73,7 @@ const EditTransactionForm = ({ transaction }) => {
 	const noteRegister = register("note", { value: note });
 	const categoryRegister = register("category", {
 		required: true,
-		value: category,
+		value: category_slug,
 	});
 
 	return (
@@ -54,13 +89,13 @@ const EditTransactionForm = ({ transaction }) => {
 			<CategorySelector
 				register={categoryRegister}
 				setValue={setValue}
-				category={category}
+				category={{ slug: category_slug, name: category_name }}
 			/>
 
+			{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+
 			<Fieldset>
-				<Button type="submit" red>
-					Remove
-				</Button>
+				<Button red>Remove</Button>
 				<Button type="submit" green>
 					Save
 				</Button>

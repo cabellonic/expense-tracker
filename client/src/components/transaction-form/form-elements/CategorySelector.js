@@ -1,15 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // Components
 import Modal from "components/ui/Modal";
 import CategoryIcon from "components/ui/CategoryIcon";
 // Styles
 import styles from "./CategorySelector.module.css";
 
-// Dummy Data
-import categories from "data/categories";
-
 const CategorySelector = ({ register, setValue, category }) => {
 	const [selectedCategory, setSelectedCategory] = useState(category);
+	const [isLoading, setIsLoading] = useState(true);
+	const [categories, setCategories] = useState([]);
 	const [showModal, setShowModal] = useState(false);
 
 	const handleModal = () => {
@@ -18,9 +17,20 @@ const CategorySelector = ({ register, setValue, category }) => {
 
 	const handleCategory = (category) => {
 		setSelectedCategory(category);
-		setValue("category", category.name);
+		setValue("category", category.slug);
 		setShowModal(false);
 	};
+	useEffect(() => {
+		const fetchData = async () => {
+			const response = await fetch("http://localhost:5000/categories");
+			const resData = await response.json();
+			setCategories(resData);
+			setIsLoading(false);
+		};
+		fetchData();
+	}, []);
+
+	if (isLoading) return <></>;
 
 	return (
 		<>
@@ -29,15 +39,9 @@ const CategorySelector = ({ register, setValue, category }) => {
 					{selectedCategory ? (
 						<>
 							<span className={styles.icon}>
-								<CategoryIcon category={selectedCategory.name} />
+								<CategoryIcon category={selectedCategory.slug} />
 							</span>
-							<input
-								className={styles.name}
-								type="text"
-								placeholder="Category"
-								{...register}
-								readOnly
-							/>
+							<span className={styles.name}>{selectedCategory.name}</span>
 						</>
 					) : (
 						<span className={styles.name}>Select category</span>
@@ -55,7 +59,7 @@ const CategorySelector = ({ register, setValue, category }) => {
 								onClick={() => handleCategory(category)}
 							>
 								<span className={styles.icon}>
-									<CategoryIcon category={category.name} />
+									<CategoryIcon category={category.slug} />
 								</span>
 								<span className={styles.name}>{category.name}</span>
 							</div>
