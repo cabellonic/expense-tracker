@@ -56,7 +56,7 @@ const EditTransactionForm = ({ transaction }) => {
 				handleModal();
 				return setErrorMessage(resData.message);
 			}
-			navigate(`/`);
+			navigate(`/home`);
 		} catch (err) {
 			// HANDLE ERROR LATER
 			console.log(err);
@@ -96,24 +96,27 @@ const EditTransactionForm = ({ transaction }) => {
 	};
 
 	const amountRegister = register("amount", {
-		required: true,
-		max: 999999999,
+		required: { value: true, message: "Amount is required" },
+		min: { value: 1, message: "Amount must be greater than 0" },
+		max: { value: 999999999, message: "Isn't that too much?" },
 		value: Math.abs(amount),
 	});
 	// const typeRegister = register("type", {
 	register("type", {
-		required: true,
+		required: { value: true, message: "Type is required" },
 		value: type,
 	});
 	const titleRegister = register("title", {
-		required: true,
-		minLength: 3,
-		maxLength: 100,
+		required: { value: true, message: "Title is required" },
+		maxLength: {
+			value: 25,
+			message: "Title can't be longer than 25 characters",
+		},
 		value: title,
 	});
 	const noteRegister = register("note", { value: note });
 	const categoryRegister = register("category", {
-		required: true,
+		required: { value: true, message: "Category is required" },
 		value: category_slug,
 	});
 
@@ -134,6 +137,12 @@ const EditTransactionForm = ({ transaction }) => {
 			/>
 
 			{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+			{errors.amount && <ErrorMessage>{errors.amount.message}</ErrorMessage>}
+			{errors.type && <ErrorMessage>{errors.type.message}</ErrorMessage>}
+			{errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
+			{errors.category && (
+				<ErrorMessage>{errors.category.message}</ErrorMessage>
+			)}
 
 			<Fieldset>
 				<Button onClick={handleModal} red>

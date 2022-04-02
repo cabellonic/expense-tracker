@@ -27,7 +27,7 @@
 .amount:focus {
 	border: 0;
 	outline: 0;
-	border-bottom: 2px solid transparent;
+	border-bottom: 2px solid var(--bg-primary);
 }
 
 /* Removing arrow for input type number */
@@ -41,5 +41,5 @@
 }
 
 .error {
-	border-bottom: 2px solid crimson;
+	border-bottom: 2px solid var(--bg-danger-dk);
 }

@@ -54,20 +54,26 @@ const AddTransactionForm = ({ type = "expense" }) => {
 		}
 	};
 
-	const amountRegister = register("amount", { required: true });
+	const amountRegister = register("amount", {
+		required: { value: true, message: "Amount is required" },
+		min: { value: 1, message: "Amount must be greater than 0" },
+		max: { value: 999999999, message: "Isn't that too much?" },
+	});
 	// const typeRegister = register("type", {
 	register("type", {
-		required: true,
+		required: { value: true, message: "Type is required" },
 		value: type,
 	});
 	const titleRegister = register("title", {
-		required: true,
-		minLength: 3,
-		maxLength: 100,
+		required: { value: true, message: "Title is required" },
+		maxLength: {
+			value: 25,
+			message: "Title can't be longer than 25 characters",
+		},
 	});
 	const noteRegister = register("note");
 	const categoryRegister = register("category", {
-		required: true,
+		required: { value: true, message: "Category is required" },
 	});
 
 	return (
@@ -83,6 +89,12 @@ const AddTransactionForm = ({ type = "expense" }) => {
 			<CategorySelector register={categoryRegister} setValue={setValue} />
 
 			{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+			{errors.amount && <ErrorMessage>{errors.amount.message}</ErrorMessage>}
+			{errors.type && <ErrorMessage>{errors.type.message}</ErrorMessage>}
+			{errors.title && <ErrorMessage>{errors.title.message}</ErrorMessage>}
+			{errors.category && (
+				<ErrorMessage>{errors.category.message}</ErrorMessage>
+			)}
 
 			<Fieldset>
 				<Button type="submit">Add</Button>

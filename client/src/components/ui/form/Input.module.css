@@ -16,5 +16,5 @@
 }
 
 .error {
-	border-bottom: 2px solid crimson;
+	border-bottom: 2px solid var(--bg-danger-dk);
 }
