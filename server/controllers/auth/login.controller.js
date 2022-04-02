@@ -29,56 +29,63 @@ exports.handleLogin = async (req, res) => {
 exports.login = async (req, res) => {
 	const { email, password } = req.body;
 
-	// We try to get the user from the database
-	const potentialLogin = await pool.query(
-		`
-		SELECT email, passhash, id
-		FROM app_user
-		WHERE email = $1
-		`,
-		[email]
-	);
+	try {
+		// We try to get the user from the database
+		const potentialLogin = await pool.query(
+			`
+			SELECT email, passhash, id
+			FROM app_user
+			WHERE email = $1
+			`,
+			[email]
+		);
 
-	if (!potentialLogin.rowCount) {
-		return res
-			.status(401)
-			.json({ isLoggedIn: false, message: "Invalid credentials" });
-	}
+		if (!potentialLogin.rowCount) {
+			return res
+				.status(401)
+				.json({ isLoggedIn: false, message: "Invalid credentials" });
+		}
 
-	// We got an user so we compare the provided password with the one in the database
-	const isValid = await bcrypt.compare(
-		password,
-		potentialLogin.rows[0].passhash
-	);
+		// We got an user so we compare the provided password with the one in the database
+		const isValid = await bcrypt.compare(
+			password,
+			potentialLogin.rows[0].passhash
+		);
 
-	if (!isValid) {
-		return res
-			.status(401)
-			.json({ isLoggedIn: false, message: "Invalid credentials" });
-	}
+		if (!isValid) {
+			return res
+				.status(401)
+				.json({ isLoggedIn: false, message: "Invalid credentials" });
+		}
 
-	// We got a valid user so we create a token
-	jwt.sign(
-		{
-			email: potentialLogin.rows[0].email,
-			id: potentialLogin.rows[0].id,
-		},
-		process.env.JWT_SECRET,
-		{ expiresIn: "1h" },
-		(err, token) => {
-			if (err) {
-				return res.status(500).json({
-					isLoggedIn: false,
-					message: "Internal server error",
+		// We got a valid user so we create a token
+		return jwt.sign(
+			{
+				email: potentialLogin.rows[0].email,
+				id: potentialLogin.rows[0].id,
+			},
+			process.env.JWT_SECRET,
+			{ expiresIn: "1h" },
+			(err, token) => {
+				if (err) {
+					return res.status(500).json({
+						isLoggedIn: false,
+						message: "Internal server error",
+					});
+				}
+				// Send the token to the client
+				return res.json({
+					isLoggedIn: true,
+					token,
+					email: potentialLogin.rows[0].email,
+					userId: potentialLogin.rows[0].id,
 				});
 			}
-			// Send the token to the client
-			res.json({
-				isLoggedIn: true,
-				token,
-				email: potentialLogin.rows[0].email,
-				userId: potentialLogin.rows[0].id,
-			});
-		}
-	);
+		);
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({
+			message: "Internal server error",
+		});
+	}
 };
