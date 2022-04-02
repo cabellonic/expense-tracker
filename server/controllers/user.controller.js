@@ -9,6 +9,7 @@ exports.getUser = async (req, res) => {
 			return res.json({ ok: false, message: "Invalid token" });
 		}
 
+		// The token is valid, so we can get the user from the database
 		try {
 			const user = await pool.query(
 				`
@@ -25,6 +26,7 @@ exports.getUser = async (req, res) => {
 
 			res.json({ ok: true, user: user.rows[0] });
 		} catch (err) {
+			console.log(err);
 			res.status(500).json({ ok: false, message: "Something went wrong" });
 		}
 	});
@@ -39,6 +41,7 @@ exports.updateUser = async (req, res) => {
 			return res.status(401).json({ ok: false, message: "Invalid token" });
 		}
 
+		// The token is valid, so we can update the user in the database
 		try {
 			await pool.query(
 				`
@@ -52,6 +55,7 @@ exports.updateUser = async (req, res) => {
 
 			res.json({ ok: true, message: "User information updated!" });
 		} catch (err) {
+			console.log(err);
 			res.status(500).json({ ok: false, message: "Something went wrong" });
 		}
 	});
@@ -66,6 +70,7 @@ exports.deleteUser = async (req, res) => {
 				.json({ ok: false, message: "You have no power here!" });
 		}
 
+		// The token is valid, so we can delete the user from the database
 		try {
 			await pool.query(
 				`
@@ -74,8 +79,6 @@ exports.deleteUser = async (req, res) => {
                 `,
 				[decoded.id]
 			);
-
-			console.log("a");
 
 			res.json({ ok: true, message: "User deleted!" });
 		} catch (err) {

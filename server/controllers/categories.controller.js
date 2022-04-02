@@ -3,6 +3,7 @@ const { pool } = require("../db");
 
 exports.getAllCategories = async (req, res) => {
 	const token = req.headers["authorization"].split(" ")[1];
+
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
 			return res.json({
@@ -12,6 +13,7 @@ exports.getAllCategories = async (req, res) => {
 		}
 
 		try {
+			// The token is valid so lets select the categories from the database
 			const categories = await pool.query(
 				`
 				SELECT *
@@ -21,9 +23,10 @@ exports.getAllCategories = async (req, res) => {
 				[decoded.id]
 			);
 
-			// I'll return the categories even if there are no one
+			// I'll return the categories even if there are no one cause the user can delete all if they want
 			return res.json({ ok: true, categories: categories.rows });
 		} catch (err) {
+			console.log(err);
 			return res
 				.status(500)
 				.json({ ok: false, message: "Something went wrong" });
@@ -35,6 +38,7 @@ exports.getAllCategories = async (req, res) => {
 // I prefered to get all the categories filtered directly from the database
 exports.getAllUsedCategories = async (req, res) => {
 	const token = req.headers["authorization"].split(" ")[1];
+
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
 			return res.json({
@@ -43,6 +47,7 @@ exports.getAllUsedCategories = async (req, res) => {
 			});
 		}
 
+		// I'll get all used the categories from the database
 		try {
 			const categories = await pool.query(
 				`
@@ -60,81 +65,10 @@ exports.getAllUsedCategories = async (req, res) => {
 			// I'll return the categories even if there are no one
 			return res.json({ ok: true, categories: categories.rows });
 		} catch (err) {
+			console.log(err);
 			return res
 				.status(500)
 				.json({ ok: false, message: "Something went wrong" });
-		}
-	});
-};
-
-exports.getTransactionsByCategory = async (req, res) => {
-	const token = req.headers["authorization"].split(" ")[1];
-	const { category } = req.params;
-
-	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-		if (err) {
-			return res.json({
-				ok: false,
-				message: "Invalid token",
-			});
-		}
-
-		try {
-			const transactions = await pool.query(
-				`
-				SELECT transaction.id, title, note, amount, created_at, updated_at, type,
-				category.name AS category_name, category.slug AS category_slug
-				FROM transaction, category
-				WHERE category.slug=$1
-				AND transaction.category_id = category.id
-				AND transaction.user_id = $2
-				ORDER BY created_at
-				DESC LIMIT 10
-				`,
-				[category, decoded.id]
-			);
-			if (!transactions.rowCount) {
-				return res.status(404).json({ message: "Transaction not found" });
-			}
-			res.status(200).json({ transactions: transactions.rows });
-		} catch (err) {
-			res.status(500).json({ ok: false, message: "Error" });
-		}
-	});
-};
-
-exports.deleteCategory = async (req, res) => {
-	const token = req.headers["authorization"].split(" ")[1];
-	const { category } = req.params;
-	console.log(category);
-
-	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-		if (err) {
-			return res.json({
-				ok: false,
-				message: "Invalid token",
-			});
-		}
-
-		try {
-			const deletedCategory = await pool.query(
-				`
-				DELETE FROM category
-				WHERE category.slug = $1
-				AND category.user_id = $2
-				RETURNING category.slug
-				`,
-				[category, decoded.id]
-			);
-
-			if (!deletedCategory.rowCount) {
-				return res.status(404).json({ message: "Category not found" });
-			}
-
-			res.json({ ok: true, message: "Category deleted!" });
-		} catch (err) {
-			console.log(err);
-			res.status(500).json({ ok: false, message: "Error" });
 		}
 	});
 };
