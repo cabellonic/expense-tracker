@@ -20,12 +20,39 @@ exports.getUser = async (req, res) => {
 			);
 
 			if (!user.rowCount) {
-				res.status(404).json({ message: "No user found" });
+				res.status(404).json({ ok: false, mmessage: "No user found" });
 			}
 
-			res.json({ user: user.rows[0] });
+			res.json({ ok: true, user: user.rows[0] });
 		} catch (err) {
-			res.status(500).json({ message: "Something went wrong" });
+			res.status(500).json({ ok: false, message: "Something went wrong" });
+		}
+	});
+};
+
+exports.updateUser = async (req, res) => {
+	const token = req.headers["authorization"]?.split(" ")[1];
+	const { firstName, lastName } = req.body;
+
+	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+		if (err) {
+			return res.status(401).json({ ok: false, message: "Invalid token" });
+		}
+
+		try {
+			const updatedUser = await pool.query(
+				`
+                UPDATE app_user
+                SET first_name = $1,
+                    last_name = $2
+                WHERE id = $3
+                `,
+				[firstName, lastName, decoded.id]
+			);
+
+			res.json({ ok: true, message: "User information updated!" });
+		} catch (err) {
+			res.status(500).json({ ok: false, message: "Something went wrong" });
 		}
 	});
 };

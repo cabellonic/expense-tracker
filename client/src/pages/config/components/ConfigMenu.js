@@ -9,7 +9,7 @@ const ConfigMenu = () => {
 			<Link className={styles.link} to={"/"}>
 				<FontAwesomeIcon icon={["fas", "pen-to-square"]} /> Edit categories
 			</Link>
-			<Link className={styles.link} to={"/"}>
+			<Link className={styles.link} to={"/config/user"}>
 				<FontAwesomeIcon icon={["fas", "user"]} /> Edit information
 			</Link>
 			<Link className={styles.link} to={"/"}>
