@@ -6,7 +6,7 @@ exports.getUser = async (req, res) => {
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
-			return res.status(401).json({ ok: false, message: "Invalid token" });
+			return res.json({ ok: false, message: "Invalid token" });
 		}
 
 		try {
@@ -31,8 +31,8 @@ exports.getUser = async (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
-	const token = req.headers["authorization"]?.split(" ")[1];
 	const { firstName, lastName } = req.body;
+	const token = req.headers["authorization"]?.split(" ")[1];
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
@@ -40,7 +40,7 @@ exports.updateUser = async (req, res) => {
 		}
 
 		try {
-			const updatedUser = await pool.query(
+			await pool.query(
 				`
                 UPDATE app_user
                 SET first_name = $1,
