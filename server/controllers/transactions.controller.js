@@ -143,12 +143,22 @@ exports.createTransaction = async (req, res) => {
 	const token = req.headers["authorization"]?.split(" ")[1];
 	const { amount, title, note, type, category } = req.body;
 
+	if (amount.length > 10) {
+		return res.json({
+			ok: false,
+			message: "That's too much, don't you think?",
+		});
+	}
+
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
 			return res.json({ ok: false, message: "Invalid token" });
 		}
 
 		try {
+			// STARTING THE TRANSACTION
+			await pool.query("BEGIN");
+			// GETTING THE CATEGORY ID
 			const categoryId = await pool.query(
 				`
 				SELECT id
@@ -159,11 +169,28 @@ exports.createTransaction = async (req, res) => {
 				[category, decoded.id]
 			);
 
-			if (!categoryId.rowCount) {
-				return res.json({ ok: false, message: "Category not found" });
+			// UPDATING USER BALANCE
+			if (type === "expense") {
+				await pool.query(
+					`
+					UPDATE app_user
+					SET expense = expense - $1
+					WHERE id = $2
+				`,
+					[amount, decoded.id]
+				);
+			} else {
+				await pool.query(
+					`
+					UPDATE app_user
+					SET income = income + $1
+					WHERE id = $2
+				`,
+					[amount, decoded.id]
+				);
 			}
 
-			// The token is valid so we can create the transaction
+			// INSERTING THE NEW TRANSACTION
 			const newTransaction = await pool.query(
 				`
 				INSERT INTO transaction
@@ -183,6 +210,9 @@ exports.createTransaction = async (req, res) => {
 				]
 			);
 
+			// ENDING THE TRANSACTION
+			await pool.query("COMMIT");
+
 			if (!newTransaction.rowCount) {
 				return res.json({ ok: false, message: "Error" });
 			}
@@ -192,7 +222,11 @@ exports.createTransaction = async (req, res) => {
 				transaction: newTransaction.rows[0],
 			});
 		} catch (err) {
-			res.status(500).json({ ok: false, message: "Error" });
+			console.log(err);
+			res.status(500).json({
+				ok: false,
+				message: "Something went wrong, please try again later.",
+			});
 		}
 	});
 };
@@ -200,7 +234,7 @@ exports.createTransaction = async (req, res) => {
 exports.updateTransaction = async (req, res) => {
 	const token = req.headers["authorization"]?.split(" ")[1];
 	const { transaction_id } = req.params;
-	const { amount, title, note, category } = req.body;
+	const { amount, title, note, category, type } = req.body;
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
@@ -208,7 +242,10 @@ exports.updateTransaction = async (req, res) => {
 		}
 
 		try {
-			// Get category id
+			// STARTING THE TRANSACTION
+			await pool.query("BEGIN");
+
+			// GETTING THE CATEGORY ID
 			const categoryId = await pool.query(
 				`
 				SELECT id
@@ -222,7 +259,56 @@ exports.updateTransaction = async (req, res) => {
 				return res.json({ ok: false, message: "Category not found" });
 			}
 
-			// The token is valid so we can update the transaction
+			// GETTING THE TRANSACTION
+			const transaction = await pool.query(
+				`
+				SELECT amount, type
+				FROM transaction, category
+				WHERE transaction.id = $1
+				AND transaction.category_id = category.id
+				AND transaction.user_id = $2
+				`,
+				[transaction_id, decoded.id]
+			);
+
+			// First I verify if the transaction exists
+			if (!transaction.rowCount)
+				return res.json({ ok: false, message: "Transaction not found" });
+
+			// Now If the type is different I dont update
+			if (transaction.rows[0].type !== type)
+				return res.json({
+					ok: false,
+					message: "Cannot update transaction type",
+				});
+
+			// I get the old transaction amount
+			const oldAmount = transaction.rows[0].amount;
+
+			// And now I update the user balance
+			if (type === "expense") {
+				const updatedAmount = Math.abs(oldAmount) - parseInt(amount);
+				await pool.query(
+					`
+					UPDATE app_user
+					SET expense = expense + $1
+					WHERE id = $2
+				`,
+					[updatedAmount, decoded.id]
+				);
+			} else {
+				const updatedAmount = -Math.abs(oldAmount) + parseInt(amount);
+				await pool.query(
+					`
+				UPDATE app_user
+				SET income = income + $1
+				WHERE id = $2
+			`,
+					[updatedAmount, decoded.id]
+				);
+			}
+
+			// Now I can update the transaction
 			const updatedTransaction = await pool.query(
 				`
 				UPDATE transaction
@@ -249,11 +335,15 @@ exports.updateTransaction = async (req, res) => {
 				return res.json({ ok: false, message: "Error" });
 			}
 
+			// ENDING THE TRANSACTION
+			await pool.query("COMMIT");
+
 			res.status(201).json({
 				ok: true,
 				transaction_id,
 			});
 		} catch (err) {
+			console.log(err);
 			res.status(500).json({ ok: false, message: "Error" });
 		}
 	});
@@ -262,6 +352,7 @@ exports.updateTransaction = async (req, res) => {
 exports.deleteTransaction = async (req, res) => {
 	const token = req.headers["authorization"]?.split(" ")[1];
 	const { transaction_id } = req.params;
+	const { amount, type } = req.body;
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
@@ -269,7 +360,11 @@ exports.deleteTransaction = async (req, res) => {
 		}
 
 		try {
-			const deletedTransaction = await pool.query(
+			// STARTING THE TRANSACTION
+			await pool.query("BEGIN");
+
+			// DELETING THE TRANSACTION
+			await pool.query(
 				`
 				DELETE FROM transaction
 				WHERE id = $1
@@ -278,18 +373,37 @@ exports.deleteTransaction = async (req, res) => {
 				[transaction_id, decoded.id]
 			);
 
-			if (!deletedTransaction.rowCount) {
-				return res.json({
-					ok: false,
-					message: "The transaction does not exist",
-				});
+			// UPDATING USER BALANCE
+			// The operation will be the inverse of the one done in the insert
+			if (type === "expense") {
+				await pool.query(
+					`
+					UPDATE app_user
+					SET expense = expense + $1
+					WHERE id = $2
+				`,
+					[amount, decoded.id]
+				);
+			} else {
+				await pool.query(
+					`
+					UPDATE app_user
+					SET income = income - $1
+					WHERE id = $2
+				`,
+					[amount, decoded.id]
+				);
 			}
+
+			// ENDING THE TRANSACTION
+			await pool.query("COMMIT");
 
 			res.status(201).json({
 				ok: true,
 				transaction_id,
 			});
 		} catch (err) {
+			console.log(err);
 			res.status(500).json({ ok: false, message: "Error" });
 		}
 	});

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { navigate, useParams } from "@reach/router";
 import { useForm } from "react-hook-form";
 // Components
+import Modal from "components/ui/Modal";
 import Form from "components/ui/form/Form";
 import AmountInput from "./form-elements/AmountInput";
 import TypeSelector from "./form-elements/TypeSelector";
@@ -12,7 +13,6 @@ import Fieldset from "components/ui/form/Fieldset";
 import Button from "components/ui/Button";
 // Context
 import { AuthContext } from "context/AuthContext";
-import Modal from "components/ui/Modal";
 
 const EditTransactionForm = ({ transaction }) => {
 	const [errorMessage, setErrorMessage] = useState();
@@ -43,11 +43,14 @@ const EditTransactionForm = ({ transaction }) => {
 						"Content-Type": "application/json",
 						Authorization: `Bearer ${userToken}`,
 					},
+					body: JSON.stringify({
+						amount,
+						type,
+					}),
 				}
 			);
 
 			const resData = await response.json();
-			console.log(resData);
 			// If credentials are invalid
 			if (!resData.ok) {
 				handleModal();
@@ -77,6 +80,7 @@ const EditTransactionForm = ({ transaction }) => {
 						title,
 						note,
 						category,
+						type,
 					}),
 				}
 			);
@@ -93,6 +97,7 @@ const EditTransactionForm = ({ transaction }) => {
 
 	const amountRegister = register("amount", {
 		required: true,
+		max: 999999999,
 		value: Math.abs(amount),
 	});
 	// const typeRegister = register("type", {
