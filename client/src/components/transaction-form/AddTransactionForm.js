@@ -26,20 +26,23 @@ const AddTransactionForm = ({ type = "expense" }) => {
 	const onSubmit = async (data) => {
 		const { amount, type, title, note, category } = data;
 		try {
-			const response = await fetch("http://localhost:5000/transactions", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${userToken}`,
-				},
-				body: JSON.stringify({
-					amount,
-					type,
-					title,
-					note,
-					category,
-				}),
-			});
+			const response = await fetch(
+				`${process.env.REACT_APP_API_URL}/transactions`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${userToken}`,
+					},
+					body: JSON.stringify({
+						amount,
+						type,
+						title,
+						note,
+						category,
+					}),
+				}
+			);
 
 			const resData = await response.json();
 			// If credentials are invalid
