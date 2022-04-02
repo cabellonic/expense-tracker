@@ -15,7 +15,7 @@ const TransactionPage = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch(
-				`http://localhost:5000/transactions/${transaction_id}`,
+				`${process.env.REACT_APP_API_URL}/transactions/${transaction_id}`,
 				{
 					method: "GET",
 					headers: {

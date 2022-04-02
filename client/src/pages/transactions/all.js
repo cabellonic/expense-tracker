@@ -13,12 +13,15 @@ function AllTransactions() {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await fetch(`http://localhost:5000/transactions`, {
-				method: "GET",
-				headers: {
-					Authorization: `Bearer ${userToken}`,
-				},
-			});
+			const response = await fetch(
+				`${process.env.REACT_APP_API_URL}/transactions`,
+				{
+					method: "GET",
+					headers: {
+						Authorization: `Bearer ${userToken}`,
+					},
+				}
+			);
 			const resData = await response.json();
 			setTransactions(resData.transactions);
 			setIsLoading(false);

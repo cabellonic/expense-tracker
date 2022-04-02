@@ -12,12 +12,15 @@ const CategoriesPage = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await fetch("http://localhost:5000/categories/used", {
-				method: "GET",
-				headers: {
-					Authorization: `Bearer ${userToken}`,
-				},
-			});
+			const response = await fetch(
+				`${process.env.REACT_APP_API_URL}/categories/used`,
+				{
+					method: "GET",
+					headers: {
+						Authorization: `Bearer ${userToken}`,
+					},
+				}
+			);
 			const resData = await response.json();
 			setCategories(resData.categories);
 			setIsLoading(false);

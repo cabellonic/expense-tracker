@@ -15,7 +15,7 @@ const Category = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch(
-				`http://localhost:5000/categories/${category_id}`,
+				`${process.env.REACT_APP_API_URL}/categories/${category_id}`,
 				{
 					method: "GET",
 					headers: {

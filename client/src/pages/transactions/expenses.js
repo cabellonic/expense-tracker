@@ -14,7 +14,7 @@ function Expenses() {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch(
-				`http://localhost:5000/transactions/expenses`,
+				`${process.env.REACT_APP_API_URL}/transactions/expenses`,
 				{
 					method: "GET",
 					headers: {

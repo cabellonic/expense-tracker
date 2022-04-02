@@ -33,7 +33,7 @@ const EditUserForm = () => {
 	const onSubmit = async (data) => {
 		const { firstName, lastName } = data;
 		try {
-			const response = await fetch("http://localhost:5000/user", {
+			const response = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
@@ -55,7 +55,7 @@ const EditUserForm = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await fetch("http://localhost:5000/user", {
+			const response = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
 				method: "GET",
 				headers: {
 					Authorization: `Bearer ${userToken}`,

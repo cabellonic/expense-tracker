@@ -36,7 +36,7 @@ const EditTransactionForm = ({ transaction }) => {
 	const handleDelete = async () => {
 		try {
 			const response = await fetch(
-				`http://localhost:5000/transactions/${transaction_id}`,
+				`${process.env.REACT_APP_API_URL}/transactions/${transaction_id}`,
 				{
 					method: "DELETE",
 					headers: {
@@ -65,7 +65,7 @@ const EditTransactionForm = ({ transaction }) => {
 
 		try {
 			const response = await fetch(
-				`http://localhost:5000/transactions/${transaction_id}`,
+				`${process.env.REACT_APP_API_URL}/transactions/${transaction_id}`,
 				{
 					method: "PUT",
 					headers: {

@@ -14,7 +14,7 @@ function Incomes() {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch(
-				`http://localhost:5000/transactions/incomes`,
+				`${process.env.REACT_APP_API_URL}/transactions/incomes`,
 				{
 					method: "GET",
 					headers: {

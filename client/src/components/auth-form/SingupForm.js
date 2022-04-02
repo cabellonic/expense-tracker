@@ -23,7 +23,7 @@ const SingupForm = () => {
 	const onSubmit = async (data) => {
 		const { firstName, lastName, email, password } = data;
 		try {
-			const response = await fetch("http://localhost:5000/singup", {
+			const response = await fetch(`${process.env.REACT_APP_API_URL}/singup`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
