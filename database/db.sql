@@ -1,3 +1,5 @@
+SET CLIENT_ENCODING TO 'utf8';
+
 CREATE DATABASE expensetracker;
 
 CREATE TABLE IF NOT EXISTS app_user (
@@ -7,8 +9,7 @@ CREATE TABLE IF NOT EXISTS app_user (
     email VARCHAR(50) UNIQUE NOT NULL,
     passhash VARCHAR(255) NOT NULL,
     income NUMERIC(10,2) DEFAULT 0,
-    expenses NUMERIC(10,2) DEFAULT 0,
-    balance NUMERIC(10,2) DEFAULT 0
+    expense NUMERIC(10,2) DEFAULT 0
 );
 
 INSERT INTO app_user (first_name, last_name, email, passhash) VALUES ('John', 'Doe', 'johndoe@mail.com', 'passhash')
