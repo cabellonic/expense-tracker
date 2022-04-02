@@ -35,13 +35,13 @@ const EditTransactionForm = ({ transaction }) => {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: `Bearer ${userToken}`,
 				},
 				body: JSON.stringify({
 					amount,
 					title,
 					note,
 					category,
-					token: userToken,
 				}),
 			});
 

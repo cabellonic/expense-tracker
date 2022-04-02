@@ -30,6 +30,7 @@ const AddTransactionForm = ({ type = "expense" }) => {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: `Bearer ${userToken}`,
 				},
 				body: JSON.stringify({
 					amount,
@@ -37,7 +38,6 @@ const AddTransactionForm = ({ type = "expense" }) => {
 					title,
 					note,
 					category,
-					token: userToken,
 				}),
 			});
 

@@ -28,7 +28,6 @@ const CategorySelector = ({ register, setValue, category }) => {
 			const response = await fetch("http://localhost:5000/categories", {
 				method: "GET",
 				headers: {
-					"Content-type": "application/json",
 					Authorization: `Bearer ${userToken}`,
 				},
 			});
