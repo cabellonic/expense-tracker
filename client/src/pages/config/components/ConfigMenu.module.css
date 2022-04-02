@@ -24,3 +24,11 @@
 	background-color: var(--bg-danger);
 	color: white;
 }
+
+.item.danger:hover {
+	background-color: var(--bg-danger-dk);
+}
+
+.error_message {
+	padding: var(--sp-8) 0;
+}

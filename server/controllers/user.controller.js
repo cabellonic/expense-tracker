@@ -56,3 +56,31 @@ exports.updateUser = async (req, res) => {
 		}
 	});
 };
+
+exports.deleteUser = async (req, res) => {
+	const token = req.headers["authorization"]?.split(" ")[1];
+	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+		if (err) {
+			return res
+				.status(401)
+				.json({ ok: false, message: "You have no power here!" });
+		}
+
+		try {
+			await pool.query(
+				`
+                DELETE FROM app_user
+                WHERE id = $1
+                `,
+				[decoded.id]
+			);
+
+			console.log("a");
+
+			res.json({ ok: true, message: "User deleted!" });
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({ ok: false, message: "Something went wrong" });
+		}
+	});
+};
