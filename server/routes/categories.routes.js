@@ -6,9 +6,11 @@ const router = express.Router();
 const {
 	getAllCategories,
 	getTransactionsByCategory,
+	getAllUsedCategories,
 } = require("../controllers/categories.controller");
 
 router.get("/categories", getAllCategories);
+router.get("/categories/used", getAllUsedCategories);
 router.get("/categories/:category", getTransactionsByCategory);
 
 module.exports = router;

@@ -31,7 +31,11 @@ exports.login = async (req, res) => {
 
 	// We try to get the user from the database
 	const potentialLogin = await pool.query(
-		"SELECT email, passhash, id FROM app_user WHERE email = $1",
+		`
+		SELECT email, passhash, id
+		FROM app_user
+		WHERE email = $1
+		`,
 		[email]
 	);
 

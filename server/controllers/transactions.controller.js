@@ -123,7 +123,6 @@ exports.updateTransaction = async (req, res) => {
 		if (err) {
 			return res.status(401).json({ ok: false, message: "Invalid token" });
 		}
-		console.log("CATEGORY", category);
 
 		// Get category id
 		const categoryId = await pool.query(
@@ -153,8 +152,6 @@ exports.updateTransaction = async (req, res) => {
 			`,
 			[amount, title, note, categoryId.rows[0].id, new Date(), id, decoded.id]
 		);
-
-		console.log("THE QUERY GO WELL");
 
 		if (!updatedTransaction.rowCount) {
 			return res.status(400).json({ ok: false, message: "Error" });
