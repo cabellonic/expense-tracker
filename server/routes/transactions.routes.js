@@ -17,8 +17,8 @@ router.get("/transactions", getAllTransactions);
 router.post("/transactions", createTransaction);
 router.get("/transactions/incomes", getIncomeTransactions);
 router.get("/transactions/expenses", getExpenseTransactions);
-router.get("/transactions/:id", getTransactionById);
-router.put("/transactions/:id", updateTransaction);
-router.delete("/transactions/:id", deleteTransaction);
+router.get("/transactions/:transaction_id", getTransactionById);
+router.put("/transactions/:transaction_id", updateTransaction);
+router.delete("/transactions/:transaction_id", deleteTransaction);
 
 module.exports = router;

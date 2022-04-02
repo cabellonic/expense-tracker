@@ -45,13 +45,13 @@ const App = () => {
 							<EditUserPage path="/config/user" />
 							<CategoriesPage path="/categories" />
 							<Category path="/categories/:category_id" />
-							<Transaction path="/transactions/:id" />
+							<Transaction path="/transactions/:transaction_id" />
 							<AllTransactions path="/transactions" />
 							<Incomes path="/transactions/incomes" />
 							<Expenses path="/transactions/expenses" />
 							<AddIncome path="/add/income" />
 							<AddExpense path="/add/expense" />
-							<EditTransaction path="/edit/:id" />
+							<EditTransaction path="/edit/:transaction_id" />
 						</>
 					) : (
 						<>

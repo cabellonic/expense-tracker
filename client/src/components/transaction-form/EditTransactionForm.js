@@ -16,7 +16,7 @@ import { AuthContext } from "context/AuthContext";
 const EditTransactionForm = ({ transaction }) => {
 	const [errorMessage, setErrorMessage] = useState();
 	const { userToken } = useContext(AuthContext);
-	const { id } = useParams();
+	const { transaction_id } = useParams();
 	const {
 		register,
 		handleSubmit,
@@ -31,19 +31,22 @@ const EditTransactionForm = ({ transaction }) => {
 		const { amount, title, note, category } = data;
 
 		try {
-			const response = await fetch(`http://localhost:5000/transactions/${id}`, {
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${userToken}`,
-				},
-				body: JSON.stringify({
-					amount,
-					title,
-					note,
-					category,
-				}),
-			});
+			const response = await fetch(
+				`http://localhost:5000/transactions/${transaction_id}`,
+				{
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${userToken}`,
+					},
+					body: JSON.stringify({
+						amount,
+						title,
+						note,
+						category,
+					}),
+				}
+			);
 
 			const resData = await response.json();
 			// If credentials are invalid

@@ -31,8 +31,8 @@ exports.getUser = async (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
-	const { firstName, lastName } = req.body;
 	const token = req.headers["authorization"]?.split(" ")[1];
+	const { firstName, lastName } = req.body;
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {

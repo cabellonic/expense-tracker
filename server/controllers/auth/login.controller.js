@@ -5,8 +5,8 @@ const { config } = require("dotenv");
 config();
 
 exports.handleLogin = async (req, res) => {
-	// We get the token from the request
 	const token = req.headers["authorization"]?.split(" ")[1];
+
 	jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
 		if (err) {
 			return res.json({
