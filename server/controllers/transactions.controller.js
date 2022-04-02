@@ -236,6 +236,13 @@ exports.updateTransaction = async (req, res) => {
 	const { transaction_id } = req.params;
 	const { amount, title, note, category, type } = req.body;
 
+	if (amount.length > 10) {
+		return res.json({
+			ok: false,
+			message: "That's too much, don't you think?",
+		});
+	}
+
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
 			return res.json({ ok: false, message: "Invalid token" });
@@ -287,7 +294,7 @@ exports.updateTransaction = async (req, res) => {
 
 			// And now I update the user balance
 			if (type === "expense") {
-				const updatedAmount = Math.abs(oldAmount) - parseInt(amount);
+				const updatedAmount = Math.abs(oldAmount) - parseFloat(amount);
 				await pool.query(
 					`
 					UPDATE app_user
@@ -297,7 +304,7 @@ exports.updateTransaction = async (req, res) => {
 					[updatedAmount, decoded.id]
 				);
 			} else {
-				const updatedAmount = -Math.abs(oldAmount) + parseInt(amount);
+				const updatedAmount = -Math.abs(oldAmount) + parseFloat(amount);
 				await pool.query(
 					`
 				UPDATE app_user
