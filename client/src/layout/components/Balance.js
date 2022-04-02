@@ -1,11 +1,32 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Util
 import { formatAmount } from "util/currency";
+// Context
+import { AuthContext } from "context/AuthContext";
 // Styles
 import styles from "./Balance.module.css";
 
-const Balance = ({ amount = -93154 }) => {
+const Balance = () => {
+	const { userToken } = useContext(AuthContext);
+	const [userData, setUserData] = useState(null);
+
+	useEffect(() => {
+		if (userToken) {
+			const getUserData = async () => {
+				const response = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
+					method: "GET",
+					headers: {
+						Authorization: `Bearer ${userToken}`,
+					},
+				});
+				const resData = await response.json();
+				setUserData(resData.user);
+			};
+			getUserData();
+		}
+	}, [userToken]);
+
 	const [hideBalance, setHideBalance] = useState(
 		localStorage.getItem("hideBalance") === "true"
 	);
@@ -17,12 +38,15 @@ const Balance = ({ amount = -93154 }) => {
 		});
 	};
 
+	const income = parseFloat(userData?.income) || 0;
+	const expense = parseFloat(userData?.expense) || 0;
+
 	return (
 		<section className={styles.balance_wrapper}>
 			<div className={styles.balance}>
 				<span className={styles.title}>Total balance</span>
 				<span className={styles.amount}>
-					{hideBalance ? "$＊＊＊＊" : formatAmount(amount)}
+					{hideBalance ? "$＊＊＊＊" : formatAmount(expense + income)}
 
 					{hideBalance ? (
 						<FontAwesomeIcon
@@ -44,7 +68,7 @@ const Balance = ({ amount = -93154 }) => {
 					</span>
 					<div className={styles.balance_incomes}>
 						<span>Incomes</span>
-						<span>{hideBalance ? "$＊＊＊" : formatAmount(5701)}</span>
+						<span>{hideBalance ? "$＊＊＊" : formatAmount(income)}</span>
 					</div>
 				</div>
 				<div className={styles.balance_info}>
@@ -53,7 +77,7 @@ const Balance = ({ amount = -93154 }) => {
 					</span>
 					<div className={styles.balance_expenses}>
 						<span>Expenses</span>
-						<span>{hideBalance ? "$＊＊＊" : formatAmount(-1504)}</span>
+						<span>{hideBalance ? "$＊＊＊" : formatAmount(expense)}</span>
 					</div>
 				</div>
 			</div>
