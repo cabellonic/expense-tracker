@@ -265,7 +265,7 @@ exports.deleteTransaction = async (req, res) => {
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
-			return res.json({ ok: false, message: "Invalid token" });
+			return res.json({ ok: false, message: "You do not have permission" });
 		}
 
 		try {
@@ -279,7 +279,10 @@ exports.deleteTransaction = async (req, res) => {
 			);
 
 			if (!deletedTransaction.rowCount) {
-				return res.json({ ok: false, message: "Error" });
+				return res.json({
+					ok: false,
+					message: "The transaction does not exist",
+				});
 			}
 
 			res.status(201).json({
@@ -290,6 +293,4 @@ exports.deleteTransaction = async (req, res) => {
 			res.status(500).json({ ok: false, message: "Error" });
 		}
 	});
-
-	res.json({ message: "Transaction deleted successfully" });
 };

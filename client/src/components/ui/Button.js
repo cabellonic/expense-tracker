@@ -2,7 +2,7 @@ import { Link } from "@reach/router";
 // Styles
 import styles from "./Button.module.css";
 
-const Button = ({ children, green, red, href, ...props }) => {
+const Button = ({ children, green, red, type, href, ...props }) => {
 	let className = styles.button;
 	if (green) className += ` ${styles.green}`;
 	else if (red) className += ` ${styles.red}`;
@@ -14,10 +14,16 @@ const Button = ({ children, green, red, href, ...props }) => {
 			</Link>
 		);
 
+	if (type)
+		return (
+			<button className={className} {...props}>
+				{children}
+			</button>
+		);
 	return (
-		<button className={className} {...props}>
+		<span className={className} {...props}>
 			{children}
-		</button>
+		</span>
 	);
 };
 

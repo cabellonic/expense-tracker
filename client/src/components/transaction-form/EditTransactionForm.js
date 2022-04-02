@@ -12,9 +12,11 @@ import Fieldset from "components/ui/form/Fieldset";
 import Button from "components/ui/Button";
 // Context
 import { AuthContext } from "context/AuthContext";
+import Modal from "components/ui/Modal";
 
 const EditTransactionForm = ({ transaction }) => {
 	const [errorMessage, setErrorMessage] = useState();
+	const [showModal, setShowModal] = useState();
 	const { userToken } = useContext(AuthContext);
 	const { transaction_id } = useParams();
 	const {
@@ -26,6 +28,37 @@ const EditTransactionForm = ({ transaction }) => {
 
 	const { amount, type, title, note, category_slug, category_name } =
 		transaction;
+
+	const handleModal = () => {
+		setShowModal((prevState) => !prevState);
+	};
+
+	const handleDelete = async () => {
+		try {
+			const response = await fetch(
+				`http://localhost:5000/transactions/${transaction_id}`,
+				{
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${userToken}`,
+					},
+				}
+			);
+
+			const resData = await response.json();
+			console.log(resData);
+			// If credentials are invalid
+			if (!resData.ok) {
+				handleModal();
+				return setErrorMessage(resData.message);
+			}
+			navigate(`/`);
+		} catch (err) {
+			// HANDLE ERROR LATER
+			console.log(err);
+		}
+	};
 
 	const onSubmit = async (data) => {
 		const { amount, title, note, category } = data;
@@ -98,7 +131,28 @@ const EditTransactionForm = ({ transaction }) => {
 			{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
 			<Fieldset>
-				<Button red>Remove</Button>
+				<Button onClick={handleModal} red>
+					Remove
+				</Button>
+				{showModal && (
+					<Modal onClose={handleModal} title="Are you sure?">
+						<div
+							style={{
+								display: "flex",
+								flexFlow: "column",
+								textAlign: "center",
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							Are you sure you want to delete the transaction? <br />
+							This action cannot be reversed!
+							<Button onClick={handleDelete} red>
+								I'm sure
+							</Button>
+						</div>
+					</Modal>
+				)}
 				<Button type="submit" green>
 					Save
 				</Button>
