@@ -16,9 +16,9 @@ exports.getAllTransactions = async (req, res) => {
 		if (!transactions.rowCount) {
 			return res.json({ message: "No transactions" });
 		}
-		res.status(200).json({ transactions: transactions.rows });
-	} catch (error) {
-		console.log(error);
+		res.json({ transactions: transactions.rows });
+	} catch (err) {
+		console.log(err);
 		res.status(500).json({ ok: false, message: "Error" });
 	}
 };
@@ -37,11 +37,11 @@ exports.getTransactionById = async (req, res) => {
 			[id]
 		);
 		if (!transaction.rowCount) {
-			return res.status(404).json({ message: "Transaction not found" });
+			return res.json({ message: "Transaction not found" });
 		}
-		res.status(200).json({ transaction: transaction.rows[0] });
-	} catch (error) {
-		console.log(error);
+		res.json({ transaction: transaction.rows[0] });
+	} catch (err) {
+		console.log(err);
 		res.status(500).json({ ok: false, message: "Error" });
 	}
 };
@@ -62,9 +62,9 @@ exports.getIncomeTransactions = async (req, res) => {
 		if (!transactions.rowCount) {
 			return res.json({ message: "No income transactions" });
 		}
-		res.status(200).json({ transactions: transactions.rows });
-	} catch (error) {
-		console.log(error);
+		res.json({ transactions: transactions.rows });
+	} catch (err) {
+		console.log(err);
 		res.status(500).json({ ok: false, message: "Error" });
 	}
 };
@@ -84,9 +84,9 @@ exports.getExpenseTransactions = async (req, res) => {
 		if (!transactions.rowCount) {
 			return res.json({ message: "No expense transactions" });
 		}
-		res.status(200).json({ transactions: transactions.rows });
-	} catch (error) {
-		console.log(error);
+		res.json({ transactions: transactions.rows });
+	} catch (err) {
+		console.log(err);
 		res.status(500).json({ ok: false, message: "Error" });
 	}
 };
@@ -144,8 +144,8 @@ exports.createTransaction = async (req, res) => {
 				ok: true,
 				transaction: newTransaction.rows[0],
 			});
-		} catch (error) {
-			console.log(error);
+		} catch (err) {
+			console.log(err);
 			res.status(500).json({ ok: false, message: "Error" });
 		}
 	});
@@ -210,5 +210,5 @@ exports.updateTransaction = async (req, res) => {
 exports.deleteTransaction = async (req, res) => {
 	const { id } = req.params;
 
-	res.status(200).json({ message: "Transaction deleted successfully" });
+	res.json({ message: "Transaction deleted successfully" });
 };
