@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 // Styles
 import styles from "./Modal.module.css";
 
-const ModalElement = ({ children, onClose, title }) => {
+const ModalElement = ({ children, onClose, title, className }) => {
 	return (
 		<>
 			<div className={styles.backdrop} onClick={onClose} />
@@ -15,7 +15,9 @@ const ModalElement = ({ children, onClose, title }) => {
 							<FontAwesomeIcon icon={["fas", "xmark"]} />
 						</span>
 					</header>
-					<main className={styles.content}>{children}</main>
+					<main className={`${styles.content} ${className ? className : ""}`}>
+						{children}
+					</main>
 				</div>
 			</div>
 		</>

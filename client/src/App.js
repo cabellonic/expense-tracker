@@ -8,8 +8,11 @@ import SingupPage from "pages/auth/singup";
 import LoginPage from "pages/auth/login";
 // For authenticated users
 import HomePage from "pages/home/home";
+
 import ConfigPage from "pages/config/config";
 import EditUserPage from "pages/config/profile";
+import EditCategories from "pages/config/categories";
+
 import CategoriesPage from "pages/categories/categories";
 import Category from "pages/categories/id";
 import Transaction from "pages/transactions/id";
@@ -45,6 +48,7 @@ const App = () => {
 
 							<ConfigPage path="/config" />
 							<EditUserPage path="/config/user" />
+							<EditCategories path="/config/categories" />
 
 							<CategoriesPage path="/categories" />
 							<Category path="/categories/:category_id" />

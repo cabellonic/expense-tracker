@@ -1,14 +1,14 @@
 import { useContext, useState } from "react";
-import { navigate } from "@reach/router";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// Components
+import Modal from "components/ui/Modal";
+import Button from "components/ui/Button";
+import ErrorMessage from "components/ui/form/ErrorMessage";
 // Context
 import { AuthContext } from "context/AuthContext";
 // Styles
 import styles from "./ConfigMenu.module.css";
-import Modal from "components/ui/Modal";
-import Button from "components/ui/Button";
-import ErrorMessage from "components/ui/form/ErrorMessage";
 
 const ConfigMenu = () => {
 	const { logout, userToken } = useContext(AuthContext);
@@ -23,7 +23,6 @@ const ConfigMenu = () => {
 	};
 
 	const handleModal = () => {
-		console.log("jasd");
 		setShowModal((prevState) => !prevState);
 	};
 
@@ -52,7 +51,7 @@ const ConfigMenu = () => {
 
 	return (
 		<div className={styles.config_menu}>
-			<Link className={styles.item} to={"/"}>
+			<Link className={styles.item} to={"/config/categories"}>
 				<FontAwesomeIcon icon={["fas", "pen-to-square"]} /> Edit categories
 			</Link>
 			<Link className={styles.item} to={"/config/user"}>

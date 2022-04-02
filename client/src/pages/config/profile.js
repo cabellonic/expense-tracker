@@ -4,7 +4,7 @@ import Layout from "layout/Layout";
 
 const EditUserPage = () => {
 	return (
-		<Layout pageTitle={"Configuration"} from="/config">
+		<Layout pageTitle={"Edit profile"} from="/config">
 			<EditUserForm />
 		</Layout>
 	);

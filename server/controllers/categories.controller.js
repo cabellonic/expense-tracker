@@ -102,3 +102,39 @@ exports.getTransactionsByCategory = async (req, res) => {
 		}
 	});
 };
+
+exports.deleteCategory = async (req, res) => {
+	const token = req.headers["authorization"].split(" ")[1];
+	const { category } = req.params;
+	console.log(category);
+
+	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+		if (err) {
+			return res.json({
+				ok: false,
+				message: "Invalid token",
+			});
+		}
+
+		try {
+			const deletedCategory = await pool.query(
+				`
+				DELETE FROM category
+				WHERE category.slug = $1
+				AND category.user_id = $2
+				RETURNING category.slug
+				`,
+				[category, decoded.id]
+			);
+
+			if (!deletedCategory.rowCount) {
+				return res.status(404).json({ message: "Category not found" });
+			}
+
+			res.json({ ok: true, message: "Category deleted!" });
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({ ok: false, message: "Error" });
+		}
+	});
+};
