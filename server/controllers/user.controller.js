@@ -12,7 +12,7 @@ exports.getUser = async (req, res) => {
 		try {
 			const user = await pool.query(
 				`
-                SELECT *
+                SELECT id, first_name, last_name, email, expense, income 
                 FROM app_user
                 WHERE id = $1
                 `,
