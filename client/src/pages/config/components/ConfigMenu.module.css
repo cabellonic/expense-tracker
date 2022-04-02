@@ -3,7 +3,7 @@
 	flex-flow: column;
 }
 
-.link {
+.item {
 	display: flex;
 	align-items: center;
 	gap: var(--sp-4);
@@ -13,13 +13,14 @@
 	padding: var(--sp-4);
 	border-bottom: 1px solid var(--bg-secondary-dk);
 	transition: background-color 0.2s ease-in-out;
+	cursor: pointer;
 }
 
-.link:hover {
+.item:hover {
 	background-color: var(--bg-secondary-dk);
 }
 
-.link.danger {
+.item.danger {
 	background-color: var(--bg-danger);
 	color: white;
 }
