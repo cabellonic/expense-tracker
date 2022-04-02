@@ -13,7 +13,7 @@ const TransactionCard = ({ item }) => {
 	const formattedDate = formatTimeAgo(created_at);
 
 	return (
-		<Link to={`/transactions/${id}`} className={styles.transaction_card}>
+		<Link to={`/transaction/${id}`} className={styles.transaction_card}>
 			<div className={styles.icon}>
 				<CategoryIcon category={category_slug} />
 			</div>

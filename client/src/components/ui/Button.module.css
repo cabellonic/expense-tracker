@@ -13,6 +13,7 @@
 	cursor: pointer;
 	box-shadow: var(--bs-base);
 	transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+	user-select: none;
 	/* Default color */
 	color: var(--text-accent);
 	background: var(--bg-primary-dk);
@@ -46,4 +47,11 @@
 		var(--bg-success-dk) 0%,
 		var(--bg-success) 100%
 	);
+}
+
+.button[disabled] {
+	cursor: not-allowed;
+	box-shadow: none;
+	transform: none;
+	background: var(--bg-primary-lt);
 }

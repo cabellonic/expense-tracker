@@ -8,8 +8,8 @@ const Tabs = () => {
 			<Link
 				to="/transactions"
 				className={styles.tab}
-				getProps={({ isCurrent }) =>
-					isCurrent
+				getProps={({ isPartiallyCurrent }) =>
+					isPartiallyCurrent
 						? { className: `${styles.tab} ${styles.active}` }
 						: { className: styles.tab }
 				}
@@ -17,10 +17,10 @@ const Tabs = () => {
 				All
 			</Link>
 			<Link
-				to="/transactions/incomes"
+				to="/incomes"
 				className={styles.tab}
-				getProps={({ isCurrent }) =>
-					isCurrent
+				getProps={({ isPartiallyCurrent }) =>
+					isPartiallyCurrent
 						? { className: `${styles.tab} ${styles.active}` }
 						: { className: styles.tab }
 				}
@@ -28,10 +28,10 @@ const Tabs = () => {
 				Incomes
 			</Link>
 			<Link
-				to="/transactions/expenses"
+				to="/expenses"
 				className={styles.tab}
-				getProps={({ isCurrent }) =>
-					isCurrent
+				getProps={({ isPartiallyCurrent }) =>
+					isPartiallyCurrent
 						? { className: `${styles.tab} ${styles.active}` }
 						: { className: styles.tab }
 				}

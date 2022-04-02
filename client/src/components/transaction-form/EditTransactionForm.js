@@ -36,7 +36,7 @@ const EditTransactionForm = ({ transaction }) => {
 	const handleDelete = async () => {
 		try {
 			const response = await fetch(
-				`${process.env.REACT_APP_API_URL}/transactions/${transaction_id}`,
+				`${process.env.REACT_APP_API_URL}/transaction/${transaction_id}`,
 				{
 					method: "DELETE",
 					headers: {
@@ -68,7 +68,7 @@ const EditTransactionForm = ({ transaction }) => {
 
 		try {
 			const response = await fetch(
-				`${process.env.REACT_APP_API_URL}/transactions/${transaction_id}`,
+				`${process.env.REACT_APP_API_URL}/transaction/${transaction_id}`,
 				{
 					method: "PUT",
 					headers: {
@@ -88,7 +88,7 @@ const EditTransactionForm = ({ transaction }) => {
 			const resData = await response.json();
 			// If credentials are invalid
 			if (!resData.ok) return setErrorMessage(resData.message);
-			navigate(`/transactions/${resData.transaction_id}`);
+			navigate(`/transaction/${resData.transaction_id}`);
 		} catch (err) {
 			// HANDLE ERROR LATER
 			console.log(err);

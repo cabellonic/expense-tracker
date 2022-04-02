@@ -25,6 +25,7 @@ import { useAuth } from "hook/use-auth";
 import { AuthContext } from "context/AuthContext";
 // Util
 import { registerIcons } from "util/fontAwesome";
+import { Redirect } from "@reach/router";
 registerIcons();
 
 const App = () => {
@@ -41,17 +42,28 @@ const App = () => {
 					{isLoggedIn ? (
 						<>
 							<HomePage path="/home" />
+
 							<ConfigPage path="/config" />
 							<EditUserPage path="/config/user" />
+
 							<CategoriesPage path="/categories" />
 							<Category path="/categories/:category_id" />
-							<Transaction path="/transactions/:transaction_id" />
-							<AllTransactions path="/transactions" />
-							<Incomes path="/transactions/incomes" />
-							<Expenses path="/transactions/expenses" />
+
+							<Transaction path="/transaction/:transaction_id" />
 							<AddIncome path="/add/income" />
 							<AddExpense path="/add/expense" />
 							<EditTransaction path="/edit/:transaction_id" />
+
+							<Redirect
+								from="/transactions"
+								to="/transactions/1"
+								noThrow={true}
+							/>
+							<AllTransactions path="/transactions/:page" />
+							<Redirect from="/incomes" to="/incomes/1" noThrow={true} />
+							<Incomes path="/incomes/:page" />
+							<Redirect from="/expenses" to="/expenses/1" noThrow={true} />
+							<Expenses path="/expenses/:page" />
 						</>
 					) : (
 						<>

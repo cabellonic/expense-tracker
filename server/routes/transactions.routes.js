@@ -13,12 +13,13 @@ const {
 	getExpenseTransactions,
 } = require("../controllers/transactions.controller");
 
-router.get("/transactions", getAllTransactions);
-router.post("/transactions", createTransaction);
-router.get("/transactions/incomes", getIncomeTransactions);
-router.get("/transactions/expenses", getExpenseTransactions);
-router.get("/transactions/:transaction_id", getTransactionById);
-router.put("/transactions/:transaction_id", updateTransaction);
-router.delete("/transactions/:transaction_id", deleteTransaction);
+router.get("/transactions/:page", getAllTransactions);
+router.get("/transactions/incomes/:page", getIncomeTransactions);
+router.get("/transactions/expenses/:page", getExpenseTransactions);
+
+router.get("/transaction/:transaction_id", getTransactionById);
+router.post("/transaction", createTransaction);
+router.put("/transaction/:transaction_id", updateTransaction);
+router.delete("/transaction/:transaction_id", deleteTransaction);
 
 module.exports = router;

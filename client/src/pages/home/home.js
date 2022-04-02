@@ -14,7 +14,7 @@ const HomePage = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch(
-				`${process.env.REACT_APP_API_URL}/transactions`,
+				`${process.env.REACT_APP_API_URL}/transactions/1`,
 				{
 					method: "GET",
 					headers: {

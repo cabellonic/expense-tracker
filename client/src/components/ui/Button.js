@@ -20,6 +20,7 @@ const Button = ({ children, green, red, type, href, ...props }) => {
 				{children}
 			</button>
 		);
+
 	return (
 		<span className={className} {...props}>
 			{children}

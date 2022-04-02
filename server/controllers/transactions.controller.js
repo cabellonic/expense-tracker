@@ -3,41 +3,7 @@ const { pool } = require("../db");
 const { config } = require("dotenv");
 config();
 
-exports.getAllTransactions = async (req, res) => {
-	const token = req.headers["authorization"]?.split(" ")[1];
-
-	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-		if (err) {
-			return res.json({
-				isLoggedIn: false,
-				message: "Invalid token",
-			});
-		}
-
-		try {
-			const transactions = await pool.query(
-				`
-				SELECT transaction.id, title, note, amount, created_at, type,
-					category.name AS category_name, category.slug AS category_slug
-				FROM transaction, category
-				WHERE transaction.category_id = category.id
-				AND transaction.user_id = $1
-				ORDER BY created_at
-				DESC LIMIT 10;
-				`,
-				[decoded.id]
-			);
-
-			if (!transactions.rowCount) {
-				return res.json({ message: "No transactions" });
-			}
-
-			res.json({ transactions: transactions.rows });
-		} catch (err) {
-			res.status(500).json({ ok: false, message: "Error" });
-		}
-	});
-};
+const TRANSACTIONS_PER_PAGE = 10;
 
 exports.getTransactionById = async (req, res) => {
 	const token = req.headers["authorization"]?.split(" ")[1];
@@ -46,7 +12,7 @@ exports.getTransactionById = async (req, res) => {
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
 			return res.json({
-				isLoggedIn: false,
+				ok: false,
 				message: "Invalid token",
 			});
 		}
@@ -75,33 +41,102 @@ exports.getTransactionById = async (req, res) => {
 	});
 };
 
+exports.getAllTransactions = async (req, res) => {
+	const token = req.headers["authorization"]?.split(" ")[1];
+	const { page } = req.params;
+
+	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+		if (err) {
+			return res.json({
+				ok: false,
+				message: "Invalid token",
+			});
+		}
+
+		try {
+			const transactions = await pool.query(
+				`
+				SELECT transaction.id, title, note, amount, created_at, type,
+					category.name AS category_name, category.slug AS category_slug, count(*) OVER() AS total_transactions
+				FROM transaction, category
+				WHERE transaction.category_id = category.id
+				AND transaction.user_id = $1
+				ORDER BY created_at
+				DESC LIMIT $2
+				OFFSET $3;
+				`,
+				[decoded.id, TRANSACTIONS_PER_PAGE, (page - 1) * TRANSACTIONS_PER_PAGE]
+			);
+
+			if (!transactions.rowCount) {
+				if (page === 1) {
+					return res.json({ ok: true, message: "No transactions" });
+				}
+				return res.json({ ok: false, message: "No more transactions" });
+			}
+
+			const total_transactions = transactions.rows[0].total_transactions;
+			const total_pages = Math.ceil(total_transactions / TRANSACTIONS_PER_PAGE);
+
+			res.json({
+				ok: true,
+				transactions: transactions.rows,
+				paginationInfo: {
+					total_transactions,
+					current_page: page,
+					total_pages,
+				},
+			});
+		} catch (err) {
+			res.status(500).json({ ok: false, message: "Error" });
+		}
+	});
+};
+
 exports.getIncomeTransactions = async (req, res) => {
 	const token = req.headers["authorization"]?.split(" ")[1];
+	const { page } = req.params;
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
 			return res.json({ ok: false, message: "Invalid token" });
 		}
+
 		try {
 			const transactions = await pool.query(
 				`
 				SELECT transaction.id, title, note, amount, created_at, updated_at, type,
-					category.name AS category_name, category.slug AS category_slug
+					category.name AS category_name, category.slug AS category_slug, count(*) OVER() AS total_transactions
 				FROM transaction, category
 				WHERE type='income'
 				AND transaction.category_id = category.id
 				AND transaction.user_id = $1
 				ORDER BY created_at
-				DESC LIMIT 10
+				DESC LIMIT $2
+				OFFSET $3;
 				`,
-				[decoded.id]
+				[decoded.id, TRANSACTIONS_PER_PAGE, (page - 1) * TRANSACTIONS_PER_PAGE]
 			);
 
 			if (!transactions.rowCount) {
-				return res.json({ message: "No income transactions" });
+				if (page === 1) {
+					return res.json({ ok: true, message: "No expense transactions" });
+				}
+				return res.json({ ok: false, message: "No more transactions" });
 			}
 
-			res.json({ transactions: transactions.rows });
+			const total_transactions = transactions.rows[0].total_transactions;
+			const total_pages = Math.ceil(total_transactions / TRANSACTIONS_PER_PAGE);
+
+			res.json({
+				ok: true,
+				transactions: transactions.rows,
+				paginationInfo: {
+					total_transactions,
+					current_page: page,
+					total_pages,
+				},
+			});
 		} catch (err) {
 			res.status(500).json({ ok: false, message: "Error" });
 		}
@@ -110,30 +145,50 @@ exports.getIncomeTransactions = async (req, res) => {
 
 exports.getExpenseTransactions = async (req, res) => {
 	const token = req.headers["authorization"]?.split(" ")[1];
+	const { page } = req.params;
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
 			return res.json({ ok: false, message: "Invalid token" });
 		}
+
 		try {
 			const transactions = await pool.query(
 				`
 				SELECT transaction.id, title, note, amount, created_at, updated_at, type,
-					category.name AS category_name, category.slug AS category_slug
+					category.name AS category_name, category.slug AS category_slug, count(*) OVER() AS total_transactions
 				FROM transaction, category
 				WHERE type='expense'
 				AND transaction.category_id = category.id
 				AND transaction.user_id = $1
 				ORDER BY created_at
-				DESC LIMIT 10
+				DESC LIMIT $2
+				OFFSET $3;
 				`,
-				[decoded.id]
+				[decoded.id, TRANSACTIONS_PER_PAGE, (page - 1) * TRANSACTIONS_PER_PAGE]
 			);
+
 			if (!transactions.rowCount) {
-				return res.json({ message: "No expense transactions" });
+				if (page === 1) {
+					return res.json({ ok: true, message: "No expense transactions" });
+				}
+				return res.json({ ok: false, message: "No more transactions" });
 			}
-			res.json({ transactions: transactions.rows });
+
+			const total_transactions = transactions.rows[0].total_transactions;
+			const total_pages = Math.ceil(total_transactions / TRANSACTIONS_PER_PAGE);
+
+			res.json({
+				ok: true,
+				transactions: transactions.rows,
+				paginationInfo: {
+					total_transactions,
+					current_page: page,
+					total_pages,
+				},
+			});
 		} catch (err) {
+			console.log(err);
 			res.status(500).json({ ok: false, message: "Error" });
 		}
 	});

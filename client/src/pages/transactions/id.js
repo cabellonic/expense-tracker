@@ -8,6 +8,7 @@ import { AuthContext } from "context/AuthContext";
 
 const TransactionPage = () => {
 	const [transaction, setTransaction] = useState([]);
+	const [paginationInfo, setPaginationInfo] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const { userToken } = useContext(AuthContext);
 	const { transaction_id } = useParams();
@@ -15,7 +16,7 @@ const TransactionPage = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch(
-				`${process.env.REACT_APP_API_URL}/transactions/${transaction_id}`,
+				`${process.env.REACT_APP_API_URL}/transaction/${transaction_id}`,
 				{
 					method: "GET",
 					headers: {

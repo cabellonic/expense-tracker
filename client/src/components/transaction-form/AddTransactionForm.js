@@ -27,7 +27,7 @@ const AddTransactionForm = ({ type = "expense" }) => {
 		const { amount, type, title, note, category } = data;
 		try {
 			const response = await fetch(
-				`${process.env.REACT_APP_API_URL}/transactions`,
+				`${process.env.REACT_APP_API_URL}/transaction`,
 				{
 					method: "POST",
 					headers: {
@@ -47,7 +47,7 @@ const AddTransactionForm = ({ type = "expense" }) => {
 			const resData = await response.json();
 			// If credentials are invalid
 			if (!resData.ok) return setErrorMessage(resData.message);
-			navigate(`/transactions/${resData.transaction.id}`);
+			navigate(`/transaction/${resData.transaction.id}`);
 		} catch (err) {
 			// HANDLE ERROR LATER
 			console.log(err);

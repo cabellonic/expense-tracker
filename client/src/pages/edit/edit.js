@@ -15,7 +15,7 @@ const EditTransaction = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch(
-				`${process.env.REACT_APP_API_URL}/transactions/${transaction_id}`,
+				`${process.env.REACT_APP_API_URL}/transaction/${transaction_id}`,
 				{
 					method: "GET",
 					headers: {
@@ -33,7 +33,7 @@ const EditTransaction = () => {
 	return (
 		<Layout
 			pageTitle={"Edit transaction"}
-			from={`/transactions/${transaction_id}`}
+			from={`/transaction/${transaction_id}`}
 		>
 			{!isLoading && <EditTransactionForm transaction={transaction} />}
 		</Layout>
