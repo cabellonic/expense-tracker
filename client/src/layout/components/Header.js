@@ -25,7 +25,7 @@ const Header = ({ pageTitle, center, href = "/home" }) => {
 			};
 			getUserData();
 		}
-	}, [userToken]);
+	}, [userToken, logout]);
 
 	if (pageTitle)
 		return (

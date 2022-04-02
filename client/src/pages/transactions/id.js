@@ -8,7 +8,6 @@ import { AuthContext } from "context/AuthContext";
 
 const TransactionPage = () => {
 	const [transaction, setTransaction] = useState([]);
-	const [paginationInfo, setPaginationInfo] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const { userToken } = useContext(AuthContext);
 	const { transaction_id } = useParams();

@@ -15,7 +15,7 @@ const NotFoundPage = () => {
 		} else {
 			navigate("/");
 		}
-	}, []);
+	}, [auth.isLoggedIn]);
 	return <></>;
 };
 

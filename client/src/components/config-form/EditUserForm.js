@@ -67,7 +67,7 @@ const EditUserForm = () => {
 			setIsLoading(false);
 		};
 		fetchData();
-	}, [userToken]);
+	}, [userToken, setValue]);
 
 	if (isLoading) return <></>;
 

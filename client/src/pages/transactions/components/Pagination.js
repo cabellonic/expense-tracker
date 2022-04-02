@@ -1,4 +1,4 @@
-import { Link } from "@reach/router";
+// Components
 import Button from "components/ui/Button";
 // Styles
 import styles from "./Pagination.module.css";
