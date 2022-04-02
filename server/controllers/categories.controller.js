@@ -6,7 +6,7 @@ exports.getAllCategories = async (req, res) => {
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
 			return res.json({
-				isLoggedIn: false,
+				ok: false,
 				message: "Invalid token",
 			});
 		}
@@ -38,7 +38,7 @@ exports.getAllUsedCategories = async (req, res) => {
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
 			return res.json({
-				isLoggedIn: false,
+				ok: false,
 				message: "Invalid token",
 			});
 		}
@@ -74,7 +74,7 @@ exports.getTransactionsByCategory = async (req, res) => {
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
 			return res.json({
-				isLoggedIn: false,
+				ok: false,
 				message: "Invalid token",
 			});
 		}
