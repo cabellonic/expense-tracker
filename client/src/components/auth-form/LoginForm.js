@@ -9,7 +9,7 @@ import ErrorMessage from "components/ui/form/ErrorMessage";
 // Context
 import { AuthContext } from "context/AuthContext";
 
-const LoginForm = ({}) => {
+const LoginForm = () => {
 	const [errorMessage, setErrorMessage] = useState();
 	const { login } = useContext(AuthContext);
 

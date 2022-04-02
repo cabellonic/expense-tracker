@@ -1,6 +1,15 @@
 import TransactionCard from "./TransactionCard";
+// Styles
+import styles from "./TransactionList.module.css";
 
 const TransactionList = ({ transactions }) => {
+	if (!transactions)
+		return (
+			<section className={styles.empty}>
+				You havo no transactions. Try adding one!
+			</section>
+		);
+
 	return (
 		<section>
 			<main>

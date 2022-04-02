@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // Components
 import Modal from "components/ui/Modal";
 import CategoryIcon from "components/ui/CategoryIcon";
+// Context
+import { AuthContext } from "context/AuthContext";
 // Styles
 import styles from "./CategorySelector.module.css";
 
 const CategorySelector = ({ register, setValue, category }) => {
 	const [selectedCategory, setSelectedCategory] = useState(category);
+	const { userToken } = useContext(AuthContext);
 	const [isLoading, setIsLoading] = useState(true);
 	const [categories, setCategories] = useState([]);
 	const [showModal, setShowModal] = useState(false);
@@ -22,13 +25,19 @@ const CategorySelector = ({ register, setValue, category }) => {
 	};
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await fetch("http://localhost:5000/categories");
+			const response = await fetch("http://localhost:5000/categories", {
+				method: "GET",
+				headers: {
+					"Content-type": "application/json",
+					Authorization: `Bearer ${userToken}`,
+				},
+			});
 			const resData = await response.json();
-			setCategories(resData);
+			setCategories(resData.categories);
 			setIsLoading(false);
 		};
 		fetchData();
-	}, []);
+	}, [userToken]);
 
 	if (isLoading) return <></>;
 

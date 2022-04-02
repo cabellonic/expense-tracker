@@ -19,6 +19,20 @@
 	color: inherit;
 }
 
+.empty {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	font-size: var(--fs-xl);
+	cursor: default;
+	background-color: var(--bg-secondary-lt);
+	padding: var(--sp-3);
+	border-radius: var(--br-base);
+	box-shadow: var(--bs-base);
+}
+
 .category:hover {
 	box-shadow: var(--bs-base-dk);
 }

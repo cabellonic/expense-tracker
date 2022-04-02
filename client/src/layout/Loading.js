@@ -1,7 +1,7 @@
 // Styles
 import styles from "./Loading.module.css";
 
-const Loading = ({}) => {
+const Loading = () => {
 	return (
 		<div className={styles.Loading_screen}>
 			<span className={styles.text}>Loading...</span>

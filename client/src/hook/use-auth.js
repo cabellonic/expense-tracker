@@ -58,7 +58,7 @@ export const useAuth = () => {
 		} else {
 			logout();
 		}
-	}, [login]);
+	}, [login, logout]);
 
 	return { token, userId, isLoggedIn, login, logout };
 };

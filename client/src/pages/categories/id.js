@@ -19,7 +19,7 @@ const Category = () => {
 			setIsLoading(false);
 		};
 		fetchData();
-	}, []);
+	}, [category_id]);
 
 	return (
 		<Layout pageTitle={"Filter by categories"} from="/categories">

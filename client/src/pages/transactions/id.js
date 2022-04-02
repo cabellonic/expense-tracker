@@ -17,7 +17,7 @@ const TransactionPage = () => {
 			setIsLoading(false);
 		};
 		fetchData();
-	}, []);
+	}, [id]);
 
 	return (
 		<Layout pageTitle={transaction.title}>

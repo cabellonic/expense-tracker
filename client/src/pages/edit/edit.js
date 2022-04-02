@@ -17,7 +17,7 @@ const EditTransaction = () => {
 			setIsLoading(false);
 		};
 		fetchData();
-	}, []);
+	}, [id]);
 
 	return (
 		<Layout pageTitle={"Edit transaction"} from={`/transactions/${id}`}>
