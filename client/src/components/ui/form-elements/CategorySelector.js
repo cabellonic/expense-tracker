@@ -64,20 +64,6 @@ const CategorySelector = ({ register, setValue, category }) => {
 			{showModal && (
 				<Modal onClose={handleModal} title="Select Category">
 					<CategoriesList categories={categories} onClick={handleCategory} />
-					{/* <div className={styles.category_list}>
-						{categories.map((category) => (
-							<div
-								key={category.id}
-								className={styles.category}
-								onClick={() => handleCategory(category)}
-							>
-								<span className={styles.icon}>
-									<CategoryIcon category={category.slug} />
-								</span>
-								<span className={styles.name}>{category.name}</span>
-							</div>
-						))}
-					</div> */}
 				</Modal>
 			)}
 		</>
