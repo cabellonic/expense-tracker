@@ -28,21 +28,7 @@ app.use(categoryRoutes);
 app.use(categoriesRoutes);
 
 app.use((req, res, next) => {
-	const error = new HttpError("Could not find this route.", 404);
-	throw error;
-});
-
-app.use((error, req, res, next) => {
-	if (req.file) {
-		fs.unlink(req.file.path, (err) => {
-			console.log(err);
-		});
-	}
-	if (res.headerSent) {
-		return next(error);
-	}
-	res.status(error.code || 500);
-	res.json({ message: error.message || "Something went wrong" });
+	res.status(404).json({ message: "Not found" });
 });
 
 app.listen(process.env.PORT || 5000);
