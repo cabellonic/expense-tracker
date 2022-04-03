@@ -3,4 +3,12 @@
 	align-items: center;
 	justify-content: center;
 	padding-bottom: var(--sp-8);
+	box-shadow: var(--bs-lg);
+	overflow: hidden;
+}
+
+.slide img {
+	width: 50%;
+	max-height: auto;
+	object-fit: cover;
 }

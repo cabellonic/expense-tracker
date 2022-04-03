@@ -20,17 +20,17 @@ const HomeSlider = () => {
 			>
 				<SwiperSlide>
 					<div className={styles.slide}>
-						<img src="https://via.placeholder.com/300x300" alt="slide" />
+						<img src="/images/slide_1.png" alt="slide" />
 					</div>
 				</SwiperSlide>
 				<SwiperSlide>
 					<div className={styles.slide}>
-						<img src="https://via.placeholder.com/300x300" alt="slide" />
+						<img src="/images/slide_2.png" alt="slide" />
 					</div>
 				</SwiperSlide>
 				<SwiperSlide>
 					<div className={styles.slide}>
-						<img src="https://via.placeholder.com/300x300" alt="slide" />
+						<img src="/images/slide_3.png" alt="slide" />
 					</div>
 				</SwiperSlide>
 			</Swiper>
