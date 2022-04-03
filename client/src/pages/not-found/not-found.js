@@ -9,8 +9,8 @@ import { AuthContext } from "context/AuthContext";
 
 const NotFoundPage = () => {
 	const auth = useContext(AuthContext);
+
 	useEffect(() => {
-		console.log(auth, "AUTH STATUS");
 		if (auth.isLoggedIn) {
 			navigate("/home");
 		} else {

@@ -77,7 +77,6 @@ const EditTransactionForm = ({ transaction }) => {
 			newCategory === category_slug
 		) {
 			setIsSubmitting(false);
-			console.log("Test");
 			return setErrorMessage("You didn't change anything!");
 		}
 
