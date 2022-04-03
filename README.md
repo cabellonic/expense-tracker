@@ -1,5 +1,5 @@
 # Full stack app expense-tracker
-Alkemy Fullstack JavaScript challenge. Web App made it with React, NodeJS and Postgresql.
+Cuando tenga más tiempo desarrollo sobre el proyecto!
 
 ## Desarrollado con
 - React
