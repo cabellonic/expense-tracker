@@ -30,10 +30,12 @@ exports.getTransactionById = async (req, res) => {
 			);
 
 			if (!transaction.rowCount) {
-				return res.status(404).json({ message: "Transaction not found" });
+				return res
+					.status(404)
+					.json({ ok: false, message: "Transaction not found" });
 			}
 
-			res.json({ transaction: transaction.rows[0] });
+			res.json({ ok: true, transaction: transaction.rows[0] });
 		} catch (err) {
 			console.log(err);
 			res.status(500).json({ ok: false, message: "Error" });
