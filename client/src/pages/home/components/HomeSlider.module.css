@@ -1,14 +1,23 @@
 .slide {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	padding-bottom: var(--sp-8);
-	box-shadow: var(--bs-lg);
 	overflow: hidden;
 }
 
 .slide img {
 	width: 50%;
+	min-width: 350px;
 	max-height: auto;
 	object-fit: cover;
+}
+
+.slide span {
+	margin-top: var(--sp-4);
+	text-align: center;
+	font-size: var(--fs-xl);
+	font-weight: 600;
+	color: var(--bg-primary-dk);
 }

@@ -6,7 +6,7 @@ import Button from "components/ui/Button";
 
 const GuestHomePage = () => {
 	return (
-		<Layout pageTitle={"Welcome"} center>
+		<Layout pageTitle={"Expense Tracker"} center>
 			<HomeSlider />
 			<Fieldset>
 				<Button href={"/login"}>Login</Button>

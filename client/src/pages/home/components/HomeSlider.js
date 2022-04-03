@@ -15,22 +15,27 @@ const HomeSlider = () => {
 				pagination={{
 					dynamicBullets: true,
 				}}
+				loop={true}
+				spaceBetween={16 * 4}
 				modules={[Pagination]}
 				className="mySwiper"
 			>
 				<SwiperSlide>
 					<div className={styles.slide}>
 						<img src="/images/slide_1.png" alt="slide" />
+						<span>Keep track of your expenses</span>
 					</div>
 				</SwiperSlide>
 				<SwiperSlide>
 					<div className={styles.slide}>
 						<img src="/images/slide_2.png" alt="slide" />
+						<span>Categorize them as you like</span>
 					</div>
 				</SwiperSlide>
 				<SwiperSlide>
 					<div className={styles.slide}>
 						<img src="/images/slide_3.png" alt="slide" />
+						<span>And be aware of where you spend most of your money</span>
 					</div>
 				</SwiperSlide>
 			</Swiper>
