@@ -34,7 +34,7 @@ const Header = ({ pageTitle, center, href = "/home" }) => {
 		return () => setIsMounted(false);
 	}, []);
 
-	if (pageTitle)
+	if (pageTitle !== "Home")
 		return (
 			<header className={styles.header_wrapper}>
 				<div className={styles.header}>
