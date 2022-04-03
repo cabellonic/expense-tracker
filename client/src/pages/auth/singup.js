@@ -1,6 +1,6 @@
 // Components
 import Layout from "layout/Layout";
-import SingupForm from "components/auth-form/SingupForm";
+import SingupForm from "./forms/SingupForm";
 
 const SingupPage = () => {
 	return (

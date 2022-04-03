@@ -1,0 +1,8 @@
+.category_icon {
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+	font-size: var(--fs-8xl);
+	border-radius: var(--br-circle);
+	overflow: hidden;
+}

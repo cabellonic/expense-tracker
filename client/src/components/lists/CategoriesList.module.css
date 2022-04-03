@@ -1,0 +1,19 @@
+.category_list {
+	display: flex;
+	flex-flow: wrap;
+	gap: var(--sp-4);
+}
+
+.empty {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	font-size: var(--fs-xl);
+	cursor: default;
+	background-color: var(--bg-secondary-lt);
+	padding: var(--sp-3);
+	border-radius: var(--br-base);
+	box-shadow: var(--bs-base);
+}

@@ -1,34 +1,15 @@
-import { Router } from "@reach/router";
 // Components
 import Loading from "layout/Loading";
-import NotFoundPage from "pages/not-found/not-found";
-// Just for guest users
-import GuestHomePage from "pages/home/guest";
-import SingupPage from "pages/auth/singup";
-import LoginPage from "pages/auth/login";
-// For authenticated users
-import HomePage from "pages/home/home";
-
-import ConfigPage from "pages/config/config";
-import EditUserPage from "pages/config/profile";
-import EditCategories from "pages/config/categories";
-
-import CategoriesPage from "pages/categories/categories";
-import Category from "pages/categories/id";
-import Transaction from "pages/transactions/id";
-import AllTransactions from "pages/transactions/all";
-import Incomes from "pages/transactions/incomes";
-import Expenses from "pages/transactions/expenses";
-import AddIncome from "pages/add/income";
-import AddExpense from "pages/add/expense";
-import EditTransaction from "pages/edit/edit";
+// Routes
+import PrivateRoutes from "routes/PrivateRoutes";
+import GuestRoutes from "routes/GuestRoutes";
 // Hookes
 import { useAuth } from "hook/use-auth";
 // Context
 import { AuthContext } from "context/AuthContext";
 // Util
 import { registerIcons } from "util/fontAwesome";
-import { Redirect } from "@reach/router";
+
 registerIcons();
 
 const App = () => {
@@ -41,43 +22,7 @@ const App = () => {
 			{isLoggedIn === null ? (
 				<Loading />
 			) : (
-				<Router>
-					{isLoggedIn ? (
-						<>
-							<HomePage path="/home" />
-
-							<ConfigPage path="/config" />
-							<EditUserPage path="/config/user" />
-							<EditCategories path="/config/categories" />
-
-							<CategoriesPage path="/categories" />
-							<Category path="/categories/:category_id" />
-
-							<Transaction path="/transaction/:transaction_id" />
-							<AddIncome path="/add/income" />
-							<AddExpense path="/add/expense" />
-							<EditTransaction path="/edit/:transaction_id" />
-
-							<Redirect
-								from="/transactions"
-								to="/transactions/1"
-								noThrow={true}
-							/>
-							<AllTransactions path="/transactions/:page" />
-							<Redirect from="/incomes" to="/incomes/1" noThrow={true} />
-							<Incomes path="/incomes/:page" />
-							<Redirect from="/expenses" to="/expenses/1" noThrow={true} />
-							<Expenses path="/expenses/:page" />
-						</>
-					) : (
-						<>
-							<GuestHomePage path="/" />
-							<LoginPage path="/login" />
-							<SingupPage path="/singup" />
-						</>
-					)}
-					<NotFoundPage default />
-				</Router>
+				<>{isLoggedIn ? <PrivateRoutes /> : <GuestRoutes />}</>
 			)}
 		</AuthContext.Provider>
 	);

@@ -1,7 +1,8 @@
-import Button from "components/ui/Button";
-import Fieldset from "components/ui/form/Fieldset";
+// Components
 import Layout from "layout/Layout";
 import HomeSlider from "./components/HomeSlider";
+import Fieldset from "components/ui/form-elements/Fieldset";
+import Button from "components/ui/Button";
 
 const GuestHomePage = () => {
 	return (

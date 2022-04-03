@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Components
 import Modal from "components/ui/Modal";
 import Button from "components/ui/Button";
-import ErrorMessage from "components/ui/form/ErrorMessage";
+import ErrorMessage from "components/ui/ErrorMessage";
 // Context
 import { AuthContext } from "context/AuthContext";
 // Styles

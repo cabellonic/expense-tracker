@@ -1,0 +1,32 @@
+// Components
+import CategoryCard from "components/cards/CategoryCard";
+// Styles
+import styles from "./CategoriesList.module.css";
+
+const CategoriesList = ({
+	categories,
+	onClick,
+	showCount,
+	href = "/category",
+	children,
+}) => {
+	return (
+		<div className={styles.category_list}>
+			{categories.map((category) => {
+				return (
+					<CategoryCard
+						key={category.id}
+						category={category}
+						onClick={onClick}
+						showCount={showCount}
+						href={href}
+					>
+						{children}
+					</CategoryCard>
+				);
+			})}
+		</div>
+	);
+};
+
+export default CategoriesList;

@@ -1,20 +1,21 @@
 import { useContext, useEffect, useState } from "react";
+import { useParams } from "@reach/router";
 // Components
 import Layout from "layout/Layout";
-import HomeHeader from "./components/HomeHeader";
-import TransactionList from "components/lists/TransactionList";
 // Context
 import { AuthContext } from "context/AuthContext";
+import EditTransactionForm from "./forms/EditTransactionForm";
 
-const HomePage = () => {
+const EditTransaction = () => {
+	const [transaction, setTransaction] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [transactions, setTransactions] = useState([]);
 	const { userToken } = useContext(AuthContext);
+	const { transaction_id } = useParams();
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch(
-				`${process.env.REACT_APP_API_URL}/transactions/1`,
+				`${process.env.REACT_APP_API_URL}/transaction/${transaction_id}`,
 				{
 					method: "GET",
 					headers: {
@@ -23,18 +24,20 @@ const HomePage = () => {
 				}
 			);
 			const resData = await response.json();
-			setTransactions(resData.transactions);
+			setTransaction(resData.transaction);
 			setIsLoading(false);
 		};
 		fetchData();
-	}, [userToken]);
+	}, [transaction_id, userToken]);
 
 	return (
-		<Layout balance menu>
-			<HomeHeader />
-			{!isLoading && <TransactionList transactions={transactions} />}
+		<Layout
+			pageTitle={"Edit transaction"}
+			from={`/transaction/${transaction_id}`}
+		>
+			{!isLoading && <EditTransactionForm transaction={transaction} />}
 		</Layout>
 	);
 };
 
-export default HomePage;
+export default EditTransaction;
