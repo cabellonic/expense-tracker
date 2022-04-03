@@ -38,6 +38,45 @@ exports.getCategoryBySlug = async (req, res) => {
 	});
 };
 
+exports.createCategory = async (req, res) => {
+	const token = req.headers["authorization"].split(" ")[1];
+	const { name } = req.body;
+	const slug = slugify(name, { lower: true });
+
+	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+		if (err) {
+			return res.json({
+				ok: false,
+				message: "Invalid token",
+			});
+		}
+
+		// The token is valid, so we can now query the database
+		try {
+			const category = await pool.query(
+				`
+				INSERT INTO category (name, slug, user_id)
+				VALUES ($1, $2, $3)
+				ON CONFLICT (slug)
+				DO NOTHING
+				RETURNING *
+				`,
+				[name, slug, decoded.id]
+			);
+
+			// If the category already exists, we don't create it
+			if (!category.rowCount) {
+				return res.json({ ok: false, message: "That category already exist!" });
+			}
+
+			res.status(200).json({ ok: true, category: category.rows[0] });
+		} catch (err) {
+			console.log(err);
+			res.status(500).json({ ok: false, message: "Error" });
+		}
+	});
+};
+
 exports.updateCategory = async (req, res) => {
 	const token = req.headers["authorization"].split(" ")[1];
 	const { category_slug } = req.params;

@@ -1,0 +1,26 @@
+.add_category_tab {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: fit-content;
+	min-width: 250px;
+	margin: 0 auto var(--sp-4) auto;
+	padding: var(--sp-4);
+	border-radius: var(--br-base);
+	box-shadow: var(--bs-base);
+	color: var(--text-accent);
+	text-decoration: none;
+	font-size: var(--fs-xl);
+	background: var(--bg-primary-dk);
+	background: linear-gradient(
+		-25deg,
+		var(--bg-primary-dk) 0%,
+		var(--bg-primary) 100%
+	);
+	transition: box-shadow 0.2s ease-in-out;
+}
+
+.add_category_tab:hover {
+	box-shadow: var(--bs-base-dk);
+}

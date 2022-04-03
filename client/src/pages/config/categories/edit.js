@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "@reach/router";
 // Components
 import Layout from "layout/Layout";
+import EditCategoryForm from "./forms/EditCategoryForm";
 // Context
 import { AuthContext } from "context/AuthContext";
 import { navigate } from "@reach/router";
-import EditCategoryForm from "./forms/EditCategoryForm";
 
 const EditCategoryPage = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +30,7 @@ const EditCategoryPage = () => {
 			setIsLoading(false);
 		};
 		fetchData();
-	}, []);
+	}, [userToken, category_id]);
 
 	return (
 		<Layout pageTitle={"Edit category"} from="/config/categories">

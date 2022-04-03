@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 // Components
 import Layout from "layout/Layout";
+import AddCategoryTab from "./components/AddCategoryTab";
 import CategoriesList from "components/lists/CategoriesList";
 import EditCategoryButton from "./components/EditCategoryButton";
 // Context
@@ -34,6 +35,7 @@ const EditCategories = () => {
 
 	return (
 		<Layout pageTitle={"Edit categories"} from="/config">
+			<AddCategoryTab />
 			<CategoriesList categories={categories} href={`/config/category`}>
 				<EditCategoryButton />
 			</CategoriesList>

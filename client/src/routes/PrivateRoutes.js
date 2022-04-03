@@ -3,7 +3,8 @@ import { Redirect, Router } from "@reach/router";
 import HomePage from "pages/home/home";
 // Configuration pages
 import ConfigPage from "pages/config";
-import EditCategories from "pages/config/categories";
+import ConfigCategories from "pages/config/categories";
+import AddCategoryPage from "pages/config/categories/add";
 import EditCategoryPage from "pages/config/categories/edit";
 import EditUserPage from "pages/config/user";
 // Categories page
@@ -29,7 +30,8 @@ const PrivateRoutes = () => {
 
 			<ConfigPage path="/config" />
 			<EditUserPage path="/config/user" />
-			<EditCategories path="/config/categories" />
+			<ConfigCategories path="/config/categories" />
+			<AddCategoryPage path="/config/categories/add" />
 			<EditCategoryPage path="/config/category/:category_id" />
 
 			<CategoriesPage path="/categories" />
