@@ -13,32 +13,14 @@ CREATE TABLE IF NOT EXISTS app_user (
     expense NUMERIC(10,2) DEFAULT 0
 );
 
-INSERT INTO app_user (first_name, last_name, email, passhash) VALUES ('John', 'Doe', 'johndoe@mail.com', 'passhash')
-
-CREATE TABLE category (
+CREATE TABLE IF NOT EXISTS category (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     slug VARCHAR(255) NOT NULL,
     user_id BIGINT REFERENCES app_user (id) ON DELETE CASCADE
 );
 
-INSERT INTO category (name, slug, user_id) VALUES ('Food', 'food', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Salary', 'salary', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Sport', 'sport', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Shopping', 'shopping', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Travel', 'travel', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Streaming', 'streaming', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Insurance', 'insurance', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Healthcare', 'healthcare', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Bills', 'bills', null);
-INSERT INTO category (name, slug, user_id) VALUES ('GYM', 'gym', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Clothes', 'clothes', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Education', 'education', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Gift', 'gift', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Decoration', 'decoration', null);
-INSERT INTO category (name, slug, user_id) VALUES ('Gaming', 'gaming', null);
-
-CREATE TABLE transaction (
+CREATE TABLE IF NOT EXISTS transaction (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     amount NUMERIC(10,2) NOT NULL,
     title VARCHAR(255) NOT NULL,
