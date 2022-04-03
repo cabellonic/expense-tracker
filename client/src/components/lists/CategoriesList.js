@@ -10,6 +10,9 @@ const CategoriesList = ({
 	href = "/category",
 	children,
 }) => {
+	if (!categories.length) {
+		return <section className={styles.empty}>Nothing to show here 😭</section>;
+	}
 	return (
 		<div className={styles.category_list}>
 			{categories.map((category) => {

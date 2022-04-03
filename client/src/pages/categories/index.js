@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 // Components
 import Layout from "layout/Layout";
 import CategoriesList from "components/lists/CategoriesList";
+import CategoryListPH from "components/lists/CategoryListPH";
 // Context
 import { AuthContext } from "context/AuthContext";
 
@@ -30,7 +31,11 @@ const CategoriesPage = () => {
 
 	return (
 		<Layout pageTitle={"Filter by categories"}>
-			{!isLoading && <CategoriesList categories={categories} showCount />}
+			{isLoading ? (
+				<CategoryListPH />
+			) : (
+				<CategoriesList categories={categories} showCount />
+			)}
 		</Layout>
 	);
 };
