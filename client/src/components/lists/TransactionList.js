@@ -7,7 +7,8 @@ const TransactionList = ({ transactions }) => {
 	if (!transactions)
 		return (
 			<section className={styles.empty}>
-				You havo no transactions. Try adding one!
+				You have no transactions. <br />
+				Try adding one!
 			</section>
 		);
 
