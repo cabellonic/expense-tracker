@@ -5,13 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AuthContext } from "context/AuthContext";
 // Styles
 import styles from "./Header.module.css";
+import UserHeader from "components/placeholders/UserPH";
 
 const Header = ({ pageTitle, center, href = "/home" }) => {
+	const [isMounted, setIsMounted] = useState(false);
 	const { userToken, logout } = useContext(AuthContext);
 	const [userData, setUserData] = useState(null);
 
 	useEffect(() => {
-		if (userToken) {
+		if (userToken && isMounted) {
 			const getUserData = async () => {
 				const response = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
 					method: "GET",
@@ -21,11 +23,16 @@ const Header = ({ pageTitle, center, href = "/home" }) => {
 				});
 				const resData = await response.json();
 				if (!resData.ok) return logout();
-				setUserData(resData.user);
+				if (isMounted) setUserData(resData.user);
 			};
 			getUserData();
 		}
-	}, [userToken, logout]);
+	}, [userToken, logout, isMounted]);
+
+	useEffect(() => {
+		setIsMounted(true);
+		return () => setIsMounted(false);
+	}, []);
 
 	if (pageTitle)
 		return (
@@ -48,18 +55,24 @@ const Header = ({ pageTitle, center, href = "/home" }) => {
 	return (
 		<header className={styles.header_wrapper}>
 			<div className={styles.header}>
-				<figure className={styles.avatar}>
-					<img
-						src={`https://cabellonic.dev/images/photo_alt.webp`}
-						alt="avatar"
-					/>
-				</figure>
-				<div className={styles.user_info}>
-					<span className={styles.welcome}>Welcome</span>
-					<span className={styles.user_name}>
-						{userData ? userData.first_name : "user"}
-					</span>
-				</div>
+				{userData ? (
+					<>
+						<figure className={styles.avatar}>
+							<img
+								src={`https://cabellonic.dev/images/photo_alt.webp`}
+								alt="avatar"
+							/>
+						</figure>
+						<div className={styles.user_info}>
+							<span className={styles.welcome}>Welcome</span>
+							<span className={styles.user_name}>
+								{userData ? userData.first_name : "user"}
+							</span>
+						</div>
+					</>
+				) : (
+					<UserHeader />
+				)}
 			</div>
 		</header>
 	);
