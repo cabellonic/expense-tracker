@@ -87,7 +87,7 @@ exports.login = async (req, res) => {
 				id: potentialLogin.rows[0].id,
 			},
 			process.env.JWT_SECRET,
-			{ expiresIn: "1h" },
+			{ expiresIn: "7d" },
 			(err, token) => {
 				if (err) {
 					return res.status(500).json({
@@ -170,7 +170,7 @@ exports.singup = async (req, res) => {
 				id: newUserQuery.rows[0].id,
 			},
 			process.env.JWT_SECRET,
-			{ expiresIn: "1h" },
+			{ expiresIn: "7d" },
 			(err, token) => {
 				if (err) {
 					return res.status(500).json({
