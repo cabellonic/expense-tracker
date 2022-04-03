@@ -51,26 +51,24 @@ const LoginForm = () => {
 		min: 5,
 	});
 	return (
-		<>
-			<Form onSubmit={handleSubmit(onSubmit)}>
-				<Input
-					register={emailRegister}
-					placeholder="Email"
-					error={errors.email}
-				/>
-				<Input
-					register={passwordRegister}
-					placeholder="Password"
-					error={errors.password}
-					type="password"
-				/>
+		<Form onSubmit={handleSubmit(onSubmit)}>
+			<Input
+				register={emailRegister}
+				placeholder="Email"
+				error={errors.email}
+			/>
+			<Input
+				register={passwordRegister}
+				placeholder="Password"
+				error={errors.password}
+				type="password"
+			/>
 
-				{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-				<Fieldset>
-					<Button type="submit">Log in</Button>
-				</Fieldset>
-			</Form>
-		</>
+			{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+			<Fieldset>
+				<Button type="submit">Log in</Button>
+			</Fieldset>
+		</Form>
 	);
 };
 
