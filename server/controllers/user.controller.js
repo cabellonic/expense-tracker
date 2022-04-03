@@ -21,7 +21,7 @@ exports.getUser = async (req, res) => {
 			);
 
 			if (!user.rowCount) {
-				res.status(404).json({ ok: false, mmessage: "No user found" });
+				return res.status(404).json({ ok: false, mmessage: "No user found" });
 			}
 
 			res.json({ ok: true, user: user.rows[0] });

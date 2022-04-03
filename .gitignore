@@ -1,6 +1,14 @@
 node_modules/
 coverage/
+build/
 .git/
+
+# Firebase
+.firebaserc
+firebase.json
+
+# Netlify
+_redirects
 
 .gitignore
 # ENVIROMENT
