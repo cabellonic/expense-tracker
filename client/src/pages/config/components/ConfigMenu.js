@@ -44,7 +44,6 @@ const ConfigMenu = () => {
 			}
 			handleLogout();
 		} catch (err) {
-			// HANDLE ERROR LATER
 			console.log(err);
 		}
 	};

@@ -38,7 +38,6 @@ const LoginForm = () => {
 			login(resData.token, resData.userId);
 			navigate("/home");
 		} catch (err) {
-			// HANDLE ERROR LATER
 			console.log(err);
 		}
 	};

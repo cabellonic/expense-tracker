@@ -38,7 +38,6 @@ const SingupForm = () => {
 			login(resData.token);
 			navigate("/home");
 		} catch (err) {
-			// HANDLE ERROR LATER
 			console.log(err);
 		}
 	};

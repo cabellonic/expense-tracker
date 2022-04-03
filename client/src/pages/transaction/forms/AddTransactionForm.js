@@ -49,7 +49,6 @@ const AddTransactionForm = ({ type = "expense" }) => {
 			if (!resData.ok) return setErrorMessage(resData.message);
 			navigate(`/transaction/${resData.transaction.id}`);
 		} catch (err) {
-			// HANDLE ERROR LATER
 			console.log(err);
 		}
 	};

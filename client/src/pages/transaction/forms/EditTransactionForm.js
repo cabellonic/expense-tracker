@@ -58,7 +58,6 @@ const EditTransactionForm = ({ transaction }) => {
 			}
 			navigate(`/home`);
 		} catch (err) {
-			// HANDLE ERROR LATER
 			console.log(err);
 		}
 	};
@@ -90,7 +89,6 @@ const EditTransactionForm = ({ transaction }) => {
 			if (!resData.ok) return setErrorMessage(resData.message);
 			navigate(`/transaction/${resData.transaction_id}`);
 		} catch (err) {
-			// HANDLE ERROR LATER
 			console.log(err);
 		}
 	};
