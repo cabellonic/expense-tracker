@@ -6,10 +6,11 @@ import CategoriesList from "components/lists/CategoriesList";
 import EditCategoryButton from "./components/EditCategoryButton";
 // Context
 import { AuthContext } from "context/AuthContext";
+import CategoryListPH from "components/lists/CategoryListPH";
 
 const EditCategories = () => {
 	const [categories, setCategories] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const { userToken } = useContext(AuthContext);
 
 	// Get categories fetch use effect
@@ -31,14 +32,16 @@ const EditCategories = () => {
 		fetchData();
 	}, [userToken, setCategories]);
 
-	if (isLoading) return <></>;
-
 	return (
 		<Layout pageTitle={"Edit categories"} from="/config">
 			<AddCategoryTab />
-			<CategoriesList categories={categories} href={`/config/category`}>
-				<EditCategoryButton />
-			</CategoriesList>
+			{isLoading ? (
+				<CategoryListPH></CategoryListPH>
+			) : (
+				<CategoriesList categories={categories} href={`/config/category`}>
+					<EditCategoryButton />
+				</CategoriesList>
+			)}
 		</Layout>
 	);
 };
