@@ -12,6 +12,7 @@ import { AuthContext } from "context/AuthContext";
 
 const SingupForm = () => {
 	const [errorMessage, setErrorMessage] = useState();
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { login } = useContext(AuthContext);
 
 	const {
@@ -22,6 +23,8 @@ const SingupForm = () => {
 
 	const onSubmit = async (data) => {
 		const { firstName, lastName, email, password } = data;
+		setIsSubmitting(true);
+
 		try {
 			const response = await fetch(`${process.env.REACT_APP_API_URL}/singup`, {
 				method: "POST",
@@ -38,6 +41,7 @@ const SingupForm = () => {
 			});
 
 			const resData = await response.json();
+			setIsSubmitting(false);
 			// If credentials are invalid
 			if (!resData.isLoggedIn) return setErrorMessage(resData.message);
 
@@ -90,7 +94,7 @@ const SingupForm = () => {
 
 			{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 			<Fieldset>
-				<Button type="submit" green>
+				<Button type="submit" green disabled={isSubmitting}>
 					Sing up
 				</Button>
 			</Fieldset>

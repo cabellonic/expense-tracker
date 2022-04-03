@@ -15,6 +15,7 @@ import { AuthContext } from "context/AuthContext";
 
 const AddTransactionForm = ({ type = "expense" }) => {
 	const [errorMessage, setErrorMessage] = useState();
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { userToken } = useContext(AuthContext);
 	const {
 		register,
@@ -25,6 +26,8 @@ const AddTransactionForm = ({ type = "expense" }) => {
 
 	const onSubmit = async (data) => {
 		const { amount, type, title, note, category } = data;
+		setIsSubmitting(true);
+
 		try {
 			const response = await fetch(
 				`${process.env.REACT_APP_API_URL}/transaction`,
@@ -46,6 +49,7 @@ const AddTransactionForm = ({ type = "expense" }) => {
 
 			const resData = await response.json();
 			// If credentials are invalid
+			setIsSubmitting(false);
 			if (!resData.ok) return setErrorMessage(resData.message);
 			navigate(`/transaction/${resData.transaction.id}`);
 		} catch (err) {
@@ -96,7 +100,9 @@ const AddTransactionForm = ({ type = "expense" }) => {
 			)}
 
 			<Fieldset>
-				<Button type="submit">Add</Button>
+				<Button type="submit" disabled={isSubmitting}>
+					Add
+				</Button>
 			</Fieldset>
 		</Form>
 	);

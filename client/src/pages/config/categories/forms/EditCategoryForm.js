@@ -16,6 +16,7 @@ import styles from "./EditCategoryForm.module.css";
 
 const EditCategoryForm = ({ category }) => {
 	const { userToken } = useContext(AuthContext);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [errorMessage, setErrorMessage] = useState();
 	const { name } = category;
 	const {
@@ -28,6 +29,8 @@ const EditCategoryForm = ({ category }) => {
 
 	const onSubmit = async (data) => {
 		const { name } = data;
+		setIsSubmitting(true);
+
 		const response = await fetch(
 			`${process.env.REACT_APP_API_URL}/category/${category.slug}`,
 			{
@@ -42,6 +45,7 @@ const EditCategoryForm = ({ category }) => {
 
 		const resData = await response.json();
 		// If credentials are invalid
+		setIsSubmitting(false);
 		if (!resData.ok) return setErrorMessage(resData.message);
 		navigate("/config/categories");
 	};
@@ -71,7 +75,7 @@ const EditCategoryForm = ({ category }) => {
 
 			<Fieldset>
 				<DeleteCategoryForm category={category} />
-				<Button type="submit" green>
+				<Button type="submit" green disabled={isSubmitting}>
 					Save
 				</Button>
 			</Fieldset>

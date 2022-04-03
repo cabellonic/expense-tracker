@@ -13,27 +13,32 @@ import styles from "./DeleteCategoryForm.module.css";
 
 const DeleteCategoryForm = ({ category }) => {
 	const { userToken } = useContext(AuthContext);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [errorMessage, setErrorMessage] = useState();
 	const [showModal, setShowModal] = useState(false);
 	const { handleSubmit } = useForm();
 
 	const onSubmit = async () => {
-		const response = await fetch(
-			`${process.env.REACT_APP_API_URL}/category/${category.slug}`,
-			{
-				method: "DELETE",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${userToken}`,
-				},
-			}
-		);
+		if (!isSubmitting) {
+			setIsSubmitting(true);
+			const response = await fetch(
+				`${process.env.REACT_APP_API_URL}/category/${category.slug}`,
+				{
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${userToken}`,
+					},
+				}
+			);
 
-		const resData = await response.json();
-		// If credentials are invalid
-		if (!resData.ok) return setErrorMessage(resData.message);
-		handleModal();
-		navigate("/config/categories");
+			const resData = await response.json();
+			// If credentials are invalid
+			setIsSubmitting(false);
+			if (!resData.ok) return setErrorMessage(resData.message);
+			handleModal();
+			navigate("/config/categories");
+		}
 	};
 
 	const handleModal = () => {
@@ -54,7 +59,7 @@ const DeleteCategoryForm = ({ category }) => {
 							<span className={styles.error}>
 								{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 							</span>
-							<Button onClick={() => onSubmit()} red>
+							<Button onClick={() => onSubmit()} red disabled={isSubmitting}>
 								I know what I'm doing
 							</Button>
 						</div>

@@ -15,6 +15,7 @@ import Modal from "components/ui/Modal";
 
 const EditUserForm = () => {
 	const [errorMessage, setErrorMessage] = useState();
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [userAvatar, setUserAvatar] = useState(false);
 	const [showModal, setShowModal] = useState(false);
@@ -52,6 +53,7 @@ const EditUserForm = () => {
 
 	const onSubmit = async (data) => {
 		const { firstName, lastName, avatar } = data;
+		setIsSubmitting(true);
 
 		try {
 			const response = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
@@ -65,6 +67,7 @@ const EditUserForm = () => {
 
 			const resData = await response.json();
 			// If credentials are invalid
+			setIsSubmitting(false);
 			if (!resData.ok) return setErrorMessage(resData.message);
 
 			navigate("/config");
@@ -133,7 +136,7 @@ const EditUserForm = () => {
 			{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
 			<Fieldset>
-				<Button type="submit" green>
+				<Button type="submit" green disabled={isSubmitting}>
 					Save
 				</Button>
 			</Fieldset>

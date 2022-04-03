@@ -12,6 +12,7 @@ import { AuthContext } from "context/AuthContext";
 
 const LoginForm = () => {
 	const [errorMessage, setErrorMessage] = useState();
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { login } = useContext(AuthContext);
 
 	const {
@@ -22,6 +23,8 @@ const LoginForm = () => {
 
 	const onSubmit = async (data) => {
 		const { email, password } = data;
+		setIsSubmitting(true);
+
 		try {
 			const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
 				method: "POST",
@@ -32,6 +35,7 @@ const LoginForm = () => {
 			});
 
 			const resData = await response.json();
+			setIsSubmitting(false);
 			// If credentials are invalid
 			if (!resData.isLoggedIn) return setErrorMessage(resData.message);
 
@@ -66,7 +70,9 @@ const LoginForm = () => {
 
 			{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 			<Fieldset>
-				<Button type="submit">Log in</Button>
+				<Button type="submit" disabled={isSubmitting}>
+					Log in
+				</Button>
 			</Fieldset>
 		</Form>
 	);

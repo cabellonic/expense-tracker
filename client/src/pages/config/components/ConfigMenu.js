@@ -12,6 +12,7 @@ import styles from "./ConfigMenu.module.css";
 
 const ConfigMenu = () => {
 	const { logout, userToken } = useContext(AuthContext);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [errorMessage, setErrorMessage] = useState();
 	const [showModal, setShowModal] = useState();
 
@@ -27,24 +28,28 @@ const ConfigMenu = () => {
 	};
 
 	const handleDelete = async () => {
-		try {
-			const response = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
-				method: "DELETE",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${userToken}`,
-				},
-			});
+		if (!isSubmitting) {
+			setIsSubmitting(true);
+			try {
+				const response = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${userToken}`,
+					},
+				});
 
-			const resData = await response.json();
-			// If credentials are invalid
-			if (!resData.ok) {
-				handleModal();
-				return setErrorMessage(resData.message);
+				const resData = await response.json();
+				// If credentials are invalid
+				setIsSubmitting(false);
+				if (!resData.ok) {
+					handleModal();
+					return setErrorMessage(resData.message);
+				}
+				handleLogout();
+			} catch (err) {
+				console.log(err);
 			}
-			handleLogout();
-		} catch (err) {
-			console.log(err);
 		}
 	};
 
@@ -79,7 +84,7 @@ const ConfigMenu = () => {
 					>
 						Are you sure you want to delete all your account? <br />
 						This action cannot be reversed!
-						<Button onClick={handleDelete} red>
+						<Button onClick={handleDelete} red disabled={isSubmitting}>
 							I'm sure
 						</Button>
 					</div>

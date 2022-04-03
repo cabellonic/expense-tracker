@@ -12,6 +12,7 @@ import { AuthContext } from "context/AuthContext";
 
 const AddCategoryForm = () => {
 	const { userToken } = useContext(AuthContext);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [errorMessage, setErrorMessage] = useState();
 	const {
 		register,
@@ -23,6 +24,8 @@ const AddCategoryForm = () => {
 
 	const onSubmit = async (data) => {
 		const { name } = data;
+		setIsSubmitting(true);
+
 		const response = await fetch(`${process.env.REACT_APP_API_URL}/category`, {
 			method: "POST",
 			headers: {
@@ -34,6 +37,7 @@ const AddCategoryForm = () => {
 
 		const resData = await response.json();
 		// If credentials are invalid
+		setIsSubmitting(false);
 		if (!resData.ok) return setErrorMessage(resData.message);
 		navigate("/config/categories");
 	};
@@ -58,7 +62,7 @@ const AddCategoryForm = () => {
 			{errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
 
 			<Fieldset>
-				<Button type="submit" green>
+				<Button type="submit" green disabled={isSubmitting}>
 					Create
 				</Button>
 			</Fieldset>

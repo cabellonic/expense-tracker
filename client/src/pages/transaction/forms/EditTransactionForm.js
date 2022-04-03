@@ -16,6 +16,7 @@ import { AuthContext } from "context/AuthContext";
 
 const EditTransactionForm = ({ transaction }) => {
 	const [errorMessage, setErrorMessage] = useState();
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [showModal, setShowModal] = useState();
 	const { userToken } = useContext(AuthContext);
 	const { transaction_id } = useParams();
@@ -34,36 +35,51 @@ const EditTransactionForm = ({ transaction }) => {
 	};
 
 	const handleDelete = async () => {
-		try {
-			const response = await fetch(
-				`${process.env.REACT_APP_API_URL}/transaction/${transaction_id}`,
-				{
-					method: "DELETE",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${userToken}`,
-					},
-					body: JSON.stringify({
-						amount,
-						type,
-					}),
-				}
-			);
+		if (!isSubmitting) {
+			setIsSubmitting(true);
+			try {
+				const response = await fetch(
+					`${process.env.REACT_APP_API_URL}/transaction/${transaction_id}`,
+					{
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${userToken}`,
+						},
+						body: JSON.stringify({
+							amount,
+							type,
+						}),
+					}
+				);
 
-			const resData = await response.json();
-			// If credentials are invalid
-			if (!resData.ok) {
-				handleModal();
-				return setErrorMessage(resData.message);
+				const resData = await response.json();
+				// If credentials are invalid
+				setIsSubmitting(false);
+				if (!resData.ok) {
+					handleModal();
+					return setErrorMessage(resData.message);
+				}
+				navigate(`/home`);
+			} catch (err) {
+				console.log(err);
 			}
-			navigate(`/home`);
-		} catch (err) {
-			console.log(err);
 		}
 	};
 
 	const onSubmit = async (data) => {
-		const { amount, title, note, category } = data;
+		const { newAmount, newTitle, newNote, newCategory } = data;
+		setIsSubmitting(true);
+		if (
+			newAmount === parseFloat(amount) &&
+			newTitle === title &&
+			newNote === note &&
+			newCategory === category_slug
+		) {
+			setIsSubmitting(false);
+			console.log("Test");
+			return setErrorMessage("You didn't change anything!");
+		}
 
 		try {
 			const response = await fetch(
@@ -75,10 +91,10 @@ const EditTransactionForm = ({ transaction }) => {
 						Authorization: `Bearer ${userToken}`,
 					},
 					body: JSON.stringify({
-						amount,
-						title,
-						note,
-						category,
+						amount: newAmount,
+						title: newTitle,
+						note: newNote,
+						category: newCategory,
 						type,
 					}),
 				}
@@ -86,6 +102,7 @@ const EditTransactionForm = ({ transaction }) => {
 
 			const resData = await response.json();
 			// If credentials are invalid
+			setIsSubmitting(false);
 			if (!resData.ok) return setErrorMessage(resData.message);
 			navigate(`/transaction/${resData.transaction_id}`);
 		} catch (err) {
@@ -93,7 +110,7 @@ const EditTransactionForm = ({ transaction }) => {
 		}
 	};
 
-	const amountRegister = register("amount", {
+	const amountRegister = register("newAmount", {
 		required: { value: true, message: "The amount is required" },
 		min: { value: 1, message: "The amount must be greater than 0" },
 		max: { value: 999999999, message: "Isn't that too much?" },
@@ -104,7 +121,7 @@ const EditTransactionForm = ({ transaction }) => {
 		required: { value: true, message: "The type is required" },
 		value: type,
 	});
-	const titleRegister = register("title", {
+	const titleRegister = register("newTitle", {
 		required: { value: true, message: "A title is required" },
 		maxLength: {
 			value: 25,
@@ -112,8 +129,8 @@ const EditTransactionForm = ({ transaction }) => {
 		},
 		value: title,
 	});
-	const noteRegister = register("note", { value: note });
-	const categoryRegister = register("category", {
+	const noteRegister = register("newNote", { value: note });
+	const categoryRegister = register("newCategory", {
 		required: { value: true, message: "A category is required" },
 		value: category_slug,
 	});
@@ -159,13 +176,13 @@ const EditTransactionForm = ({ transaction }) => {
 						>
 							Are you sure you want to delete the transaction? <br />
 							This action cannot be reversed!
-							<Button onClick={handleDelete} red>
+							<Button onClick={handleDelete} disabled={isSubmitting} red>
 								I'm sure
 							</Button>
 						</div>
 					</Modal>
 				)}
-				<Button type="submit" green>
+				<Button type="submit" green disabled={isSubmitting}>
 					Save
 				</Button>
 			</Fieldset>
