@@ -10,7 +10,7 @@ import ErrorMessage from "components/ui/ErrorMessage";
 // Context
 import { AuthContext } from "context/AuthContext";
 
-const AddCategoryForm = ({}) => {
+const AddCategoryForm = () => {
 	const { userToken } = useContext(AuthContext);
 	const [errorMessage, setErrorMessage] = useState();
 	const {

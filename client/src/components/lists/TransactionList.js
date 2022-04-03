@@ -13,11 +13,9 @@ const TransactionList = ({ transactions }) => {
 
 	return (
 		<section>
-			<main>
-				{transactions.map((item) => (
-					<TransactionCard key={item.id} item={item} />
-				))}
-			</main>
+			{transactions.map((item) => (
+				<TransactionCard key={item.id} item={item} />
+			))}
 		</section>
 	);
 };

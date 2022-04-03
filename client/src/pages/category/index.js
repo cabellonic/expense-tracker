@@ -6,6 +6,7 @@ import TransactionList from "components/lists/TransactionList";
 import Pagination from "components/ui/Pagination";
 // Context
 import { AuthContext } from "context/AuthContext";
+import TransactionListPH from "components/lists/TransactionListPH";
 
 const CategoryPage = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +37,9 @@ const CategoryPage = () => {
 
 	return (
 		<Layout pageTitle={"Filter by categories"} from="/categories">
-			{!isLoading && transactions && (
+			{isLoading ? (
+				<TransactionListPH />
+			) : (
 				<TransactionList transactions={transactions} />
 			)}
 			<Pagination

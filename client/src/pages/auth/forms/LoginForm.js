@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { navigate } from "@reach/router";
 import { useForm } from "react-hook-form";
 // Components
 import Form from "components/ui/form-elements/Form";
@@ -35,6 +36,7 @@ const LoginForm = () => {
 			if (!resData.isLoggedIn) return setErrorMessage(resData.message);
 
 			login(resData.token, resData.userId);
+			navigate("/home");
 		} catch (err) {
 			// HANDLE ERROR LATER
 			console.log(err);

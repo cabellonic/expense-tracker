@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import Layout from "layout/Layout";
 import HomeHeader from "./components/HomeHeader";
 import TransactionList from "components/lists/TransactionList";
+import TransactionListPH from "components/lists/TransactionListPH";
 // Context
 import { AuthContext } from "context/AuthContext";
 
@@ -32,7 +33,11 @@ const HomePage = () => {
 	return (
 		<Layout balance menu>
 			<HomeHeader />
-			{!isLoading && <TransactionList transactions={transactions} />}
+			{isLoading ? (
+				<TransactionListPH />
+			) : (
+				<TransactionList transactions={transactions} />
+			)}
 		</Layout>
 	);
 };

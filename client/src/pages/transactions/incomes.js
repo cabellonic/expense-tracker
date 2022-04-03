@@ -4,6 +4,7 @@ import { useParams, navigate } from "@reach/router";
 import Layout from "layout/Layout";
 import Tabs from "./components/Tabs";
 import TransactionList from "components/lists/TransactionList";
+import TransactionListPH from "components/lists/TransactionListPH";
 import Pagination from "components/ui/Pagination";
 // Context
 import { AuthContext } from "context/AuthContext";
@@ -38,7 +39,11 @@ function Incomes() {
 	return (
 		<Layout pageTitle={"Income transactions"}>
 			<Tabs />
-			{!isLoading && <TransactionList transactions={transactions} />}
+			{isLoading ? (
+				<TransactionListPH />
+			) : (
+				<TransactionList transactions={transactions} />
+			)}
 			<Pagination path="/incomes" paginationInfo={paginationInfo} />
 		</Layout>
 	);

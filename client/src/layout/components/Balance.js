@@ -6,6 +6,7 @@ import { formatAmount } from "util/currency";
 import { AuthContext } from "context/AuthContext";
 // Styles
 import styles from "./Balance.module.css";
+import BalancePH from "components/placeholders/BalancePH";
 
 const Balance = () => {
 	const { userToken } = useContext(AuthContext);
@@ -44,42 +45,48 @@ const Balance = () => {
 	return (
 		<section className={styles.balance_wrapper}>
 			<div className={styles.balance}>
-				<span className={styles.title}>Total balance</span>
-				<span className={styles.amount}>
-					{hideBalance ? "$＊＊＊＊" : formatAmount(expense + income)}
+				{!userData ? (
+					<BalancePH />
+				) : (
+					<>
+						<span className={styles.title}>Total balance</span>
+						<span className={styles.amount}>
+							{hideBalance ? "$＊＊＊＊" : formatAmount(expense + income)}
 
-					{hideBalance ? (
-						<FontAwesomeIcon
-							className={styles.amount_toggle}
-							onClick={toggleBalance}
-							icon={["fas", "eye-slash"]}
-						/>
-					) : (
-						<FontAwesomeIcon
-							className={styles.amount_toggle}
-							onClick={toggleBalance}
-							icon={["fas", "eye"]}
-						/>
-					)}
-				</span>
-				<div className={styles.balance_info}>
-					<span className={styles.balance_icon}>
-						<FontAwesomeIcon icon={["fas", "arrow-circle-up"]} />
-					</span>
-					<div className={styles.balance_incomes}>
-						<span>Incomes</span>
-						<span>{hideBalance ? "$＊＊＊" : formatAmount(income)}</span>
-					</div>
-				</div>
-				<div className={styles.balance_info}>
-					<span className={styles.balance_icon}>
-						<FontAwesomeIcon icon={["fas", "arrow-circle-down"]} />
-					</span>
-					<div className={styles.balance_expenses}>
-						<span>Expenses</span>
-						<span>{hideBalance ? "$＊＊＊" : formatAmount(expense)}</span>
-					</div>
-				</div>
+							{hideBalance ? (
+								<FontAwesomeIcon
+									className={styles.amount_toggle}
+									onClick={toggleBalance}
+									icon={["fas", "eye-slash"]}
+								/>
+							) : (
+								<FontAwesomeIcon
+									className={styles.amount_toggle}
+									onClick={toggleBalance}
+									icon={["fas", "eye"]}
+								/>
+							)}
+						</span>
+						<div className={styles.balance_info}>
+							<span className={styles.balance_icon}>
+								<FontAwesomeIcon icon={["fas", "arrow-circle-up"]} />
+							</span>
+							<div className={styles.balance_incomes}>
+								<span>Incomes</span>
+								<span>{hideBalance ? "$＊＊＊" : formatAmount(income)}</span>
+							</div>
+						</div>
+						<div className={styles.balance_info}>
+							<span className={styles.balance_icon}>
+								<FontAwesomeIcon icon={["fas", "arrow-circle-down"]} />
+							</span>
+							<div className={styles.balance_expenses}>
+								<span>Expenses</span>
+								<span>{hideBalance ? "$＊＊＊" : formatAmount(expense)}</span>
+							</div>
+						</div>
+					</>
+				)}
 			</div>
 		</section>
 	);
