@@ -2,11 +2,12 @@ import { useContext, useEffect, useState } from "react";
 // Components
 import Modal from "components/ui/Modal";
 import CategoryIcon from "components/ui/CategoryIcon";
+import CategoriesList from "components/lists/CategoriesList";
+import CategorieListPH from "components/lists/CategorieListPH";
 // Context
 import { AuthContext } from "context/AuthContext";
 // Styles
 import styles from "./CategorySelector.module.css";
-import CategoriesList from "components/lists/CategoriesList";
 
 const CategorySelector = ({ register, setValue, category }) => {
 	const [selectedCategory, setSelectedCategory] = useState(category);
@@ -42,8 +43,6 @@ const CategorySelector = ({ register, setValue, category }) => {
 		fetchData();
 	}, [userToken]);
 
-	if (isLoading) return <></>;
-
 	return (
 		<>
 			<div className={styles.select_category} onClick={handleModal}>
@@ -63,7 +62,11 @@ const CategorySelector = ({ register, setValue, category }) => {
 
 			{showModal && (
 				<Modal onClose={handleModal} title="Select Category">
-					<CategoriesList categories={categories} onClick={handleCategory} />
+					{isLoading ? (
+						<CategorieListPH />
+					) : (
+						<CategoriesList categories={categories} onClick={handleCategory} />
+					)}
 				</Modal>
 			)}
 		</>

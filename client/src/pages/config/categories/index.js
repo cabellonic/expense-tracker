@@ -3,10 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import Layout from "layout/Layout";
 import AddCategoryTab from "./components/AddCategoryTab";
 import CategoriesList from "components/lists/CategoriesList";
+import CategorieListPH from "components/lists/CategorieListPH";
 import EditCategoryButton from "./components/EditCategoryButton";
 // Context
 import { AuthContext } from "context/AuthContext";
-import CategoryListPH from "components/lists/CategoryListPH";
 
 const EditCategories = () => {
 	const [categories, setCategories] = useState([]);
@@ -36,7 +36,7 @@ const EditCategories = () => {
 		<Layout pageTitle={"Edit categories"} from="/config">
 			<AddCategoryTab />
 			{isLoading ? (
-				<CategoryListPH></CategoryListPH>
+				<CategorieListPH></CategorieListPH>
 			) : (
 				<CategoriesList categories={categories} href={`/config/category`}>
 					<EditCategoryButton />
