@@ -1,9 +1,13 @@
 node_modules/
 coverage/
+.git/
 
+.gitignore
 # ENVIROMENT
 .env
 .env.development
 .env.test
 .env.production
 .env.*
+
+vercel.json
