@@ -36,7 +36,7 @@ exports.getAllTransactions = async (req, res) => {
 			if (!transactions.rowCount) {
 				// If we have no transactions and is the first page then was a valid request
 				// Thats why we return ok: true
-				if (page === 1) {
+				if (parseInt(page) === 1) {
 					return res.json({ ok: true, message: "No transactions" });
 				}
 				// But if is other page then we return ok: false
@@ -97,13 +97,7 @@ exports.getTransactionsByCategory = async (req, res) => {
 			);
 
 			if (!transactions.rowCount) {
-				if (page === 1) {
-					// If we have no transactions and is the first page then was a valid request
-					// Thats why we return ok: true
-					return res.json({ ok: true, message: "No expense transactions" });
-				}
-				// But if is other page then we return ok: false
-				return res.json({ ok: false, message: "No more transactions" });
+				return res.json({ ok: false, message: "No transactions" });
 			}
 
 			if (!transactions.rowCount) {
@@ -156,7 +150,7 @@ exports.getIncomeTransactions = async (req, res) => {
 			);
 
 			if (!transactions.rowCount) {
-				if (page === 1) {
+				if (parseInt(page) === 1) {
 					// If we have no transactions and is the first page then was a valid request
 					// Thats why we return ok: true
 					return res.json({ ok: true, message: "No expense transactions" });
@@ -211,7 +205,7 @@ exports.getExpenseTransactions = async (req, res) => {
 			);
 
 			if (!transactions.rowCount) {
-				if (page === 1) {
+				if (parseInt(page) === 1) {
 					// If we have no transactions and is the first page then was a valid request
 					// Thats why we return ok: true
 					return res.json({ ok: true, message: "No expense transactions" });
