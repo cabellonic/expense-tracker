@@ -11,7 +11,10 @@ import styles from "./Layout.module.css";
 const Layout = ({ balance, menu, pageTitle, center, from, children }) => {
 	return (
 		<main className={styles.layout}>
-			<Helmet title={pageTitle} titleTemplate={`%s | Expense Tracker`} />
+			<Helmet
+				title={pageTitle === "Expense Tracker" ? "Welcome" : pageTitle}
+				titleTemplate={`%s | Expense Tracker`}
+			/>
 			<Header pageTitle={pageTitle} center={center} href={from} />
 			{balance && <Balance />}
 			{menu && <Menu />}
