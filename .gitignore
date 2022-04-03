@@ -1,7 +1,6 @@
 node_modules/
 coverage/
 build/
-.git/
 
 # Firebase
 .firebaserc
@@ -10,11 +9,15 @@ firebase.json
 # Netlify
 _redirects
 
+# Vercel
+vercel.json
+
+# GIT
 .gitignore
+.git/
+
 # ENVIROMENT
 .env
 .env.development
 .env.test
 .env.production
-
-vercel.json
