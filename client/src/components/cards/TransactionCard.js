@@ -1,4 +1,5 @@
 import { Link } from "@reach/router";
+import { useLocation } from "@reach/router";
 // Util
 import { formatAmount } from "util/currency";
 import { formatTimeAgo } from "util/date";
@@ -8,12 +9,17 @@ import CategoryIcon from "components/ui/CategoryIcon";
 import styles from "./TransactionCard.module.css";
 
 const TransactionCard = ({ item }) => {
+	const location = useLocation();
 	const { id, type, title, amount, category_slug, created_at } = item;
 	const formattedAmount = formatAmount(amount);
 	const formattedDate = formatTimeAgo(created_at);
 
 	return (
-		<Link to={`/transaction/${id}`} className={styles.transaction_card}>
+		<Link
+			to={`/transaction/${id}`}
+			state={{ from: location.pathname }}
+			className={styles.transaction_card}
+		>
 			<div className={styles.icon}>
 				<CategoryIcon category={category_slug} />
 			</div>

@@ -6,7 +6,7 @@ import Transaction from "./components/Transaction";
 // Context
 import { AuthContext } from "context/AuthContext";
 
-const TransactionPage = () => {
+const TransactionPage = ({ location }) => {
 	const [transaction, setTransaction] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const { userToken } = useContext(AuthContext);
@@ -31,7 +31,7 @@ const TransactionPage = () => {
 	}, [transaction_id, userToken]);
 
 	return (
-		<Layout pageTitle={transaction.title}>
+		<Layout pageTitle={transaction.title} from={location.state?.from}>
 			{!isLoading && <Transaction transaction={transaction} />}
 		</Layout>
 	);
