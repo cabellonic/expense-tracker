@@ -3,7 +3,7 @@ const { pool } = require("../db");
 const slugify = require("slugify");
 
 exports.getCategoryBySlug = async (req, res) => {
-	const token = req.headers["authorization"].split(" ")[1];
+	const token = req.headers["authorization"]?.split(" ")[1];
 	const { category_slug } = req.params;
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
@@ -39,7 +39,7 @@ exports.getCategoryBySlug = async (req, res) => {
 };
 
 exports.createCategory = async (req, res) => {
-	const token = req.headers["authorization"].split(" ")[1];
+	const token = req.headers["authorization"]?.split(" ")[1];
 	const { name } = req.body;
 	const slug = slugify(name, { lower: true });
 
@@ -87,7 +87,7 @@ exports.createCategory = async (req, res) => {
 };
 
 exports.updateCategory = async (req, res) => {
-	const token = req.headers["authorization"].split(" ")[1];
+	const token = req.headers["authorization"]?.split(" ")[1];
 	const { category_slug } = req.params;
 	const { name } = req.body;
 	const slug = slugify(name, { lower: true });
@@ -127,7 +127,7 @@ exports.updateCategory = async (req, res) => {
 };
 
 exports.deleteCategory = async (req, res) => {
-	const token = req.headers["authorization"].split(" ")[1];
+	const token = req.headers["authorization"]?.split(" ")[1];
 	const { category_slug } = req.params;
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {

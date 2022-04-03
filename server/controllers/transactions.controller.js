@@ -63,7 +63,7 @@ exports.getAllTransactions = async (req, res) => {
 };
 
 exports.getTransactionsByCategory = async (req, res) => {
-	const token = req.headers["authorization"].split(" ")[1];
+	const token = req.headers["authorization"]?.split(" ")[1];
 	const { category_slug, page } = req.params;
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {

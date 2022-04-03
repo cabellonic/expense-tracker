@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { pool } = require("../db");
 
 exports.getAllCategories = async (req, res) => {
-	const token = req.headers["authorization"].split(" ")[1];
+	const token = req.headers["authorization"]?.split(" ")[1];
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
@@ -37,7 +37,7 @@ exports.getAllCategories = async (req, res) => {
 // Instead of using the above query and getting all the categories created by the user and filtering them in the frontend
 // I prefered to get all the categories filtered directly from the database
 exports.getAllUsedCategories = async (req, res) => {
-	const token = req.headers["authorization"].split(" ")[1];
+	const token = req.headers["authorization"]?.split(" ")[1];
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
