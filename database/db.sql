@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS app_user (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     first_name VARCHAR(20) NOT NULL,
     last_name VARCHAR(20),
+    avatar VARCHAR(255) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
     passhash VARCHAR(255) NOT NULL,
     income NUMERIC(10,2) DEFAULT 0,

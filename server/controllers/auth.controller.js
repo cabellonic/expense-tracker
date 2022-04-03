@@ -114,7 +114,7 @@ exports.login = async (req, res) => {
 };
 
 exports.singup = async (req, res) => {
-	const { firstName, lastName, email, password } = req.body;
+	const { firstName, lastName, email, password, avatar } = req.body;
 
 	try {
 		// Starting transaction
@@ -138,11 +138,11 @@ exports.singup = async (req, res) => {
 		const hashedPass = await bcrypt.hash(password, 10);
 		const newUserQuery = await pool.query(
 			`
-			INSERT INTO app_user (first_name, last_name, email, passhash)
-			VALUES ($1, $2, $3, $4)
+			INSERT INTO app_user (first_name, last_name, avatar, email, passhash)
+			VALUES ($1, $2, $3, $4, $5)
 			RETURNING id, email
 			`,
-			[firstName, lastName, email, hashedPass]
+			[firstName, lastName, avatar, email, hashedPass]
 		);
 
 		if (!newUserQuery.rowCount) {

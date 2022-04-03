@@ -28,7 +28,13 @@ const SingupForm = () => {
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({ firstName, lastName, email, password }),
+				body: JSON.stringify({
+					firstName,
+					lastName,
+					email,
+					password,
+					avatar: `/avatar/Monster${Math.floor(Math.random() * 23)}.png`,
+				}),
 			});
 
 			const resData = await response.json();

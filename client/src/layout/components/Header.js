@@ -58,16 +58,11 @@ const Header = ({ pageTitle, center, href = "/home" }) => {
 				{userData ? (
 					<>
 						<figure className={styles.avatar}>
-							<img
-								src={`https://cabellonic.dev/images/photo_alt.webp`}
-								alt="avatar"
-							/>
+							<img src={userData.avatar} alt="avatar" />
 						</figure>
 						<div className={styles.user_info}>
 							<span className={styles.welcome}>Welcome</span>
-							<span className={styles.user_name}>
-								{userData ? userData.first_name : "user"}
-							</span>
+							<span className={styles.user_name}>{userData.first_name}</span>
 						</div>
 					</>
 				) : (

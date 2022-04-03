@@ -13,7 +13,7 @@ exports.getUser = async (req, res) => {
 		try {
 			const user = await pool.query(
 				`
-                SELECT id, first_name, last_name, email, expense, income 
+                SELECT id, first_name, last_name, avatar, email, expense, income 
                 FROM app_user
                 WHERE id = $1
                 `,
@@ -34,7 +34,7 @@ exports.getUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
 	const token = req.headers["authorization"]?.split(" ")[1];
-	const { firstName, lastName } = req.body;
+	const { firstName, lastName, avatar } = req.body;
 
 	jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
 		if (err) {
@@ -47,10 +47,11 @@ exports.updateUser = async (req, res) => {
 				`
                 UPDATE app_user
                 SET first_name = $1,
-                    last_name = $2
-                WHERE id = $3
+                    last_name = $2,
+					avatar = $3
+                WHERE id = $4
                 `,
-				[firstName, lastName, decoded.id]
+				[firstName, lastName, avatar, decoded.id]
 			);
 
 			res.json({ ok: true, message: "User information updated!" });
