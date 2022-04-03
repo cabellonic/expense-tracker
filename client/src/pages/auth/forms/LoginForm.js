@@ -46,12 +46,10 @@ const LoginForm = () => {
 	const emailRegister = register("email", {
 		required: true,
 		pattern: /^\S+@\S+$/i,
-		value: "cabellonic@gmail.com",
 	});
 	const passwordRegister = register("password", {
 		required: true,
 		min: 5,
-		value: "somepassword",
 	});
 	return (
 		<>
