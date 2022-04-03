@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 // Components
 import Header from "./components/Header";
 import Balance from "./components/Balance";
@@ -10,6 +11,7 @@ import styles from "./Layout.module.css";
 const Layout = ({ balance, menu, pageTitle, center, from, children }) => {
 	return (
 		<main className={styles.layout}>
+			<Helmet title={pageTitle} titleTemplate={`%s | Expense Tracker`} />
 			<Header pageTitle={pageTitle} center={center} href={from} />
 			{balance && <Balance />}
 			{menu && <Menu />}

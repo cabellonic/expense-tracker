@@ -31,7 +31,7 @@ const HomePage = () => {
 	}, [userToken]);
 
 	return (
-		<Layout balance menu>
+		<Layout pageTitle={"Home"} balance menu>
 			<HomeHeader />
 			{isLoading ? (
 				<TransactionListPH />
