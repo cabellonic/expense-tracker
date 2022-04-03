@@ -17,7 +17,7 @@ INSERT INTO app_user (first_name, last_name, email, passhash) VALUES ('John', 'D
 CREATE TABLE category (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    slug VARCHAR(255) UNIQUE,
+    slug VARCHAR(255) NOT NULL,
     user_id BIGINT REFERENCES app_user (id) ON DELETE CASCADE
 );
 

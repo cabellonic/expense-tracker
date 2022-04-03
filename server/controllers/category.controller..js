@@ -53,23 +53,32 @@ exports.createCategory = async (req, res) => {
 
 		// The token is valid, so we can now query the database
 		try {
+			// Check if the category already exists
 			const category = await pool.query(
+				`
+				SELECT *
+				FROM category
+				WHERE category.slug = $1
+				AND category.user_id = $2
+				`,
+				[slug, decoded.id]
+			);
+
+			// If the category already exists, we don't create it
+			if (category.rowCount) {
+				return res.json({ ok: false, message: "That category already exist!" });
+			}
+
+			const newCategory = await pool.query(
 				`
 				INSERT INTO category (name, slug, user_id)
 				VALUES ($1, $2, $3)
-				ON CONFLICT (slug)
-				DO NOTHING
 				RETURNING *
 				`,
 				[name, slug, decoded.id]
 			);
 
-			// If the category already exists, we don't create it
-			if (!category.rowCount) {
-				return res.json({ ok: false, message: "That category already exist!" });
-			}
-
-			res.status(200).json({ ok: true, category: category.rows[0] });
+			res.status(200).json({ ok: true, category: newCategory.rows[0] });
 		} catch (err) {
 			console.log(err);
 			res.status(500).json({ ok: false, message: "Error" });
