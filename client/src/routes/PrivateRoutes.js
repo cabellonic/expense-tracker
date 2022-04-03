@@ -35,7 +35,12 @@ const PrivateRoutes = () => {
 			<EditCategoryPage path="/config/category/:category_id" />
 
 			<CategoriesPage path="/categories" />
-			<CategoryPage path="/category/:category_id" />
+			<Redirect
+				from="/category/:category_id"
+				to="/category/:category_id/1"
+				noThrow={true}
+			/>
+			<CategoryPage path="/category/:category_id/:page" />
 
 			<TransactionPage path="/transaction/:transaction_id" />
 			<AddIncome path="/add/income" />

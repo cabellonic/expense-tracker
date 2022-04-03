@@ -4,7 +4,7 @@ import { useParams, navigate } from "@reach/router";
 import Layout from "layout/Layout";
 import Tabs from "./components/Tabs";
 import TransactionList from "components/lists/TransactionList";
-import Pagination from "./components/Pagination";
+import Pagination from "components/ui/Pagination";
 // Context
 import { AuthContext } from "context/AuthContext";
 
